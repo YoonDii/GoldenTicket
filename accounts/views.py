@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 
@@ -97,6 +98,7 @@ def pw_change(request):
 
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, form.user)
             return redirect("accounts:profile")
     else:
         form = PasswordChangeForm(request.user)
@@ -105,3 +107,11 @@ def pw_change(request):
     }
 
     return render(request, "accounts/form.html", context)
+
+
+@login_required
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
+
+    return redirect("accounts:index")
