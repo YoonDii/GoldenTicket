@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -47,3 +47,20 @@ def logout(request):
 
     auth_logout(request)
     return redirect("accounts:index")
+
+
+def update(request):
+
+    if request.method == "POST":
+        user_update_form = CustomUserChangeForm(request.POST, instance=request.user)
+
+        if user_update_form.is_valid():
+            user_update_form.save()
+            return redirect("accounts:index")
+    else:
+        user_update_form = CustomUserChangeForm(instance=request.user)
+    context = {
+        "form": user_update_form,
+    }
+
+    return render(request, "accounts/login.html", context)

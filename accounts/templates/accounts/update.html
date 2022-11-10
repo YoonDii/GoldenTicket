@@ -4,11 +4,11 @@
 {% block content %}
 <div class="container" style="width:50%">
 
-  <h1>회원가입</h1>
+  <h1>update</h1>
   
   <form action="" method="POST">
     {% csrf_token %}
-    {% bootstrap_form form %}
+    {% bootstrap_form sign_form %}
     <input class="btn btn-outline-primary" type="submit" value="Submit">
   </form>
 </div>
