@@ -46,6 +46,10 @@ a:hover {
   text-decoration: none;
 }
 
+.main-color {
+  color: var(--main-color);
+}
+
 .gray {
   color: var(--gray-color);
 }
