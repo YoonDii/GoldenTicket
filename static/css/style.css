@@ -7,3 +7,28 @@
 
 
 /* Footer */
+.cont{
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-txt{
+  
+  height: 165px;
+}
+.flogo {
+  display: block;
+  
+  top: 53px;
+  left: 2px;
+}
+.footertxt{
+ 
+  top: 22px;
+  left: 221px;
+}
+.gray{
+  color: #999;
+  font-size: 13px;
+}
+
