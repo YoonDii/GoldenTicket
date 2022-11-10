@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static %}
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +12,39 @@
 
   <!-- Main-Nav -->
   <nav class="main-nav">
-    main-nav
-  <i class="fa-regular fa-user"></i>
-
+    <div class="container">
+      <div class="main-nav__wrap">
+        <div class="m-nav__logo">
+          <i class="fa-solid fa-bars-staggered fa-xl"></i>
+          <h1>
+            <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+          </h1>
+        </div>
+        <ul class="m-nav__nav">
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'accounts:index' %}">accounts</a></li>
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}">articles</a></li>
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'reviews:index' %}">reviews</a></li>
+        </ul>
+        <div class="m-nav__search">
+          <form action="#">
+            <input type="text" id="search_type">
+            <a href="#" onclick="#">
+              <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+            </a>
+          </form>
+          <a href="{% url 'accounts:index' %}">
+            <i class="fa-regular fa-user fa-xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </nav>
+
+
+  <!-- Visual -->
+  <div class="visual">
+    <img src="https://i.pinimg.com/564x/a7/c5/17/a7c517c2e9a88d4140a94189a1b3a16b.jpg" alt="" width="100%">
+  </div>
 
 
 </body>
