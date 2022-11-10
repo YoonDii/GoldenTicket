@@ -23,7 +23,7 @@ class PlayDetail(models.Model):
 
 
 class LocationDetail(models.Model):
-    locationid = models.ForeignKey(PlayDetail, on_delete=models.CASCADE)
+    locationid = models.CharField(max_length=20)
     locationname = models.CharField(max_length=30)
     address = models.CharField(max_length=50)
     phone = models.CharField(max_length=20)

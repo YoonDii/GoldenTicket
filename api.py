@@ -21,7 +21,7 @@ stdate = "&stdate=" + "20221101"
 # 공연 종료일자
 eddate = "&eddate=" + "20230630"
 # 현재페이지
-cpage = "&cpage=" + "3"
+cpage = "&cpage=" + "5"
 # 페이지당 목록 수
 rows = "&rows=" + "524"
 
