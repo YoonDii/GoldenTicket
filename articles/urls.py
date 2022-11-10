@@ -1,6 +1,6 @@
 from django.urls import path
 
-app_name = 'accounts'
+app_name = 'articles'
 
 urlpatterns = [
 
