@@ -4,23 +4,22 @@ from django.db import models
 
 
 class PlayDetail(models.Model):
-    playid = models.CharField(max_length=20, primary_key=True)
+    playid = models.CharField(max_length=20)
     playname = models.CharField(max_length=50)
     genrename = models.CharField(max_length=20)
     playstate = models.CharField(max_length=20)
     playstdate = models.CharField(max_length=20)
     playenddate = models.CharField(max_length=20)
-    poster = models.CharField(max_length=20)
+    poster = models.ImageField(upload_to="images/", blank=True)
     locationname = models.CharField(max_length=30)
     playcast = models.CharField(max_length=50)
     runtime = models.CharField(max_length=10)
     age = models.CharField(max_length=10)
     locationid = models.CharField(max_length=20)
-
-
-class PlayImage(models.Model):
-    playid = models.ForeignKey(PlayDetail, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="images/", blank=True)
+    image1 = models.ImageField(upload_to="images/", blank=True)
+    image2 = models.ImageField(upload_to="images/", blank=True)
+    image3 = models.ImageField(upload_to="images/", blank=True)
+    image4 = models.ImageField(upload_to="images/", blank=True)
 
 
 class LocationDetail(models.Model):
