@@ -2,14 +2,39 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<div class="container" style="width:50%">
-
-  <h1>회원가입</h1>
-  
-  <form action="" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form sign_form %}
-    <input class="btn btn-outline-primary" type="submit" value="Submit">
-  </form>
-</div>
-  {% endblock content %} {% endcomment %}
+<section class="login_bg">
+  <div class="container d-flex justify-content-center">
+    <div class="box_bg boxbgwid p-5">
+      <h1 class="text-center mb-5">회원가입</h1>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div required class="input_form" id="info__id">
+          <input id="check_id" type="text" name="username" placeholder="아이디 입력 (4~20자)"/>
+          <button id="id-check">중복 확인</button>
+          <p id="id-error"></p>
+        </div>
+        <div required class="password_form" id="info__pw">
+        <input class="mt-5" type="password" autoComplete="off" id="password1" name="password1" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)"/>
+        <p id="pass_1"></p>
+        <input class="my-5" type="password" autoComplete="off" id="password2" name="password2" placeholder="비밀번호 확인"/>
+        <p id="pass_2"></p>
+        <div class="error-msg"></div>
+      </div>
+      <div required class="email_form">
+        <input type="text" name="email_id" placeholder="이메일 주소"/>
+        <p>@</p>
+        <input class="text" name="email_address" id="domain-txt" type="text"/>
+        <select class="box" id="domain-list">
+          <option value="type">직접 입력</option>
+          <option value="naver.com">naver.com</option>
+          <option value="google.com">google.com</option>
+          <option value="kakao.com">kakao.com</option>
+        </select>
+      </div>
+        <input class="btn account_btn mt-5" type="submit" value="가입하기">
+      <p class="text-center my-5">이미 회원이세요? 👉<a href="{% url 'accounts:login' %}">로그인</a></p>
+    </form>
+    </div>
+  </div>
+</section>
+  {% endblock content %}
