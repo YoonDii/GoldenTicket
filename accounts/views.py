@@ -27,7 +27,7 @@ def signup(request):
             "form": signup_form,
         }
 
-        return render(request, "accounts/form.html", context)
+        return render(request, "accounts/signup.html", context)
     else:
         # 이미 로그인된 상태입니다 메시지 띄우기
         return redirect("accounts:index")
@@ -46,7 +46,7 @@ def login(request):
         context = {
             "form": login_form,
         }
-        return render(request, "accounts/form.html", context)
+        return render(request, "accounts/login.html", context)
     else:
         # 이미 로그인된 상태입니다 메시지 띄우기
         return redirect("accounts:index")

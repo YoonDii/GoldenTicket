@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block content %}
+<section class="login_bg">
+  <div class="container d-flex justify-content-center">
+    <div class="box_bg boxbgwid p-5">
+      <h1 class="text-center mb-3">로그인</h1>
+      
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div required class="input_form" id="info__id">
+          <input class="mt-5" type="text" placeholder="아이디" class="in">
+        </div>
+        <div required class="password_form" id="info__pw">
+          <input class="mt-5" type="password" placeholder="비밀번호" class="in">
+        </div>
+        <input class="btn account_btn mt-5" type="submit" value="로그인">
+      </form>
+      <p class="text-center my-5">간편 로그인</p>
+        <div class="d-flex flex-row" style="justify-content: space-evenly; ">
+          <a href=""><img class="social_btn" src="https://www.ichrogene.kr/assets/img/kakako-icon.png" alt="kakaologin"></a>
+          <a href=""><img class="social_btn" src="{% static 'img/naverr.png' %}" alt="naverlogin"></a>
+        </div>
+    </div>
+  </div>
+</section>
+  {% endblock content %}

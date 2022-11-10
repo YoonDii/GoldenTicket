@@ -1,3 +1,6 @@
+@import './main.css';
+
+
 /* Root */
 :root {
   /* Color */
@@ -26,7 +29,7 @@ ul {
   margin: 0;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
@@ -41,6 +44,10 @@ a:visited {
 a:hover { 
   color: black; 
   text-decoration: none;
+}
+
+.main-color {
+  color: var(--main-color);
 }
 
 .gray {
@@ -127,7 +134,7 @@ a:hover {
 }
 
 /* Search-Form */
-#search_type {
+#search-type {
   border: none;
   background-color: transparent;
   border-bottom: 3px solid var(--white-color);
@@ -260,7 +267,7 @@ a:hover {
 }
 
 .sf-right i {
-  color: var(--gray-color);
+  color: var(--gray-dark-color);
   margin-right: 14px;
 }
 
@@ -269,7 +276,7 @@ a:hover {
 }
 
 .sf-social span {
-  color: var(--gray-color);
+  color: var(--gray-dark-color);
   font-size: 8px;  
   margin-right: var(--base-space);
 }
@@ -278,6 +285,7 @@ a:hover {
   margin: 0;
   margin-right: 5px;
 }
+
 
 /* list */
 
@@ -309,3 +317,144 @@ a:hover {
 .ms-list-imgs a .list-bigger-wrap .list-bigger-txt .list-b-tit2{font-size:16px; color:#000;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 .ms-list-imgs a .list-bigger-wrap .list-bigger-txt .list-b-circle{font-size:19px;color:#fff;background:#ec7d2c;width:57px;height:57px;line-height:62px;border-radius:50%;text-align:center;border:4px solid #fff;font-weight:bold;position:absolute;left:10px;top:-44px;}
 .ms-list-imgs a:hover img{transform:scale(1.08);}
+
+/* 로그인 */
+.login_bg {
+    background-color: #ffffff;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding-top: 6.25rem;
+    padding-bottom: 6.25rem;
+}
+.box_bg {
+    backdrop-filter: blur(15px) saturate(200%);
+    -webkit-backdrop-filter: blur(15px) saturate(200%);
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    box-shadow: 5px 5px 5px #bec4ca;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+    margin-top: .9375rem;
+    height: auto;
+}
+/* accounts 버튼들*/
+.social_btn{
+    width: 43px;
+    height: 42px;
+    object-fit: fill;
+}
+
+.account_btn{
+    background-color:  rgb(238, 170, 65);;
+    color: rgb(255, 255, 255);
+    
+}
+
+.account_btn:hover{
+    background-color:  rgb(255, 206, 132);
+    opacity: 60%;
+    color: rgb(243, 240, 240);
+}
+/*회원가입 */
+.input_form {
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+}
+
+.input_form input {
+    width: 100%;
+    height: 5vh;
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, .125);
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, .5);
+    padding-left: 1rem;
+}
+
+.input_form input:active {
+    border: none;
+    box-shadow: none;
+}
+
+.input_form button {
+    position: absolute;
+    background-color: rgb(238, 170, 65);
+    color: white;
+    border-radius: 7px;
+    border: 1px solid rgba(241, 195, 68, 0.125);
+    width: 7rem;
+    height: 3.5vh;
+    right: 2%;
+    margin-top: 1.5%;
+}
+
+.input_form button:hover{
+    background-color: rgb(224, 173, 158);
+    opacity: 90%;
+    color: rgb(243, 240, 240);
+}
+.input_form p {
+    margin-top: 1rem;
+    color: red;
+}
+
+div[class="submitBtn"] div[id="result-check"] {
+    display: none;
+}
+
+.password_form {
+    position: relative;
+    width: 100%;
+}
+
+.password_form input {
+    width: 100%;
+    height: 5vh;
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, .125);
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, .5);
+    padding-left: 1rem;
+}
+
+.email_form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.email_form input {
+    width: 100%;
+    height: 5vh;
+    border-radius: 7px;
+    border: 1px solid rgba(0, 0, 0, .125);
+    box-shadow: 1px 1px 1px 1px rgba(128, 128, 128, .5);
+    padding-left: 1rem;
+}
+
+.email_form p {
+    vertical-align: bottom;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 1rem;
+}
+
+select.box {
+    width: 100%;
+    height: 5vh;
+    box-sizing: border-box;
+    margin-left: 5px;
+    padding: 5px 0 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #d9d6d6;
+    color: #383838;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-family: 'Montserrat', 'Pretendard', sans-serif;
+}
+
+option {
+    font-size: 16px;
+}
+

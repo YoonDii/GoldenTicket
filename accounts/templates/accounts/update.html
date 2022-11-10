@@ -1,15 +1,14 @@
-{% comment %} {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
 {% block content %}
 <div class="container" style="width:50%">
 
-  <h1>update</h1>
+  <h1>회원가입</h1>
   
   <form action="" method="POST">
     {% csrf_token %}
-    {% bootstrap_form sign_form %}
+    {% bootstrap_form login_form %}
     <input class="btn btn-outline-primary" type="submit" value="Submit">
   </form>
 </div>
-  {% endblock content %} {% endcomment %}
+  {% endblock content %}

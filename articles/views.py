@@ -1,9 +1,17 @@
+
 from django.shortcuts import render, redirect
 from .models import PlayDetail
 
 
 def main(request):
-    return render(request, "articles/main.html")
+    playlist = PlayDetail.objects.all()
+    return render(
+        request,
+        "articles/main.html",
+        {
+            "playlist": playlist[:1],
+        },
+    )
 
 
 def index(request):
