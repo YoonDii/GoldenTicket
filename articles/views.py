@@ -7,3 +7,7 @@ def main(request):
 
 def index(request):
     return render(request, "articles/index.html")
+
+
+def concert(request):
+    return render(request, "articles/concert.html")
