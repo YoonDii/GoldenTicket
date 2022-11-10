@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import login as auth_login
 
-# Create your views here.
+
 def index(request):
 
     return render(request, "accounts/index.html")
