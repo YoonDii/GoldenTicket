@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container" style="width:50%">
+  <h1>{{ request.user }}님의 프로필</h1>
+  <hr>
+  <p>아이디: {{ user_id }}</p>
+  <p>이메일: {{ user_email }}</p>
+  <p><a href="{% url 'accounts:update' %}">회원정보수정</a></p>
+
+</div>
+{% endblock content %}
+

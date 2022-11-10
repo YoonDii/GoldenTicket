@@ -64,3 +64,15 @@ def update(request):
     }
 
     return render(request, "accounts/login.html", context)
+
+
+def profile(request):
+
+    user = request.user
+
+    context = {
+        "user_id": user.username,
+        "user_email": user.email,
+    }
+
+    return render(request, "accounts/profile.html", context)
