@@ -134,7 +134,7 @@ a:hover {
 }
 
 /* Search-Form */
-#search_type {
+#search-type {
   border: none;
   background-color: transparent;
   border-bottom: 3px solid var(--white-color);
@@ -267,7 +267,7 @@ a:hover {
 }
 
 .sf-right i {
-  color: var(--gray-color);
+  color: var(--gray-dark-color);
   margin-right: 14px;
 }
 
@@ -276,7 +276,7 @@ a:hover {
 }
 
 .sf-social span {
-  color: var(--gray-color);
+  color: var(--gray-dark-color);
   font-size: 8px;  
   margin-right: var(--base-space);
 }
@@ -286,8 +286,8 @@ a:hover {
   margin-right: 5px;
 }
 
-/* 로그인 */
 
+/* 로그인 */
 .login_bg {
     background-color: #ffffff;
     position: relative;

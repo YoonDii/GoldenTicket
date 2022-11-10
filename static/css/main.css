@@ -7,6 +7,8 @@
   --gray-light-color:#e6e5e5;
   --gray-dark-color:#6c757d;
   --dark-color: #3E3E3E;
+  --purple-color: #8441ea;
+  --green-color: #14caa6;
   
   /* Font-size */
   --xlarge-font: 36px;
@@ -46,6 +48,10 @@
   font-weight: 400;
 }
 
+.ranking__tag__name:last-child {
+  margin-right: 0;
+}
+
 .ranking__tag__name:hover {
   color: var(--main-color);
 }
@@ -70,6 +76,14 @@
 
 .ranking__item__img img {
   width: 100%;
+  transition: transform 1s, filter 2s ease-in-out;
+  filter: blur(2px);
+  transform: scale(1.2);
+}
+
+.ranking__item__img img:hover {
+  filter: blur(0);
+  transform: scale(1);
 }
 
 .ranking__item__desc {
@@ -135,10 +149,67 @@
 
 .audio__play {
   width: 70%;
-  background-color: #ec7d2c;
 }
 
 .audio__play iframe {
   width: 100%;
   height: 100%;
+}
+
+
+/* Concert & Musical * Classic */
+.concert,
+.musical,
+.classic {
+  margin: 30px;
+}
+
+.concert__title {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.concert__title h1 {
+  font-weight: 700;
+  margin: 0 3px;
+}
+
+.under-line-01,
+.under-line-02, 
+.under-line-03 {
+  width: 100px;
+  height: 40px;
+  border-bottom: 5px solid var(--purple-color);
+}
+.under-line-02 {
+  border-bottom: 5px solid var(--main-color);
+}
+.under-line-03 {
+  border-bottom: 5px solid var(--green-color);
+}
+
+.concert__list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.concert__list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.concert__list__item img {
+  width: 200px;
+  height: 300px;
+  transition: transform ease-out .2s;
+}
+
+.concert__list__item img:hover {
+  transform: scale(1.1);
+}
+
+.concert__list__item p {
+  padding: 10px 0;
 }
