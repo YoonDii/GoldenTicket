@@ -1,13 +1,18 @@
 /* Root */
 :root {
   /* Color */
-  --white-color: #fff;
+  --white-color: #f7f7f7;
   --main-color: #ec7d2c;
+  --gray-color: #adb5bd;
+  --gray-light-color:#e6e5e5;
+  --gray-dark-color:#6c757d;
+  --dark-color: #3E3E3E;
   
   /* Font-size */
   --xlarge-font: 36px;
   --large-font: 24px;
   --middle-font: 18px;
+  --small-font: 14px;
 
   /* Space */
   --base-space: 8px;
@@ -39,6 +44,22 @@ a:visited {
 a:hover { 
   color: blue; 
   text-decoration: underline;
+}
+
+.gray {
+  color: var(--gray-color);
+}
+
+.emp {
+  width: 50px;
+  height: 50px;
+}
+
+.line {
+  width: 2px;
+  height: 100px;
+  background-color: var(--gray-light-color);
+  margin: 0 15px;
 }
 
 
@@ -193,3 +214,70 @@ a:hover {
   font-size: 13px;
 }
 
+
+/* Sub-Footer */
+.sf-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 35px 0;
+}
+
+.sf-number {
+  color: var(--main-color);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.sf-walking {
+  font-size: 14px;
+}
+
+.sf-walking th {
+  color: var(--gray-color);
+  width: 50px;  
+  
+}
+
+.sf-center {
+  display: flex;
+  padding-top: 15px;
+}
+
+.sf-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.sf-item p {
+  font-weight: 500;
+  margin-top: 15px;
+}
+
+.sf-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sf-right i {
+  color: var(--gray-color);
+  margin-right: 14px;
+}
+
+.sf-social {
+  margin-top: var(--base-space);
+}
+
+.sf-social span {
+  color: var(--gray-color);
+  font-size: 8px;  
+  margin-right: var(--base-space);
+}
+
+.sf-social span i {
+  margin: 0;
+  margin-right: 5px;
+}
