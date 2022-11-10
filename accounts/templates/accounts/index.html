@@ -1,14 +1,44 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<nav class="nav" style="color: #000; ">
+  <div class="container">
+    <div class="main-nav__wrap">
+      <div class="m-nav__logo">
+        <i class="fa-solid fa-bars-staggered fa-xl"></i>
+        <h1>
+          <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+        </h1>
+      </div>
+      <ul class="m-nav__nav">
+        <li class="nav__nav__item hover-underline-animation"><a href="{% url 'accounts:index' %}">accounts</a></li>
+        <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}">articles</a></li>
+        <li class="nav__nav__item hover-underline-animation"><a href="{% url 'reviews:index' %}">reviews</a></li>
+      </ul>
+      <div class="nav__search">
+        <form action="#">
+          <input type="text" id="search_type_1">
+          <a href="#" onclick="#">
+            <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+          </a>
+        </form>
+        <a href="{% url 'accounts:index' %}">
+          <i class="fa-regular fa-user fa-xl"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
 <div class="container" style="width:50%">
   <h1>accounts/index</h1>
   <p>로그인 상태: {{ request.user }}</p>
-
   <p><a href="{% url 'accounts:signup' %}">가입하기</a></p>
   <p><a href="{% url 'accounts:login' %}">로그인하기</a></p>
   <p><a href="{% url 'accounts:logout' %}">로그아웃</a></p>
   <p><a href="{% url 'accounts:profile' %}">프로필정보</a></p>
 </div>
+
 {% endblock content %}
 

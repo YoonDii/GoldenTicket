@@ -1,3 +1,4 @@
+{% load django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +20,26 @@
   {% endblock  %}
 
   <!-- Footer -->
-  <footer class="footer">
-    
+  <footer>
+    <div class="cont p-3" >
+      <div class="footer-txt d-flex">
+        <a href='' class="d-flex align-items-center" >
+          <img src="{% static 'img/golden_ticket.png' %}" alt='logo' class="flogo" ></a>
+          <div class="footxt">
+            <p>GoldenTicket</p>
+              <p class="github">
+                <a href="https://github.com/YoonDii/GoldenTicket" target="_blank">프로젝트 깃허브</a>
+                <div class="github d-flex">
+                <a href="https://github.com/Jobyeongjin">조병진 |</a>  
+                <a href="https://github.com/devhump">&nbsp조수람 |</a>
+                <a href="https://github.com/Bonbon315">&nbsp조본희 |</a> 
+                <a href="https://github.com/YoonDii">&nbsp김윤지 |</a>  
+                <a href="https://github.com/rhoeunbin">&nbsp노은빈</a>
+                </div></p>
+            
+            <p>Copyright © GoldenTicket Corp. All Rights Reserved.</p>
+      </div>
+    </div>
   </footer>
 
   <!-- JavaScript Bundle with Popper -->
