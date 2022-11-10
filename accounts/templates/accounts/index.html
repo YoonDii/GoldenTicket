@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-  hi!!
+<div class="container" style="width:50%">
+  <h1>accounts/index</h1>
+  <p>로그인 상태: {{ request.user }}</p>
+
+  <a href="{% url 'accounts:signup' %}">가입하기</a>
+</div>
 {% endblock content %}
-  
+
