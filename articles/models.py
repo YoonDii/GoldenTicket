@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -20,6 +21,9 @@ class PlayDetail(models.Model):
     image2 = models.ImageField(upload_to="images/", blank=True)
     image3 = models.ImageField(upload_to="images/", blank=True)
     image4 = models.ImageField(upload_to="images/", blank=True)
+    like_users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="performance"
+    )
 
 
 class LocationDetail(models.Model):
