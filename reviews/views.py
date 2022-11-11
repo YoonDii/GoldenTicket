@@ -133,3 +133,35 @@ def comment_create(request, pk):
         comment.user = request.user
         comment.save()
     return redirect("reviews:detail", pk)
+
+
+# def comment_update(request, pk):
+
+#     comment = Comment.objects.get(pk=pk)
+#     review = comment.review
+#     print(review)
+
+#     if request.method == "POST":
+#         comment_form = CommentForm(request.POST, instance=comment)
+#         if comment_form.is_valid():
+#             comment_form.save()
+#             return redirect("reviews:detail", review.pk)
+
+#     else:
+#         comment_form = CommentForm(instance=comment)
+
+#     context = {
+#         "comment_form" : comment_form,
+#     }
+
+#     return redirect("reviews:detail", context)
+
+
+def comment_delete(request, pk):
+    comment = Comment.objects.get(pk=pk)
+    review = comment.review
+    comment.delete()
+
+    print(review.pk)
+
+    return redirect("reviews:detail", review.pk)
