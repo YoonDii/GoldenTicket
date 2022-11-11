@@ -16,7 +16,8 @@ def index(request):
 
 
 def create(request):
-
+    # 임시로 넣음
+    play = PlayDetail.objects.get(pk=1)
     if request.method == "POST":
         review_form = ReviewForm(request.POST)
         reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
@@ -41,6 +42,7 @@ def create(request):
     context = {
         "review_form": review_form,
         "reviewPhoto_form": reviewPhoto_form,
+        "play": play,
     }
 
     return render(request, "reviews/create.html", context)
