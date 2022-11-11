@@ -3,13 +3,13 @@
 {% block content %}
 {% include 'nav.html' %}
 
-<div class="container" style="width:50%">
+<div class="container mt-5" style="width:50%">
   <h1>accounts/index</h1>
   <p>로그인 상태: {{ request.user }}</p>
   <p><a href="{% url 'accounts:signup' %}">가입하기</a></p>
   <p><a href="{% url 'accounts:login' %}">로그인하기</a></p>
   <p><a href="{% url 'accounts:logout' %}">로그아웃</a></p>
-  <p><a href="{% url 'accounts:profile' %}">프로필정보</a></p>
+  <p><a href="{% url 'accounts:profile' request.user.pk %}">프로필정보</a></p>
 </div>
 
 {% endblock content %}

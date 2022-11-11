@@ -6,8 +6,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 import requests
-
 
 
 def index(request):
@@ -56,39 +56,31 @@ def login(request):
 
 
 def logout(request):
-
     auth_logout(request)
     return redirect("accounts:index")
 
 
 @login_required
 def update(request):
-
     if request.method == "POST":
-        user_update_form = CustomUserChangeForm(request.POST, instance=request.user)
-
-        if user_update_form.is_valid():
-            user_update_form.save()
-            return redirect("accounts:index")
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:profile", request.user.pk)
     else:
-        user_update_form = CustomUserChangeForm(instance=request.user)
+        form = CustomUserChangeForm(request.FILES, instance=request.user)
     context = {
-        "form": user_update_form,
+        "form": form,
     }
-
-    return render(request, "accounts/form.html", context)
+    return render(request, "accounts/update.html", context)
 
 
 @login_required
-def profile(request):
-
-    user = request.user
-
+def profile(request, user_pk):
+    user = get_user_model().objects.get(pk=user_pk)
     context = {
-        "user_id": user.username,
-        "user_email": user.email,
+        "user": user,
     }
-
     return render(request, "accounts/profile.html", context)
 
 
@@ -117,6 +109,27 @@ def delete(request):
     auth_logout(request)
 
     return redirect("accounts:index")
+
+
+# Follow
+def follow(request, user_pk):
+    user = get_user_model().objects.get(pk=user_pk)
+    if user != request.user:
+        if user.followings.filter(pk=request.user.pk).exists():
+            user.followings.remove(request.user)
+            is_followed = False
+        else:
+            user.followings.add(request.user)
+            is_followed = True
+        return JsonResponse(
+            {
+                "is_followed": is_followed,
+                "followers_count": user.followings.count(),
+                "followings_count": user.followers.count(),
+            }
+        )
+    return redirect("accounts:profile", user_pk)
+
 
 # 소셜로그인
 import secrets

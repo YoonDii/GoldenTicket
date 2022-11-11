@@ -17,4 +17,5 @@ class CustomUserChangeForm(UserChangeForm):
         model = get_user_model()
         fields = [
             "email",
+            "image",
         ]

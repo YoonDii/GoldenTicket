@@ -1,15 +1,83 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container" style="width:50%">
+
   <h1>{{ request.user }}님의 프로필</h1>
   <hr>
-  <p>아이디: {{ user_id }}</p>
-  <p>이메일: {{ user_email }}</p>
+  <p>아이디: {{ user.username }}</p>
+  <p>이메일: {{ user.email }}</p>
+  <div class="">
+    <img src="{{ user.profile_image }}" alt="" width="100" height="100" style="border-radius: 50%;">
+  </div>
   <p><a href="{% url 'accounts:update' %}">회원정보수정</a></p>
   <p><a href="{% url 'accounts:pw_change' %}">비밀번호 수정</a></p>
   <p><a href="{% url 'accounts:delete' %}">회원탈퇴</a></p>
 
+
+  <!-- Follow -->
+  {% if request.user.is_authenticated %}
+    <form id="follow-form" data-user-id="{{ user.pk }}">
+    {% csrf_token %}
+    팔로잉: <span id="followers-count">{{ user.followers.count }}</span> | 팔로워: <span id="followings-count">{{ user.followings.count }}</span>
+      {% if request.user != user %}
+        {% if request.user in user.followings.all %}
+          <input type="submit" value='팔로우 취소'>
+        {% else %}
+          <input type="submit" value='팔로우'>
+        {% endif %}
+      {% endif %}
+    </form>  
+  {% else %}
+  팔로잉: <span id="followers-count">{{ user.followers.count }}</span> | 팔로워: <span id="followings-count">{{ user.followings.count }}</span>
+  <a href="{% url 'accounts:index' %}" class="btn btn-outline-secondary">로그인이 필요합니다.</a>
+  {% endif %}
+
 </div>
+
 {% endblock content %}
 
+
+{% block js %}
+<!-- CDN axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const form = document.querySelector('#follow-form')
+  // csrf token -> input(hidden type) tag in HTML
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault()
+    const userId = event.target.dataset.userId
+
+    // request axios
+    axios({
+      method: 'post',
+      url: `/accounts/${userId}/follow/`,
+      headers: {'X-CSRFToken': csrftoken}, // csrf token
+    })
+      // response views
+      .then((response) => {
+        const isFollowed = response.data.is_followed
+        const followBtn = document.querySelector('#follow-form > input[type=submit]')
+        if (isFollowed === true) {
+          followBtn.value = '팔로우 취소'
+        } else {
+          followBtn.value = '팔로우'
+        }
+        // follow counts
+        const followersCountTag = document.querySelector('#followers-count')
+        const followingsCountTag = document.querySelector('#followings-count')
+        const followersCount = response.data.followers_count
+        const followingsCount = response.data.followings_count
+        followersCountTag.innerText = followersCount
+        followingsCountTag.innerText = followingsCount
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+  })
+</script>
+{% endblock js %}
+  
