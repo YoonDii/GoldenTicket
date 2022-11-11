@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import PlayDetail
+from .models import PlayDetail, LocationDetail
 
 
 def main(request):
@@ -22,7 +22,17 @@ def index(request):
     return render(request, "articles/index.html")
 
 
+def detail(request, performance_pk):
+    performance = PlayDetail.objects.get(playid=performance_pk)
+    location = LocationDetail.objects.get(locationid=performance.locationid)
+    context = {
+        "performance": performance,
+        "location": location,
+    }
+    return render(request, "articles/detail.html", context)
+
 def play(request):
     playlist = PlayDetail.objects.filter(genrename="연극")
     context = {"playlist": playlist}
     return render(request, "articles/play.html", context)
+
