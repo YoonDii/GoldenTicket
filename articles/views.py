@@ -36,3 +36,28 @@ def play(request):
     context = {"playlist": playlist}
     return render(request, "articles/play.html", context)
 
+
+def musical(request):
+    playlist = PlayDetail.objects.filter(genrename="뮤지컬")
+    context = {"playlist": playlist}
+    return render(request, "articles/musical.html", context)
+
+
+def classic(request):
+    playlist = PlayDetail.objects.filter(genrename="클래식")
+    context = {"playlist": playlist}
+    return render(request, "articles/classic.html", context)
+
+
+def dance(request):
+    playlist = PlayDetail.objects.filter(genrename="무용")
+    context = {"playlist": playlist}
+    return render(request, "articles/dance.html", context)
+
+
+def ktm(request):
+    playlist = PlayDetail.objects.filter(genrename="국악")
+    context = {"playlist": playlist}
+    return render(request, "articles/ktm.html", context)
+
+
