@@ -20,6 +20,16 @@
     {% csrf_token %}
     <input type="submit" value="삭제하기">
   </form>
+<hr>
+<form action="{% url 'reviews:comment_create' review.pk %}" method="POST">
+  {% csrf_token %}
+  {% bootstrap_form comment_form %}
+  <input type="submit" value="댓글생성">
+</form>
+{% for comment in comments %}
+<p>{{ comment.user }}:{{ comment.content }}</p>
+<hr>
+{% endfor %}
 
 {% include 'sub-footer.html' %}
 {% endblock content %}
