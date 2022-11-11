@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect
 from .models import PlayDetail
 
@@ -18,7 +17,7 @@ def index(request):
     return render(request, "articles/index.html")
 
 
-def concert(request):
-    concert = PlayDetail.objects.all()
-    context = {"concert": concert}
-    return render(request, "articles/concert.html", context)
+def play(request):
+    playlist = PlayDetail.objects.filter(genrename="연극")
+    context = {"playlist": playlist}
+    return render(request, "articles/play.html", context)
