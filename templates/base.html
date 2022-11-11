@@ -18,6 +18,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/png" href=""/>
+  <!-- Modal-Position -->
+  <style>
+    .modal-dialog {
+      margin-top: 0;
+      margin-bottom: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
 
@@ -27,7 +38,7 @@
   <!-- Footer -->
   <footer>
     <hr class="gray">
-    <div class="cont p-3" >
+    <div class="container p-3" >
 
       <div class="footer-txt d-flex">
         <a href='{% url 'articles:main' %}' class="d-flex align-items-center" >
