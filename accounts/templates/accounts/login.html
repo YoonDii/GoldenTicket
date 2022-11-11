@@ -19,9 +19,10 @@
       </form>
       <p class="text-center my-5">간편 로그인</p>
         <div class="d-flex flex-row" style="justify-content: space-evenly; ">
-          <a href=""><img class="social_btn" src="https://www.ichrogene.kr/assets/img/kakako-icon.png" alt="kakaologin"></a>
-          <a href=""><img class="social_btn" src="{% static 'img/naverr.png' %}" alt="naverlogin"></a>
+          <a href="{% url 'accounts:login' %}kakao"><img class="social_btn" src="https://www.ichrogene.kr/assets/img/kakako-icon.png" alt="kakao_login"></a>
+          <a href="{% url 'accounts:login' %}naver"><img class="social_btn" src="{% static 'img/naverr.png' %}" alt="naver_login"></a>
         </div>
+      <p class="text-center my-5">아직 회원이 아니신가요? 👉<a href="{% url 'accounts:signup' %}">회원가입</a></p>
     </div>
   </div>
 </section>
