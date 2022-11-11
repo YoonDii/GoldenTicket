@@ -1,6 +1,5 @@
-
 from django.shortcuts import render, redirect
-from .models import PlayDetail
+from .models import PlayDetail, LocationDetail
 
 
 def main(request):
@@ -22,3 +21,13 @@ def concert(request):
     concert = PlayDetail.objects.all()
     context = {"concert": concert}
     return render(request, "articles/concert.html", context)
+
+
+def detail(request, performance_pk):
+    performance = PlayDetail.objects.get(playid=performance_pk)
+    location = LocationDetail.objects.get(locationid=performance.locationid)
+    context = {
+        "performance": performance,
+        "location": location,
+    }
+    return render(request, "articles/detail.html", context)
