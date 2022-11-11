@@ -17,7 +17,9 @@
         <div class="m-nav__logo">
           <i class="fa-solid fa-bars-staggered fa-xl"></i>
           <h1>
-            <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+            <a href="{% url 'articles:main' %}">
+              <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+            </a>
           </h1>
         </div>
         <ul class="m-nav__nav">
