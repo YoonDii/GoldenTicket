@@ -17,7 +17,9 @@
         <div class="m-nav__logo">
           <i class="fa-solid fa-bars-staggered fa-xl"></i>
           <h1>
-            <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+            <a href="{% url 'articles:main' %}">
+              <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+            </a>
           </h1>
         </div>
         <ul class="m-nav__nav">
@@ -26,8 +28,8 @@
           <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'reviews:index' %}">reviews</a></li>
         </ul>
         <div class="m-nav__search">
-          <form action="#">
-            <input type="text" id="search_type">
+          <form id="search-form" action="#">
+            <input type="text" id="search-type">
             <a href="#" onclick="#">
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
@@ -42,10 +44,27 @@
 
 
   <!-- Visual -->
-  <div class="visual">
-    <img src="https://i.pinimg.com/564x/a7/c5/17/a7c517c2e9a88d4140a94189a1b3a16b.jpg" alt="" width="100%">
-  </div>
-
+  <section class="visual" aria-label="Newest Photos">
+    <div class="carousel" data-carousel>
+      <button class="carousel-button prev" data-carousel-button="prev">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="carousel-button next" data-carousel-button="next">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <ul data-slides>
+        <li class="slide" data-active>
+          <img src="http://tkfile.yes24.com/Upload2/Display/202211/20221107/wel_mv_43842_2.jpg/dims/quality/70/" alt="Nature Image #1">
+        </li>
+        <li class="slide">
+          <img src="http://tkfile.yes24.com/Upload2/Display/202210/20221028/wel_mv_43889_1.jpg/dims/quality/70/" alt="Nature Image #2">
+        </li>
+        <li class="slide">
+          <img src="http://tkfile.yes24.com/Upload2/Display/202211/20221110/wel_mv_44048.jpg/dims/quality/70/" alt="Nature Image #3">
+        </li>
+      </ul>
+    </div>
+  </section>
 
 </body>
 </html>

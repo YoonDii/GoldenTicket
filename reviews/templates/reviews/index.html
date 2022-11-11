@@ -6,6 +6,11 @@
 {% block content %}
 {% include 'main-nav.html' %}
 
+  {% for review in  reviews %}
+
+  <p>{{ review.playId.playname }} | {{ review.title }}</p>
+  
+  {% endfor %}
 {% include 'sub-footer.html' %}
 {% endblock content %}
   

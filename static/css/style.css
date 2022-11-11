@@ -46,6 +46,10 @@ a:hover {
   text-decoration: none;
 }
 
+.main-color {
+  color: var(--main-color);
+}
+
 .gray {
   color: var(--gray-color);
 }
@@ -71,6 +75,7 @@ a:hover {
   left: 0;
   padding: 10px 0;
   color: var(--white-color);
+  z-index: 9;
 }
 
 .main-nav__wrap {
@@ -130,7 +135,7 @@ a:hover {
 }
 
 /* Search-Form */
-#search_type {
+#search-type {
   border: none;
   background-color: transparent;
   border-bottom: 3px solid var(--white-color);
@@ -153,6 +158,73 @@ a:hover {
   height: 700px;
   overflow: hidden;
 }
+
+/* Carousel */
+.carousel {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.carousel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: 200ms opacity ease-in-out;
+  transition-delay: 200ms;
+}
+
+.slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.slide[data-active] {
+  opacity: 1;
+  z-index: 1;
+  transition-delay: 0ms;
+}
+
+.carousel-button {
+  position: absolute;
+  z-index: 2;
+  background: none;
+  border: none;
+  font-size: 4rem;
+  top: 40%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, .5);
+  cursor: pointer;
+  border-radius: .25rem;
+  padding: 0 .5rem;
+}
+
+.carousel-button:hover,
+.carousel-button:focus {
+  color: white;
+}
+
+.carousel-button:focus {
+  outline: 1px solid black;
+}
+
+.carousel-button.prev {
+  left: 3rem;
+}
+
+.carousel-button.next {
+  right: 3rem;
+}
+
 
 /* Nav */
 .nav {
@@ -263,7 +335,7 @@ a:hover {
 }
 
 .sf-right i {
-  color: var(--gray-color);
+  color: var(--gray-dark-color);
   margin-right: 14px;
 }
 
@@ -272,7 +344,7 @@ a:hover {
 }
 
 .sf-social span {
-  color: var(--gray-color);
+  color: var(--gray-dark-color);
   font-size: 8px;  
   margin-right: var(--base-space);
 }
@@ -282,8 +354,39 @@ a:hover {
   margin-right: 5px;
 }
 
-/* 로그인 */
 
+/* list */
+
+.list-sec{width:1300px; margin:0 auto;text-align:center;}
+.li-sec-tit{height:200px;}
+.li-sec-tit > span{display:inline-block; margin-top:100px; font-size:45px;font-family:'Noto Sans KR','NanumBarunGothic','맑은 고딕','Malgun Gothic',sans-serif;font-weight:500;position:relative;}
+.li-sec-tit1{color:#333;}
+
+
+.li-sec-tag{border-bottom:2px solid #333;width:1200px; margin:0 auto;font-size:0;}
+.li-sec-tag span{display:inline-block; padding:0 41px;position:relative;}
+.li-sec-tag span:after{content:""; display:block; width:1px;height:15px;background:#ddd;position:absolute;right:0;top:22px; }
+.li-sec-tag span:last-child:after{display:none;}
+.li-sec-tag span a{display:inline-block;font-size:16px; color:#888; height:61px;line-height:62px;padding:0 5px;position:relative;}
+.li-sec-tag span a:before{content:""; display:block; width:0;height:3px;background:#ec7d2c;position:absolute; top:0;left:0;transition:all 0.3;}
+.li-sec-tag span a.on{color:#333;font-weight:bold;margin:0 -5px;}
+.li-sec-tag span a.on:before{width:100%;}
+.li-sec-tag span a.on:after{content:"↓"; display:inline; color:#333;margin-left:3px;}
+
+.li-sec-result{width:1200px; margin:0 auto;height:182px;line-height:173px;font-size:19px;color:#333;text-align:center;letter-spacing:0.04em;}
+.li-sec-result span{color:#ec7d2c;}
+
+.ms-list-imgs{width:1300px; margin:0 auto;font-size:0;text-align:center;}
+.ms-list-imgs a{display:inline-block;width:216px;height:410px;margin:0 15px;vertical-align:top;}
+.ms-list-imgs a .list-bigger-wrap{width:216px;height:450px;margin-bottom: 30px;}
+.poster{width: 216px;height: 260px;overflow: hidden;}
+.ms-list-imgs a .list-bigger-wrap img{display:block;width:100%;transition:all 0.3s;}
+.list-bigger-txt{width:100%; height:108px; text-align:center;position:relative;}
+.list-b-tit1{font-size:14px; line-height:22px; color:#888;padding:25px 0 12px 0;}
+.list-b-tit2{font-size:14px; color:#000;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.ms-list-imgs a:hover img{transform:scale(1.08);}
+
+/* 로그인 */
 .login_bg {
     background-color: #ffffff;
     position: relative;
@@ -422,3 +525,4 @@ select.box {
 option {
     font-size: 16px;
 }
+

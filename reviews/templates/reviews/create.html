@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+{% include 'main-nav.html' %}
+
+<div class="container" style="width: 600px">
+  <div class="my-5 ">
+    {% if request.resolver_match.url_name == 'create' %}
+      <h1 class="text-center">글쓰기</h1>
+    {%else%}
+      <h1 class="text-center">수정하기</h1>
+    {% endif %}
+
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form review_form %}
+      {% bootstrap_form reviewPhoto_form %}
+      <button type="submit" class="btn btn-dark">제출</button>
+    </form>
+
+{% include 'sub-footer.html' %}
+{% endblock content %}

@@ -15,57 +15,132 @@
         </a>
         <div class="ranking__tag">
           <h3 class="ranking__tag__name"># 뮤지컬</h3>
-          <h3 class="ranking__tag__name"># 콘서트</h3>
+          <h3 class="ranking__tag__name"># 연극</h3>
           <h3 class="ranking__tag__name"># 클래식</h3>
         </div>
       </div>
       <!-- Ranking-List -->
       <div class="ranking__list">
+        {% for play in playlist_rank %}
         <div class="ranking__item">
           <div class="ranking__item__img">
-            <img src="https://i.pinimg.com/564x/f5/f9/a5/f5f9a5d6c6e28be66c711e24dd66a6c2.jpg" alt="">
+            <img src="{{ play.poster }}" alt="play_image">
           </div>
           <div class="ranking__item__desc">
-            <div class="rank-box">순위</div>
+            <div class="rank-box">{{ forloop.counter }}위</div>
             <h6 class="ranking__item__name">
-              상품이름
+              {{ play.playname }}
             </h6>
             <p class="ranking__item__date">
-              상품날짜
+              {{ play.playstdate }} ~ {{ play.playenddate }}
             </p>
           </div>
         </div>
-        <div class="ranking__item">
-          <div class="ranking__item__img">
-            <img src="https://i.pinimg.com/564x/f5/f9/a5/f5f9a5d6c6e28be66c711e24dd66a6c2.jpg" alt="">
-          </div>
-          <div class="ranking__item__desc">
-            <div class="rank-box">순위</div>
-            <h6 class="ranking__item__name">
-              상품이름
-            </h6>
-            <p class="ranking__item__date">
-              상품날짜
-            </p>
-          </div>
-        </div>
-        <div class="ranking__item">
-          <div class="ranking__item__img">
-            <img src="https://i.pinimg.com/564x/f5/f9/a5/f5f9a5d6c6e28be66c711e24dd66a6c2.jpg" alt="">
-          </div>
-          <div class="ranking__item__desc">
-            <div class="rank-box">순위</div>
-            <h6 class="ranking__item__name">
-              상품이름
-            </h6>
-            <p class="ranking__item__date">
-              상품날짜
-            </p>
-          </div>
-        </div>
+        {% endfor %}
+          
       </div>
     </div>
     <!-- Ranking-Wrap-End -->
+  </div>
+</section>
+
+
+<!-- Audio -->
+<section class="audio">
+  <div class="container">
+    <div class="audio-wrap">
+      <div class="audio__desc">
+        <h1>FOCUS <span class="main-color">ON</span></h1>
+        <h1 class="audio__title">뮤지컬 <br/>캣츠</h1>
+        <p>전 세계가 사랑한 명작 <br/>오리지널 매력 그대로 컴백!</p>
+      </div>
+      <div class="audio__play">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/efrNjq39de8?autoplay=0&autohide=1" title="YouTube video player" frameborder="0" modestbranding="0" controls="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Concert & Play -->
+<section class="concert">
+  <div class="container">
+    <div class="concert-wrap">
+      <div class="concert__title">
+        <div class="under-line-01"></div>
+        <a href="#">
+          <h1>PLAY</h1>
+        </a>
+        <div class="under-line-01"></div>
+      </div>
+      <!-- Concert-List -->
+      <div class="concert__list">
+        {% for play in playlist %}
+        <a href="#">
+          <div class="concert__list__item">
+            <img src="{{ play.poster }}" alt="">
+            <p>{{ play.playname }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+
+<!-- Musical -->
+<section class="musical">
+  <div class="container">
+    <div class="concert-wrap">
+      <div class="concert__title">
+        <div class="under-line-02"></div>
+        <a href="#">
+          <h1>MUSICAL</h1>
+        </a>
+        <div class="under-line-02"></div>
+      </div>
+      <!-- Concert-List -->
+      <div class="concert__list">
+        {% for musical in musical_list %}
+        <a href="#">
+          <div class="concert__list__item">
+            <img src="{{ musical.poster }}" alt="">
+            <p>{{ musical.playname }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+
+<!-- Classic -->
+<section class="classic">
+  <div class="container">
+    <div class="concert-wrap">
+      <div class="concert__title">
+        <div class="under-line-03"></div>
+        <a href="#">
+          <h1>CLASSIC</h1>
+        </a>
+        <div class="under-line-03"></div>
+      </div>
+      <!-- Concert-List -->
+      <div class="concert__list">
+        {% for classic in classic_list %}
+        <a href="#">
+          <div class="concert__list__item">
+            <img src="{{ classic.poster }}" alt="">
+            <p>{{ classic.playname }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </section>
 
