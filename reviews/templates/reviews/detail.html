@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+
+{% block content %}
+{% include 'main-nav.html' %}
+
+<p>리뷰제목: {{ review.title }}</p>
+<hr>
+<p>리뷰내용: {{ review.content }}</p>
+<hr>
+{% for photo in review.reviewphoto_set.all %}
+
+<div style="width: 5rem; height: 5rem;">
+  <img src="{{ photo.image.url }}" alt="" style="height: 5rem; width:5rem;">
+</div>
+{% endfor %}
+  <a href="{% url 'reviews:update' review.pk %}">수정하기</a>
+  <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제하기">
+  </form>
+
+{% include 'sub-footer.html' %}
+{% endblock content %}
