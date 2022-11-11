@@ -1,8 +1,17 @@
-from django.shortcuts import render
+
+from django.shortcuts import render, redirect
+from .models import PlayDetail
 
 
 def main(request):
-    return render(request, "articles/main.html")
+    playlist = PlayDetail.objects.all()
+    return render(
+        request,
+        "articles/main.html",
+        {
+            "playlist": playlist[:1],
+        },
+    )
 
 
 def index(request):
@@ -10,4 +19,6 @@ def index(request):
 
 
 def concert(request):
-    return render(request, "articles/concert.html")
+    concert = PlayDetail.objects.all()
+    context = {"concert": concert}
+    return render(request, "articles/concert.html", context)

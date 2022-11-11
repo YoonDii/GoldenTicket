@@ -26,8 +26,8 @@
           <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'reviews:index' %}">reviews</a></li>
         </ul>
         <div class="m-nav__search">
-          <form action="#">
-            <input type="text" id="search_type">
+          <form id="search-form" action="#">
+            <input type="text" id="search-type">
             <a href="#" onclick="#">
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
@@ -42,10 +42,27 @@
 
 
   <!-- Visual -->
-  <div class="visual">
-    <img src="https://i.pinimg.com/564x/a7/c5/17/a7c517c2e9a88d4140a94189a1b3a16b.jpg" alt="" width="100%">
-  </div>
-
+  <section class="visual" aria-label="Newest Photos">
+    <div class="carousel" data-carousel>
+      <button class="carousel-button prev" data-carousel-button="prev">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="carousel-button next" data-carousel-button="next">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <ul data-slides>
+        <li class="slide" data-active>
+          <img src="https://i.pinimg.com/564x/a7/c5/17/a7c517c2e9a88d4140a94189a1b3a16b.jpg" alt="Nature Image #1">
+        </li>
+        <li class="slide">
+          <img src="https://i.pinimg.com/564x/61/d3/10/61d310369218f763fd4a79d479a29ac5.jpg" alt="Nature Image #2">
+        </li>
+        <li class="slide">
+          <img src="https://i.pinimg.com/564x/48/76/34/487634ab4ee20210ba36a94cfc44d08d.jpg" alt="Nature Image #3">
+        </li>
+      </ul>
+    </div>
+  </section>
 
 </body>
 </html>

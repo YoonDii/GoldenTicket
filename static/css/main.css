@@ -1,0 +1,215 @@
+/* Root */
+:root {
+  /* Color */
+  --white-color: #f7f7f7;
+  --main-color: #ec7d2c;
+  --gray-color: #adb5bd;
+  --gray-light-color:#e6e5e5;
+  --gray-dark-color:#6c757d;
+  --dark-color: #3E3E3E;
+  --purple-color: #8441ea;
+  --green-color: #14caa6;
+  
+  /* Font-size */
+  --xlarge-font: 36px;
+  --large-font: 24px;
+  --middle-font: 18px;
+  --small-font: 14px;
+
+  /* Space */
+  --base-space: 8px;
+}
+
+
+/* Ranking */
+.ranking-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.ranking__title {
+  text-align: center;
+}
+
+.ranking__title h1 {
+  font-weight: 700;
+  margin: 30px 0;
+}
+
+.ranking__tag {
+  display: flex;
+  justify-content: center;
+}
+
+.ranking__tag__name {
+  margin-right: 30px;
+  font-size: var(--middle-font);
+  font-weight: 400;
+}
+
+.ranking__tag__name:last-child {
+  margin-right: 0;
+}
+
+.ranking__tag__name:hover {
+  color: var(--main-color);
+}
+
+/* Ranking-Item */
+.ranking__list {
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ranking__item {
+  width: 350px;
+  height: 350px;
+}
+
+.ranking__item__img {
+  height: 75%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ranking__item__img img {
+  width: 100%;
+  transition: transform 1s, filter 2s ease-in-out;
+  filter: blur(2px);
+  transform: scale(1.2);
+}
+
+.ranking__item__img img:hover {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.ranking__item__desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;  
+  align-items: center;
+  height: 25%;
+  border-bottom: 1px solid var(--gray-color);
+  position: relative;
+}
+
+.ranking__item__name {
+  font-weight: 500;
+}
+
+.ranking__item__date {
+  color: var(--gray-color);
+}
+
+.rank-box {
+  width: 50px;
+  height: 50px;
+  background-color: var(--main-color);
+  color: var(--white-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  position: absolute;
+  top: -25px;
+  left: 15px;
+}
+
+
+/* Audio */
+.audio {
+  width: 100%;
+  background-color: #000;
+}
+
+.audio-wrap {
+  display: flex;
+}
+
+.audio__desc {
+  padding: 30px 0;
+  width: 30%;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.audio__desc {
+  color: var(--white-color);
+}
+
+.audio__title {
+  color: var(--white-color);
+  font-size: calc(var(--large-font) * 2);
+  font-weight: 700;
+}
+
+.audio__play {
+  width: 70%;
+}
+
+.audio__play iframe {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Concert & Musical * Classic */
+.concert,
+.musical,
+.classic {
+  margin: 30px;
+}
+
+.concert__title {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.concert__title h1 {
+  font-weight: 700;
+  margin: 0 3px;
+}
+
+.under-line-01,
+.under-line-02, 
+.under-line-03 {
+  width: 100px;
+  height: 40px;
+  border-bottom: 5px solid var(--purple-color);
+}
+.under-line-02 {
+  border-bottom: 5px solid var(--main-color);
+}
+.under-line-03 {
+  border-bottom: 5px solid var(--green-color);
+}
+
+.concert__list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.concert__list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.concert__list__item img {
+  width: 200px;
+  height: 300px;
+  transition: transform ease-out .2s;
+}
+
+.concert__list__item img:hover {
+  transform: scale(1.1);
+}
+
+.concert__list__item p {
+  padding: 10px 0;
+}
