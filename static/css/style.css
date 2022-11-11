@@ -378,9 +378,9 @@ a:hover {
 
 .ms-list-imgs{width:1300px; margin:0 auto;font-size:0;text-align:center;}
 .ms-list-imgs a{display:inline-block;width:216px;height:410px;margin:0 15px;vertical-align:top;}
-.ms-list-imgs a .list-bigger-wrap{width:216px;height:450px;margin-bottom: 30px;}
+.list-bigger-wrap{width:216px;height:450px;margin-bottom: 30px;}
 .poster{width: 216px;height: 260px;overflow: hidden;}
-.ms-list-imgs a .list-bigger-wrap img{display:block;width:100%;transition:all 0.3s;}
+.list-bigger-wrap img{display:block;width:100%;transition:all 0.3s;}
 .list-bigger-txt{width:100%; height:108px; text-align:center;position:relative;}
 .list-b-tit1{font-size:14px; line-height:22px; color:#888;padding:25px 0 12px 0;}
 .list-b-tit2{font-size:14px; color:#000;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
@@ -526,3 +526,16 @@ option {
     font-size: 16px;
 }
 
+/* 업버튼 */
+.return-top {
+  position:fixed; 
+  bottom:35px; 
+  right:8px; 
+  z-index:99;
+}
+
+.on {
+  animation-name: rtt;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}

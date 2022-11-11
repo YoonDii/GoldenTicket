@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block content %}
 {% include 'nav.html' %}
 
 <section class="list-sec">
   <div><p class="li-sec-tit">
-		<span class="li-sec-tit1">연극</span>
+		<span class="li-sec-tit1">무용</span>
   <p class="li-sec-tag">
     <span><a style="cursor:pointer;" token="0" >신상품순</a></span>
     <span><a style="cursor:pointer;" token="1">종료임박순</a></span>
@@ -19,7 +18,7 @@
     <a style="cursor:pointer;" onclick="" title="{{play.playname}}">
       <div class="list-bigger-wrap">
         <div class="poster">
-          <img class="lazyload" alt="" src="{{play.poster}}" >
+        <img class="lazyload" alt="" src="{{play.poster}}" >
         </div>
         <div class="list-bigger-txt">
           <p class="list-b-tit1 v2 v2">{{play.playname}}</p>
@@ -33,9 +32,3 @@
 </section>
 
 {% endblock content %}
-
-
-{% block js %}
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="{% static 'js/base.js' %}"></script>
-{% endblock js %}  
