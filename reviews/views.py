@@ -20,6 +20,7 @@ def create(request):
     if request.method == "POST":
         review_form = ReviewForm(request.POST)
         reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
+        # 추후 pk 부분 수정해야 함
         playId = PlayDetail.objects.get(pk=1)
 
         images = request.FILES.getlist("image")
@@ -34,7 +35,8 @@ def create(request):
                     image_instance.save()
             else:
                 review.save()
-            return redirect("articles:concert")
+            # return redirect("articles:concert")
+            return redirect("review:index")
     else:
         review_form = ReviewForm()
         reviewPhoto_form = ReviewPhotoForm()
@@ -44,3 +46,16 @@ def create(request):
     }
 
     return render(request, "reviews/create.html", context)
+
+
+def detail(request, pk):
+
+    review = Review.objects.get(pk=pk)
+    # review_photos = ReviewPhoto.objects.filter(review=review)
+
+    context = {
+        "review": review,
+        # "review_photos": review_photos,
+    }
+
+    return render(request, "reviews/detail.html", context)
