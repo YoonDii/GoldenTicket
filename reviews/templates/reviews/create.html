@@ -2,22 +2,39 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-{% include 'main-nav.html' %}
+{% include 'nav.html' %}
 
-<div class="container" style="width: 600px">
-  <div class="my-5 ">
-    {% if request.resolver_match.url_name == 'create' %}
-      <h1 class="text-center">글쓰기</h1>
-    {%else%}
-      <h1 class="text-center">수정하기</h1>
-    {% endif %}
+<div class="container mt-5">
+  <!-- Button trigger modal -->
+  <button type="button" class="rc-btn mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    관람 후기 등록
+    <i class="fa-solid fa-pen"></i>
+  </button>
 
-    <form action="" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% bootstrap_form review_form %}
-      {% bootstrap_form reviewPhoto_form %}
-      <button type="submit" class="btn btn-dark">제출</button>
-    </form>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ play.playname }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Review-Form -->
+        <form id="review-create" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form review_form %}
+          {% bootstrap_form reviewPhoto_form %}
+        </form>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="submit" class="rc-btn" data-bs-dismiss="modal">취소</button>
+        <button type="submit" class="rc-btn" onclick="document.forms['review-create'].submit();"">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 {% include 'sub-footer.html' %}
 {% endblock content %}

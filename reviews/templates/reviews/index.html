@@ -6,10 +6,11 @@
 {% block content %}
 {% include 'main-nav.html' %}
 
+  <a class="btn btn-primary" href="{% url 'reviews:create' %}">새글 쓰기</a>
   {% for review in  reviews %}
 
-  <p>{{ review.playId.playname }} | {{ review.title }}</p>
-  
+  <a href="{% url 'reviews:detail' review.pk %}"><p>{{ review.playId.playname }} | {{ review.title }}</p></a>
+  <hr>
   {% endfor %}
 {% include 'sub-footer.html' %}
 {% endblock content %}
