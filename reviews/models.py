@@ -6,13 +6,14 @@ from articles.models import PlayDetail
 class Review(models.Model):
     title = models.CharField(max_length=20)
     content = models.TextField()
-    grade = [
+    grades = [
         ("1", "⭐"),
         ("2", "⭐⭐"),
         ("3", "⭐⭐⭐"),
         ("4", "⭐⭐⭐⭐"),
         ("5", "⭐⭐⭐⭐⭐"),
     ]
+    grade = models.CharField(max_length=20, choices=grades)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
