@@ -22,10 +22,13 @@
       <!-- Ranking-List -->
       <div class="ranking__list">
         {% for play in playlist_rank %}
+        <!-- Ranking-Item -->
         <div class="ranking__item">
-          <div class="ranking__item__img">
-            <img src="{{ play.poster }}" alt="play_image">
-          </div>
+          <a href="{% url 'articles:detail' play.playid %}">
+            <div class="ranking__item__img">
+              <img src="{{ play.poster }}" alt="play_image">
+            </div>
+          </a>
           <div class="ranking__item__desc">
             <div class="rank-box">{{ forloop.counter }}위</div>
             <h6 class="ranking__item__name">

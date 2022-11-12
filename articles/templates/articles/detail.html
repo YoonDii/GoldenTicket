@@ -22,6 +22,26 @@
     <div class="perf-movieinfo-left">
       <img src="{{performance.poster}}" alt="">
       <!--좋아요, 평균별점-->
+      <!-- Likes -->
+      <div class="d-flex align-items-center">
+        {% if request.user.is_authenticated %}
+        <div class="me-3">
+          <span id="like-count">{{ performance.like_users.count }}</span>
+        </div>
+        <!-- Like-Form -->
+        <form class="like-forms" data-performance-id="{{ performance.playid }}">
+        {% csrf_token %}
+          {% if user in performance.like_users.all %}
+            <input id="like-{{ performance.playid }}" type="submit" value='좋아요 취소'>
+          {% else %}
+            <input id="like-{{ performance.playid }}" type="submit" value='좋아요'>
+          {% endif %}
+        </form>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-outline-warning">로그인이 필요합니다.</a>
+        {% endif %}
+      </div>
+      <!-- Likes-End -->
     </div>
     <div class="perf-movieinfo-right">
       <div class="product-area1">
@@ -303,4 +323,48 @@
 
 </div>
 {% endblock content %}
+  
+
+
+{% block js %}
+
+<!-- CDN axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- Script -->
+<script>
+  const forms = document.querySelectorAll('.like-forms')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', function(evnet) {
+      event.preventDefault();
+      const performanceId = event.target.dataset.performanceId
+      // request axios
+      axios({
+        method: 'post',
+        url: `/articles/${performanceId}/like/`,
+        headers: {'X-CSRFToken': csrftoken}, // csrf token
+      })
+        // response views
+        .then((response) => {
+          console.log(response.data)
+          const isLiked = response.data.is_liked
+          const likeBtn = document.querySelector(`#like-${performanceId}`)
+          const likeCountTag = document.querySelector('#like-count')
+          const likeCount = response.data.like_count
+          likeCountTag.innerText = likeCount
+          if (isLiked === true) {
+            likeBtn.value = '좋아요 취소'
+          } else {
+            likeBtn.value = '좋아요'
+          }
+        })
+        .catch((error) => {
+          console.log(error.response)
+        })
+    })
+  })
+</script>
+
+{% endblock js %}
   

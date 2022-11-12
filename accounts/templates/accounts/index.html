@@ -5,13 +5,15 @@
 
 <div class="container mt-5" style="width:50%">
   <h1>accounts/index</h1>
+  
+  {% if request.user.is_authenticated %}
   <p>로그인 상태: {{ request.user }}</p>
+  <p><a href="{% url 'accounts:profile' request.user.pk %}">프로필정보</a></p>
+  {% endif %}
+    
   <p><a href="{% url 'accounts:signup' %}">가입하기</a></p>
   <p><a href="{% url 'accounts:login' %}">로그인하기</a></p>
   <p><a href="{% url 'accounts:logout' %}">로그아웃</a></p>
-  {% if request.user.is_authenticated %}
-    <p><a href="{% url 'accounts:profile' request.user.pk %}">프로필정보</a></p>
-  {% endif %}
 </div>
 
 {% endblock content %}
