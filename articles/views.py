@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import PlayDetail, LocationDetail
+from django.http import JsonResponse
 
 
 def main(request):
@@ -31,6 +32,27 @@ def detail(request, performance_pk):
     }
     return render(request, "articles/detail.html", context)
 
+
+# like
+def like(request, performance_pk):
+    if request.user.is_authenticated:
+        performance = PlayDetail.objects.get(playid=performance_pk)
+        if performance.like_users.filter(pk=request.user.pk).exists():
+            performance.like_users.remove(request.user)
+            is_liked = False
+        else:
+            performance.like_users.add(request.user)
+            is_liked = True
+    else:
+        return redirect("articles:detail", performance_pk)
+    return JsonResponse(
+        {
+            "is_liked": is_liked,
+            "like_count": performance.like_users.count(),
+        }
+    )
+
+
 def play(request):
     playlist = PlayDetail.objects.filter(genrename="연극")
     context = {"playlist": playlist}
@@ -59,5 +81,3 @@ def ktm(request):
     playlist = PlayDetail.objects.filter(genrename="국악")
     context = {"playlist": playlist}
     return render(request, "articles/ktm.html", context)
-
-
