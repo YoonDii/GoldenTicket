@@ -52,15 +52,19 @@
   margin-right: 0;
 }
 
-.ranking__tag__name:hover {
+.ranking__tag__name.on .tag-btn {
   color: var(--main-color);
 }
 
 /* Ranking-Item */
 .ranking__list {
   margin-top: 35px;
-  display: flex;
+  display: none;
   justify-content: space-between;
+}
+
+.ranking__list-01 {
+  display: flex;
 }
 
 .ranking__item {
