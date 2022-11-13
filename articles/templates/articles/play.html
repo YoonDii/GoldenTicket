@@ -14,6 +14,7 @@
   <p class="li-sec-result">
     현재 예매 가능한 공연은 총 <span>{{ playlist|length }}개</span> 입니다.
   </p>
+  {% comment %} <div class='article'> {% endcomment %}
   <div class="ms-list-imgs">
     {% for play in playlist %}
     <a style="cursor:pointer;" onclick="" title="{{play.playname}}">
@@ -30,6 +31,16 @@
     </a>
     {% endfor %}
   </div>
+  <input name="ListTotalCnt" type="hidden" id="ListTotalCnt" value="121">
+  <script type="text/javascript">
+    $(function () {
+        $('.lazyload').Lazy({
+            effect: "fadeIn",
+            effectTime: 200,
+            defaultImage: 'http://tkfile.yes24.com' + '/imgNew/common/noimg.gif'
+        });
+    });
+</script>
 </section>
 
 {% endblock content %}
@@ -37,5 +48,5 @@
 
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="{% static 'js/base.js' %}"></script>
+  <script src="{% static 'js/list.js' %}"></script>
 {% endblock js %}  

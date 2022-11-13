@@ -35,6 +35,7 @@ def detail(request, performance_pk):
     return render(request, "articles/detail.html", context)
 
 
+
 # like
 def like(request, performance_pk):
     if request.user.is_authenticated:
@@ -53,6 +54,7 @@ def like(request, performance_pk):
             "like_count": performance.like_users.count(),
         }
     )
+
 
 
 def play(request):
