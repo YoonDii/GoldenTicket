@@ -6,12 +6,10 @@
   <div class="container d-flex justify-content-center">
     <div class="box_bg boxbgwid p-5">
       <h1 class="text-center mb-5">회원가입</h1>
-      <form action="" method="POST">
+      <form action="" id="form_check" method="POST">
         {% csrf_token %}
         <div required class="input_form" id="info__id">
           <input id="check_id" type="text" name="username" placeholder="아이디 입력 (4~20자)"/>
-          <button id="id-check">중복 확인</button>
-          <p id="id-error"></p>
         </div>
         <div required class="password_form" id="info__pw">
         <input class="mt-5" type="password" autoComplete="off" id="password1" name="password1" placeholder="비밀번호 입력(문자,숫자,특수문자 포함 8~20자)"/>
