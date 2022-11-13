@@ -21,19 +21,54 @@
     <input type="submit" value="삭제하기">
   </form>
 <hr>
+
+{% comment %} 댓글생성 {% endcomment %}
 {% if request.user.is_authenticated %}
-<form action="{% url 'reviews:comment_create' review.pk %}" method="POST">
+<form id="comment-form" data-review-id="{{ review.pk }}">
   {% csrf_token %}
   {% bootstrap_form comment_form %}
   <input type="submit" value="댓글생성">
 </form>
 {% endif %}
+
+{% comment %} 댓글 출력 {% endcomment %}
+<div id="comments">
   {% for comment in comments %}
-  <p>{{ comment.user }}:{{ comment.content }}<span>
+  <p>{{ comment.user }}:{{ comment.content }} <span>
     <a class="btn btn-danger float-end" href="{% url 'reviews:comment_delete' comment.pk %}">댓글삭제</a>
   </span></p>
   <hr>
   {% endfor %}
+</div>
 
-{% include 'sub-footer.html' %}
 {% endblock content %}
+{% include 'sub-footer.html' %}
+
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const commentForm = document.querySelector('#comment-form')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  
+  commentForm.addEventListener('submit', function(event){
+    event.preventDefault()
+
+    axios({
+      method: 'post',
+      url: `/reviews/${event.target.dataset.reviewId}/comment_create/`,
+      headers: {'X-CSRFToken': csrftoken},
+      data: new FormData(commentForm)
+    })
+    .then(response => {
+      console.log(response.data)
+
+      const comments = document.querySelector('#comments')
+      const p = document.createElement('p')
+      p.innerText = `${response.data.userName}:${response.data.content}`
+      const hr = document.createElement('hr')
+      comments.append(p, hr)
+      commentForm.reset()
+    })
+  })
+</script>
+{% endblock js %}

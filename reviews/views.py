@@ -4,6 +4,7 @@ from articles.models import PlayDetail
 from .models import ReviewPhoto, Review, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 
 
 def index(request):
@@ -125,6 +126,7 @@ def delete(request, pk):
 
 
 def comment_create(request, pk):
+    print(request.POST)
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
@@ -132,7 +134,11 @@ def comment_create(request, pk):
         comment.review = review
         comment.user = request.user
         comment.save()
-    return redirect("reviews:detail", pk)
+        context = {
+            "content": comment.content,
+            "userName": comment.user.username,
+        }
+        return JsonResponse(context)
 
 
 # def comment_update(request, pk):
