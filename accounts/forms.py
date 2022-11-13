@@ -9,7 +9,6 @@ class CustomUserCreationForm(UserCreationForm):
             "username",
             "email",
         ]
-        labels = {}
 
 
 class CustomUserChangeForm(UserChangeForm):

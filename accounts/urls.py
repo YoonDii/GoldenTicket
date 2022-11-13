@@ -11,7 +11,7 @@ urlpatterns = [
     path("update/", views.update, name="update"),
     path("<int:user_pk>/", views.profile, name="profile"),
     path("<int:user_pk>/follow/", views.follow, name="follow"),
-    path("pw_change/", views.pw_change, name="pw_change"),
+    path("password/", views.pw_change, name="pw_change"),
     path("delete/", views.delete, name="delete"),
     path("login/kakao/", views.kakao_request, name="kakao"),
     path("login/kakao/callback/", views.kakao_callback),

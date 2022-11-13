@@ -2,38 +2,165 @@
 {% load static %}
 
 {% block content %}
-<div class="container" style="width:50%">
+{% include 'nav.html' %}
 
-  <h1>{{ request.user }}님의 프로필</h1>
-  <hr>
-  <p>아이디: {{ user.username }}</p>
-  <p>이메일: {{ user.email }}</p>
-  <div class="">
-    <img src="{{ user.profile_image }}" alt="" width="100" height="100" style="border-radius: 50%;">
+<div class="container">
+    <!-- Profile -->
+  <div class="profile-detail my-5">
+    <!-- Profile-Image -->
+    <div class="pd__img w-25 me-5">
+      <img src="{{ user.profile_image }}" alt="profile-image">
+    </div>
+    <!-- Profile-Info -->
+    <div class="pd__info w-50 ms-5">
+      <!-- Info-Top -->
+      <div class="pd__info-top">
+        <div class="pd__info__username">
+          <h3>{{ user.username }}</h3>
+          <p class="mx-3">✅</p>
+        </div>
+        <!-- Info-Button -->
+        <div class="pd__info__btn">
+          <!-- Followings -->
+          <form id='follow-form' data-user-id='{{ user.pk }}' data-my-id="{{ my.pk }}">
+            {% csrf_token %}
+            {% if request.user != user %}
+              {% if request.user in user.followings.all %}
+                <button type='submit' style="
+              border: 0;
+              background: none;
+              border: 1px solid var(--gray-light--color);
+              border-radius: 5px;
+              padding: 3px 25px;
+              margin: 0 10px 0 20px;">
+                  <i id="follow-{{ request.user.pk }}" class="fa-solid fa-user-check"></i>
+                </button>
+              {% else %}
+                <button type='submit' style="
+              border: 0;
+              background: none;
+              border: 1px solid var(--gray-light--color);
+              border-radius: 5px;
+              padding: 3px 25px;
+              margin: 0 10px 0 20px;">
+                  <i id="follow-{{ request.user.pk }}" class="fa-solid fa-user-plus"></i>
+                </button>
+              {% endif %}
+            {% endif %}
+          </form>
+          <span class="pd__info__btn-arrow">
+            <i class="fa-solid fa-chevron-down"></i>
+          </span>
+
+          <!-- Button trigger modal -->
+          <button data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: none; border: 0;">
+            <i class="fa-solid fa-ellipsis fa-lg"></i>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-accounts-detail">
+              <div class="container">
+                <div class="modal-content text-center">
+                  <!-- Modal-Body -->
+                  <div class="modal-body p-0 accounts-modal">
+                    <a href="#" class="fw-bold text-danger">
+                      <p class="m-0 text-danger" style="padding: 12px">차단</p>
+                    </a>
+                    <hr class="m-0">
+                    <a href="#" class="fw-bold text-danger">
+                      <p class="m-0 text-danger" style="padding: 12px">제한</p>
+                    </a>
+                    <hr class="m-0">
+                    <a href="#" class="fw-bold text-danger">
+                      <p class="m-0 text-danger" style="padding: 12px">신고</p>
+                    </a>
+                    {% if request.user == user %}
+                      <hr class="m-0">
+                      <a href="{% url 'accounts:update' %}" style="color: var(--dark-color);">
+                        <p class="m-0" style="padding: 12px">정보수정</p>
+                      </a>
+                      <hr class="m-0">
+                      <a href="{% url 'accounts:delete' %}" style="color: var(--dark-color);">
+                        <p class="m-0" style="padding: 12px">회원탈퇴</p>
+                      </a>
+                    {% endif %}
+                    <hr class="m-0">
+                    <a href="{% url 'accounts:profile' user.pk %}" style="color: var(--dark-color);">
+                      <p class="m-0" style="padding: 12px">취소</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal-End -->
+        </div>
+      </div>
+      <!-- Info-Bottom -->
+      <div class="pd__info-bottom my-3">
+        <span class="me-2">찜</span>
+        <span class="me-3 fw-bold">{{ request.user.performance.count }}</span>
+        <span class="me-2">팔로우</span>
+        <span id="followings-count" class="me-3 fw-bold">{{ user.followers.count }}</span>
+        <span class="me-2">팔로워</span>
+        <span id="followers-count" class="me-3 fw-bold">{{ user.followings.count }}</span>
+      </div>
+      <div class="pd__email">{{ request.user.email }}</div>
+    </div>
   </div>
-  <p><a href="{% url 'accounts:update' %}">회원정보수정</a></p>
-  <p><a href="{% url 'accounts:pw_change' %}">비밀번호 수정</a></p>
-  <p><a href="{% url 'accounts:delete' %}">회원탈퇴</a></p>
 
 
-  <!-- Follow -->
-  {% if request.user.is_authenticated %}
-    <form id="follow-form" data-user-id="{{ user.pk }}">
-    {% csrf_token %}
-    팔로잉: <span id="followers-count">{{ user.followers.count }}</span> | 팔로워: <span id="followings-count">{{ user.followings.count }}</span>
-      {% if request.user != user %}
-        {% if request.user in user.followings.all %}
-          <input type="submit" value='팔로우 취소'>
-        {% else %}
-          <input type="submit" value='팔로우'>
-        {% endif %}
-      {% endif %}
-    </form>  
-  {% else %}
-  팔로잉: <span id="followers-count">{{ user.followers.count }}</span> | 팔로워: <span id="followings-count">{{ user.followings.count }}</span>
-  <a href="{% url 'accounts:index' %}" class="btn btn-outline-secondary">로그인이 필요합니다.</a>
-  {% endif %}
-
+  <!-- Profile-Likes -->
+  <div class="profile-likes">
+    <h3 class="my-3">🎬 찜한 연극 </h3>
+    <!-- Grid -->
+    {% if user.performance.all %}
+      <div class="like-outbox">
+        {% for play in user.performance.all %}
+          <a href="{% url 'articles:detail' play.playid %}">
+            <div class="like-box sa sa-up">
+              <div class="like-box__item">
+                {% if play.poster %}
+                  <img src="{{ play.poster }}" alt="like-performance-image">
+                  <div class="img__description">
+                    <div class="img__description__count">
+                      <span class="me-3">
+                        <i class="fa-solid fa-heart"></i>
+                        {{ play.like_users.count }}
+                      </span>
+                      <span>
+                        <i class="fa-solid fa-user-pen"></i>
+                        {{ play.review_set.count }}
+                      </span>
+                    </div>
+                  </div>
+                {% else %}
+                  <img class="card-img-top rounded-0" src="https://picsum.photos/300/200" style="width: 100%; height: 100%;" alt="empty-image">
+                  <div class="img__description">
+                    <div class="img__description__count">
+                      <span class="me-3">
+                        <i class="fa-solid fa-heart"></i>
+                        {{ play.like_users.count }}
+                      </span>
+                      <span>
+                        <i class="fa-solid fa-user-pen"></i>
+                        {{ play.review_set.count }}
+                      </span>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>찜한 연극이 없습니다...</p>
+    {% endif %}
+    <!-- Grid-End -->
+    <div class="my-3"></div>
+  </div>
 </div>
 
 {% endblock content %}
@@ -44,13 +171,15 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   const form = document.querySelector('#follow-form')
-  // csrf token -> input(hidden type) tag in HTML
   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
   form.addEventListener('submit', function(event) {
     event.preventDefault()
     const userId = event.target.dataset.userId
-
+    const myId = event
+        .target
+        .dataset
+        .myId
     // request axios
     axios({
       method: 'post',
@@ -60,11 +189,21 @@
       // response views
       .then((response) => {
         const isFollowed = response.data.is_followed
-        const followBtn = document.querySelector('#follow-form > input[type=submit]')
+        const followBtn = document.querySelector(`#follow-${myId}`)
         if (isFollowed === true) {
-          followBtn.value = '팔로우 취소'
+          followBtn
+            .classList
+            .remove('fa-user-plus');
+          followBtn
+            .classList
+            .add('fa-user-check');
         } else {
-          followBtn.value = '팔로우'
+          followBtn
+            .classList
+            .remove('fa-user-check');
+          followBtn
+            .classList
+            .add('fa-user-plus');
         }
         // follow counts
         const followersCountTag = document.querySelector('#followers-count')

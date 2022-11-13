@@ -1,0 +1,122 @@
+/* Detail */
+.profile-detail {
+  display: flex;
+}
+
+.pd__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.pd__img img {
+  width: 100%;
+  background-color: #adb5bd;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pd__info-top {
+  display: flex;
+  align-items: center;
+}
+
+.pd__info__username {
+  display: flex;
+}
+
+.pd__info__btn {
+  display: flex;
+  align-items: center;
+}
+
+.pd__info__btn-arrow {
+  border: 1px solid var(--gray-light--color);
+  border-radius: 5px;
+  padding: 3px 5px;
+  margin-right: 10px;
+}
+
+.pd__info-bottom {
+  display: flex;
+  align-items: center;
+}
+
+.pd__email {
+  color: #01376A;
+}
+
+
+/* Detail-Modal-Hover */
+.accounts-modal p:hover {
+  background-color: var(--gray-light--color);
+}
+.accounts-modal a:first-child p:hover {
+  background-color: var(--gray-light--color);
+  border-radius: 10px 10px 0 0;
+}
+.accounts-modal a:last-child p:hover {
+  background-color: var(--gray-light--color);
+  border-radius: 0 0 10px 10px;
+}
+
+.like-outbox {
+  width: 100%;
+  height: auto;
+}
+
+.like-box {
+  display: inline-block;
+  width: 30%;
+  height: 25vw;
+  border: 1px solid var(--gray-color);
+  margin: 0 10px 10px 0;
+}
+
+.like-box__item {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.like-box__item img {
+  width: 100%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img__description {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  font-size: 18px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s, visibility .2s;
+}
+
+.img__description__count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.like-box__item:hover .img__description {
+  visibility: visible;
+  opacity: 1;
+}
