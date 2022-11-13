@@ -31,6 +31,7 @@ def detail(request, performance_pk):
     }
     return render(request, "articles/detail.html", context)
 
+
 def play(request):
     playlist = PlayDetail.objects.filter(genrename="연극")
     context = {"playlist": playlist}
@@ -59,5 +60,3 @@ def ktm(request):
     playlist = PlayDetail.objects.filter(genrename="국악")
     context = {"playlist": playlist}
     return render(request, "articles/ktm.html", context)
-
-
