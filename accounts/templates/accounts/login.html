@@ -1,29 +1,113 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 {% load django_bootstrap5 %}
 {% block content %}
 <section class="login_bg">
   <div class="container d-flex justify-content-center">
     <div class="box_bg boxbgwid p-5">
-      <h1 class="text-center mb-3">로그인</h1>
+      <h1 class="text-center mb-5">로그인</h1>
       
-      <form action="" method="POST">
+      <form action="{% url 'accounts:login' %}" method='POST' onsubmit="return frm_check();">
         {% csrf_token %}
-        <div required class="input_form" id="info__id">
-          <input class="mt-5" type="text" placeholder="아이디" class="in">
-        </div>
-        <div required class="password_form" id="info__pw">
-          <input class="mt-5" type="password" placeholder="비밀번호" class="in">
-        </div>
-        <input class="btn account_btn mt-5" type="submit" value="로그인">
+        {% render_field form.username class="form-control w-70" placeholder="아이디를 입력하세요" type="text" name="id" id="logId" %}
+        {% render_field form.password class="form-control w-70 my-3" placeholder="비밀번호를 입력하세요" %}
+        <!--아이디저장, 찾기 묶음-->
+        <div class="box d-flex flex-row justify-content-between mb-3">
+        <span class="input-wrap">
+          <input type="checkbox" name="saveId" id="saveId">
+          <label for="saveId">
+            <span></span></label>
+          아이디 저장
+        </span>
+      </div>
+        <div class="text-center"><input class="btn account_btn w-100" type="submit" value="로그인"></div>
       </form>
-      <p class="text-center my-5">간편 로그인</p>
+      <p class="text-center my-3">간편 로그인</p>
         <div class="d-flex flex-row" style="justify-content: space-evenly; ">
           <a href="{% url 'accounts:login' %}kakao"><img class="social_btn" src="https://www.ichrogene.kr/assets/img/kakako-icon.png" alt="kakao_login"></a>
           <a href="{% url 'accounts:login' %}naver"><img class="social_btn" src="{% static 'img/naverr.png' %}" alt="naver_login"></a>
         </div>
-      <p class="text-center my-5">아직 회원이 아니신가요? 👉<a href="{% url 'accounts:signup' %}">회원가입</a></p>
+      <p class="text-center my-5">아직 회원이 아니신가요?<a href="{% url 'accounts:signup' %}"> 👉회원가입</a></p>
     </div>
   </div>
 </section>
   {% endblock content %}
+
+  {% block js %}
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+
+      fnInit();
+
+    });
+
+    function frm_check() {
+      saveid();
+    }
+
+    function fnInit() {
+      var cookieid = getCookie("saveid");
+      console.log(cookieid);
+      if (cookieid != "") {
+        $("input:checkbox[id='saveId']").prop("checked", true);
+        $('#logId').val(cookieid);
+      }
+
+    }
+
+    function setCookie(name, value, expiredays) {
+      var todayDate = new Date();
+      todayDate.setTime(todayDate.getTime() + 0);
+      if (todayDate > expiredays) {
+        document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expiredays + ";";
+      } else if (todayDate < expiredays) {
+        todayDate.setDate(todayDate.getDate() + expiredays);
+        document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+      }
+
+      console.log(document.cookie);
+    }
+
+    function getCookie(Name) {
+      var search = Name + "=";
+      console.log("search : " + search);
+
+      if (document.cookie.length > 0) { // 쿠키가 설정되어 있다면
+        offset = document
+          .cookie
+          .indexOf(search);
+        console.log("offset : " + offset);
+        if (offset != -1) { // 쿠키가 존재하면
+          offset += search.length;
+          // set index of beginning of value
+          end = document
+            .cookie
+            .indexOf(";", offset);
+          console.log("end : " + end);
+          // 쿠키 값의 마지막 위치 인덱스 번호 설정
+          if (end == -1) 
+            end = document.cookie.length;
+          console.log("end위치  : " + end);
+
+          return unescape(document.cookie.substring(offset, end));
+        }
+      }
+      return "";
+    }
+
+    function saveid() {
+      var expdate = new Date();
+      if ($("#saveId").is(":checked")) {
+        expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30);
+        setCookie("saveid", $("#logId").val(), expdate);
+      } else {
+        expdate.setTime(expdate.getTime() - 1000 * 3600 * 24 * 30);
+        setCookie("saveid", $("#logId").val(), expdate);
+
+      }
+    }
+  </script>
+{% endblock js %}
