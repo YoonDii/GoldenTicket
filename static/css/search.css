@@ -108,7 +108,12 @@
   padding: 40px 0;
   border-left: 1px solid var(--gray-light-color);
   justify-content: space-around;
+  align-items: center;
   width: 620px;
   color: var(--dark-color);
   font-weight: 200;
+}
+
+.search-item__location {
+  width: 350px;
 }

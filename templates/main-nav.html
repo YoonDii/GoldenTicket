@@ -31,12 +31,12 @@
         </ul>
         <div class="m-nav__search">
           <form id="search-form" action="{% url 'articles:search' %}" role='search'>
-            <input type="text" id="search-type" name='search'>
+            <input type="text" id="search-type" name='search' style="color: var(--white-color);">
             <a href="{% url 'articles:search' %}" role='search' onclick="#">
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
           </form>
-          <a href="{% url 'accounts:index' %}">
+          <a href="{% url 'accounts:profile' request.user.pk %}">
             <i class="fa-regular fa-user fa-xl"></i>
           </a>
         </div>
