@@ -25,22 +25,27 @@
       <img src="{{performance.poster}}" alt="">
       <!--좋아요, 평균별점-->
       <!-- Likes -->
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center" style="padding: 20px 0; border-bottom: 1px solid var(--gray-color);">
         {% if request.user.is_authenticated %}
-        <div class="me-3">
-          <span id="like-count">{{ performance.like_users.count }}</span>
-        </div>
         <!-- Like-Form -->
         <form class="like-forms" data-performance-id="{{ performance.playid }}">
         {% csrf_token %}
           {% if user in performance.like_users.all %}
-            <input id="like-{{ performance.playid }}" type="submit" value='좋아요 취소'>
+            <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+              <i id="star-{{ performance.playid }}" class="fa-solid fa-heart fa-2x"></i>
+            </button>
           {% else %}
-            <input id="like-{{ performance.playid }}" type="submit" value='좋아요'>
+            <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+              <i id="star-{{ performance.playid }}" class="fa-regular fa-heart fa-2x"></i>
+            </button>
           {% endif %}
         </form>
+        <div class="ms-3 d-flex align-items-center">
+          <span id="like-count" style="color: var(--main-color);">{{ performance.like_users.count }}</span>
+          <p class="ms-2">likes</p>
+        </div>
         {% else %}
-        <a href="{% url 'accounts:login' %}" class="btn btn-outline-warning">로그인이 필요합니다.</a>
+        <a href="{% url 'accounts:login' %}" class="">로그인이 필요합니다.</a>
         {% endif %}
       </div>
       <!-- Likes-End -->
@@ -448,13 +453,26 @@
           console.log(response.data)
           const isLiked = response.data.is_liked
           const likeBtn = document.querySelector(`#like-${performanceId}`)
+          const starBtn = document.querySelector(`#star-${performanceId}`)
           const likeCountTag = document.querySelector('#like-count')
           const likeCount = response.data.like_count
           likeCountTag.innerText = likeCount
           if (isLiked === true) {
-            likeBtn.value = '좋아요 취소'
+            starBtn
+            .classList
+            .remove('fa-regular')
+            starBtn
+            .classList
+            .add('fa-solid')
+            starBtn.style.color = 'var(--main-color)';
           } else {
-            likeBtn.value = '좋아요'
+            starBtn
+            .classList
+            .remove('fa-solid')
+            starBtn
+            .classList
+            .add('fa-regular')
+            starBtn.style.color = 'var(--main-color)';
           }
         })
         .catch((error) => {
