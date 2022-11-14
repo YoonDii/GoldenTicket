@@ -8,9 +8,15 @@
   <div class="perf-content"><!--제목-->
     <h1>{{performance.playname}}</h1>
     <div class="dateloc-data">
-      <p><span class="ps-date">{{performance.playstdate}} ~ {{performance.playenddate}}</span><a href="#map" id="ps-location"> | <span class="ps-location">{{performance.locationname}}</span> <i class="bi bi-geo-alt-fill"></i></a></p>
+      <p>
+        <span class="ps-date">{{performance.playstdate}} ~ {{performance.playenddate}}</span>
+        <a href="#tit-map" id="ps-location">
+          | <span class="ps-location">{{performance.locationname}}</span> 
+          <i class="bi bi-geo-alt-fill" style="color: var(--main-color); font-size: 20px;"></i>
+        </a>
+      </p>
       <!--배포후 공유링크 교체-->
-      <div class="pf-social">
+      <div class="pf-social" style="text-align: end;">
         <a href="http://www.facebook.com/sharer.php?u=http://ticket.yes24.com/Perf/41222" target="_blank" class="ps-social-btn1"><img src="http://tkfile.yes24.com/imgNew/common/rn-social-01.png" alt=""></a>
         <a href='https://twitter.com/share?url=http://ticket.yes24.com/Perf/41222&text=%ec%97%b0%ea%b7%b9+%5b%ed%96%89%ec%98%a4%eb%b2%84%5d'  class='ps-social-btn2' target='_blank' ><img src='http://tkfile.yes24.com/imgNew/common/rn-social-02.png' alt='트위터' /></a>
         <a href="javascript:void(0);" class="ps-social-btn3"><img src="http://tkfile.yes24.com/imgNew/common/rn-social-03.png" alt=""></a>
@@ -69,16 +75,18 @@
   </div>
   <div class="tabbox">
     <!--상세정보 *나중에 js적용-->
-    <a href="#info">
+    <a href="#info" style="border-top: 3px solid var(--main-color);">
       <span>상세정보</span>
     </a>
     <!--후기-->
     <a href="#reviews">
-      <span>관람후기</span>
+      <span>관람후기 ({{ performance.review_set.count }})</span>
     </a>
   </div>
 </div>
 
+
+{% if performance.image1 %}
 <div class="perf-content" id="info">
   <div class="perf-detailinfo">
     <p class="detail-title">공연정보</p>
@@ -88,9 +96,11 @@
     <img src="{{performance.image4}}" alt="">
   </div>
 </div>
+{% endif %}
+  
 <!--지도-->
 <div class="perf-content-2">
-  <p class="tit-map">
+  <p class="tit-map" id="tit-map">
     <span>{{performance.locationname}}</span>
   </p>
   <p class="loc-map">
@@ -373,13 +383,16 @@
   </div>
   <div>
     <ul class="review-list">
+      
+      
+      {% if performance.review_set.first %}
       {% for review in reviews %}
         {% if review.playId == performance %}
         <li>
           <div class="ttbox">
             <span class="tt1">작성자</span>
             <span class="tt2"><a href="{% url 'accounts:profile' review.user.pk %}">{{review.user}}</a></span>
-            <span class="tt3">{{review.created_at}}</span>
+            <span class="tt3">{{review.created_at|date:'Y-m-d'}}</span>
             <span class="tt4">
               {% if review.grade == "5" %}
               <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
@@ -422,6 +435,11 @@
         </li>
         {% endif %}
       {% endfor %}
+      {% else %}
+      <div class="d-flex justify-content-center align-items-center py-5" style="color: var(--gray-dark-color);">
+        <p class="py-5">등록된 관람후기가 없습니다.</p>
+      </div>
+      {% endif %}
     </ul>
   </div>
 </div>

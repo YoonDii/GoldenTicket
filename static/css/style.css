@@ -103,7 +103,7 @@ a:hover {
 .m-nav__nav__item {
   display: flex;
   align-items: center;
-  margin-right: calc(var(--base-space) * 2);
+  margin-right: 40px;
   font-size: var(--large-font);
 }
 
