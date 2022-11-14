@@ -16,7 +16,7 @@
   </p>
   <div class="ms-list-imgs ms-list-imgs-01" id="new">
     {% for play in playlist %}
-    <a style="cursor:pointer;" onclick="" title="{{play.playname}}">
+    <a style="cursor:pointer;" href="{% url 'articles:detail' play.playid %}" onclick="" title="{{play.playname}}">
       <div class="list-bigger-wrap">
         <div class="poster">
           <img class="lazyload" alt="" src="{{play.poster}}" >
@@ -33,7 +33,7 @@
   {% comment %} 종료임박순 {% endcomment %}
   <div class="ms-list-imgs" id="end">
     {% for play in plist %}
-    <a style="cursor:pointer;" onclick="" title="{{play.playname}}">
+    <a style="cursor:pointer;" onclick="" href="{% url 'articles:detail' play.playid %}" title="{{play.playname}}">
       <div class="list-bigger-wrap">
         <div class="poster">
           <img class="lazyload" alt="" src="{{play.poster}}" >

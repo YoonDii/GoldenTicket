@@ -147,7 +147,7 @@ def like(request, performance_pk):
 #     return render(request, "articles/ktm.html", context)
 
 
-@login_required
+
 def search(request):
     all_data = PlayDetail.objects.order_by("-pk")
     search = request.GET.get("search", "")
