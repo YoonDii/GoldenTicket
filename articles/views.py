@@ -92,6 +92,7 @@ def ktm(request):
     return render(request, "articles/ktm.html", context)
 
 
+
 @login_required
 def search(request):
     all_data = PlayDetail.objects.order_by("-pk")
@@ -115,3 +116,4 @@ def search(request):
         }
 
     return render(request, "articles/search.html", context)
+
