@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% include 'nav.html' %}
+
+<div class="container">
+  <!-- Search-Top -->
+  <div class="search-top">
+    <h3 class="mb-3"><span>'검색'</span> 에 대한 검색 결과입니다.</h3>
+    <div class="nav__search">
+      <form action="#">
+        <input type="text" id="search-type-02">
+        <a href="#" onclick="#">
+          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+        </a>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Search-word -->
+  <div class="search-word">
+    <div class="sw-left">
+      <h4>(<span class="shap">#</span>) 추천 검색어</h4>
+    </div>
+    <div class="sw-right">
+      <div class="sw-tag">
+        <p># 마룬파이브</p>
+      </div>
+      <div class="sw-tag">
+        <p># 서툰 사람들</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Search-List -->
+  <div class="search-list">
+    {% for play in playlist %}
+    <!-- Search-Item -->
+    <div class="search-item">
+      <a href="{% url 'articles:detail' play.playid %}">
+        <img src="{{ play.poster }}" alt="poster">
+      </a>
+      <div class="search-desc">
+        <div class="search-item__title">{{ play.playname }}</div>
+        <div class="search-desc-in">
+          <div class="search-item__date">{{ play.playstdate }}~{{ play.playenddate }}</div>
+          <div class="search-item__location">{{ play.locationname }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% include 'sub-footer.html' %}
+{% endblock content %}
+  

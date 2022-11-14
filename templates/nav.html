@@ -23,14 +23,19 @@
           </h1>
         </div>
         <ul class="m-nav__nav">
+          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=연극">연극</a></li>
+          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=클래식">클래식</a></li>
+          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용">무용</a></li>
+          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬">뮤지컬</a></li>
+          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악">국악</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'accounts:index' %}">accounts</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}">articles</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'reviews:index' %}">reviews</a></li>
         </ul>
         <div class="nav__search">
-          <form action="#">
-            <input type="text" id="search_type_1">
-            <a href="#" onclick="#">
+          <form  action="{% url 'articles:search' %}" role='search'>
+            <input type="text" id="search_type_1" name='search'>
+            <a href="{% url 'articles:search' %}" role='search' onclick="#">
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
           </form>
