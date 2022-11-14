@@ -88,3 +88,14 @@ def ktm(request):
     plist = PlayDetail.objects.filter(genrename="국악").order_by("playenddate")
     context = {"playlist": playlist, "plist": plist}
     return render(request, "articles/ktm.html", context)
+
+
+def search(request):
+    playlist = PlayDetail.objects.filter(genrename="연극").order_by("-playstdate")
+    return render(
+        request,
+        "articles/search.html",
+        {
+            "playlist": playlist[:2],
+        },
+    )
