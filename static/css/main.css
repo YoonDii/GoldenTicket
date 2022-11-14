@@ -80,8 +80,8 @@
 
 .ranking__item__img img {
   width: 100%;
-  transition: transform 1s, filter 2s ease-in-out;
-  filter: blur(2px);
+  transition: transform .6s, filter 1s ease-in-out;
+  filter: blur(1.5px);
   transform: scale(1.2);
 }
 
