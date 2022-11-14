@@ -126,19 +126,34 @@ def delete(request, pk):
 
 
 def comment_create(request, pk):
-    print(request.POST)
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm(request.POST)
+
     if comment_form.is_valid():
         comment = comment_form.save(commit=False)
         comment.review = review
         comment.user = request.user
         comment.save()
-        context = {
-            "content": comment.content,
-            "userName": comment.user.username,
-        }
-        return JsonResponse(context)
+
+    user = request.user.pk
+    temp = Comment.objects.filter(review_id=pk).order_by("-pk")
+    comment_data = []
+
+    for tem in temp:
+        comment_data.append(
+            {
+                "user_pk": tem.user_id,
+                "userName": tem.user.username,
+                "content": tem.content,
+                "commentPk": tem.pk,
+            }
+        )
+    context = {
+        "comment_data": comment_data,
+        "review_pk": review.pk,
+        "user": user,
+    }
+    return JsonResponse(context)
 
 
 # def comment_update(request, pk):
@@ -168,6 +183,23 @@ def comment_delete(request, pk):
     review = comment.review
     comment.delete()
 
-    print(review.pk)
+    user = request.user.pk
+    temp = Comment.objects.filter(review=review).order_by("-pk")
+    comment_data = []
 
-    return redirect("reviews:detail", review.pk)
+    for tem in temp:
+        comment_data.append(
+            {
+                "user_pk": tem.user_id,
+                "userName": tem.user.username,
+                "content": tem.content,
+                "commentPk": tem.pk,
+            }
+        )
+    context = {
+        "comment_data": comment_data,
+        "review_pk": review.pk,
+        "user": user,
+    }
+    print("실행")
+    return JsonResponse(context)
