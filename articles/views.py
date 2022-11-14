@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 
-
 def main(request):
     play_list = PlayDetail.objects.filter(genrename="연극")
     musical_list = PlayDetail.objects.filter(genrename="뮤지컬")
@@ -147,10 +146,9 @@ def like(request, performance_pk):
 #     return render(request, "articles/ktm.html", context)
 
 
-@login_required
 def search(request):
     all_data = PlayDetail.objects.order_by("-pk")
-    search = request.GET.get("search", "")
+    search = request.GET.get("search")
 
     if search:
         search_list = all_data.filter(
