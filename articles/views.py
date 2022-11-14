@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import PlayDetail, LocationDetail
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 def main(request):
@@ -90,12 +92,28 @@ def ktm(request):
     return render(request, "articles/ktm.html", context)
 
 
+
+@login_required
 def search(request):
-    playlist = PlayDetail.objects.filter(genrename="연극").order_by("-playstdate")
-    return render(
-        request,
-        "articles/search.html",
-        {
-            "playlist": playlist[:2],
-        },
-    )
+    all_data = PlayDetail.objects.order_by("-pk")
+    search = request.GET.get("search", "")
+
+    if search:
+        search_list = all_data.filter(
+            Q(playname__icontains=search)
+            | Q(genrename__icontains=search)
+            | Q(locationname__icontains=search)
+            | Q(playcast__icontains=search)
+        )
+        context = {
+            "search": search,
+            "search_list": search_list,
+        }
+    else:
+        context = {
+            "search": search,
+            "search_list": all_data,
+        }
+
+    return render(request, "articles/search.html", context)
+
