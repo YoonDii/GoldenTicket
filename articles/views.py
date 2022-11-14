@@ -24,7 +24,28 @@ def main(request):
 
 
 def index(request):
-    return render(request, "articles/index.html")
+
+    if request.GET.get("genre"):
+        genre = request.GET.get("genre")
+
+        playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
+        plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
+
+        context = {
+            "genrename": genre,
+            "playlist": playlist,
+            "plist": plist,
+        }
+    else:
+        playlist = PlayDetail.objects.order_by("-playstdate")
+        plist = PlayDetail.objects.order_by("playenddate")
+
+        context = {
+            "genrename": "모든 공연",
+            "playlist": playlist,
+            "plist": plist,
+        }
+    return render(request, "articles/index.html", context)
 
 
 def detail(request, performance_pk):
@@ -57,40 +78,39 @@ def like(request, performance_pk):
     )
 
 
-def play(request):
-    playlist = PlayDetail.objects.filter(genrename="연극").order_by("-playstdate")
-    plist = PlayDetail.objects.filter(genrename="연극").order_by("playenddate")
-    context = {"playlist": playlist, "plist": plist}
-    return render(request, "articles/play.html", context)
+# def play(request):
+#     playlist = PlayDetail.objects.filter(genrename="연극").order_by("-playstdate")
+#     plist = PlayDetail.objects.filter(genrename="연극").order_by("playenddate")
+#     context = {"playlist": playlist, "plist": plist}
+#     return render(request, "articles/play.html", context)
 
 
-def musical(request):
-    playlist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("-playstdate")
-    plist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("playenddate")
-    context = {"playlist": playlist, "plist": plist}
-    return render(request, "articles/musical.html", context)
+# def musical(request):
+#     playlist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("-playstdate")
+#     plist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("playenddate")
+#     context = {"playlist": playlist, "plist": plist}
+#     return render(request, "articles/musical.html", context)
 
 
-def classic(request):
-    playlist = PlayDetail.objects.filter(genrename="클래식").order_by("-playstdate")
-    plist = PlayDetail.objects.filter(genrename="클래식").order_by("playenddate")
-    context = {"playlist": playlist, "plist": plist}
-    return render(request, "articles/classic.html", context)
+# def classic(request):
+#     playlist = PlayDetail.objects.filter(genrename="클래식").order_by("-playstdate")
+#     plist = PlayDetail.objects.filter(genrename="클래식").order_by("playenddate")
+#     context = {"playlist": playlist, "plist": plist}
+#     return render(request, "articles/classic.html", context)
 
 
-def dance(request):
-    playlist = PlayDetail.objects.filter(genrename="무용").order_by("-playstdate")
-    plist = PlayDetail.objects.filter(genrename="무용").order_by("playenddate")
-    context = {"playlist": playlist, "plist": plist}
-    return render(request, "articles/dance.html", context)
+# def dance(request):
+#     playlist = PlayDetail.objects.filter(genrename="무용").order_by("-playstdate")
+#     plist = PlayDetail.objects.filter(genrename="무용").order_by("playenddate")
+#     context = {"playlist": playlist, "plist": plist}
+#     return render(request, "articles/dance.html", context)
 
 
-def ktm(request):
-    playlist = PlayDetail.objects.filter(genrename="국악").order_by("-playstdate")
-    plist = PlayDetail.objects.filter(genrename="국악").order_by("playenddate")
-    context = {"playlist": playlist, "plist": plist}
-    return render(request, "articles/ktm.html", context)
-
+# def ktm(request):
+#     playlist = PlayDetail.objects.filter(genrename="국악").order_by("-playstdate")
+#     plist = PlayDetail.objects.filter(genrename="국악").order_by("playenddate")
+#     context = {"playlist": playlist, "plist": plist}
+#     return render(request, "articles/ktm.html", context)
 
 
 @login_required
@@ -116,4 +136,3 @@ def search(request):
         }
 
     return render(request, "articles/search.html", context)
-
