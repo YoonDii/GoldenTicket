@@ -28,9 +28,9 @@
           <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'reviews:index' %}">reviews</a></li>
         </ul>
         <div class="m-nav__search">
-          <form id="search-form" action="#">
-            <input type="text" id="search-type">
-            <a href="#" onclick="#">
+          <form id="search-form" action="{% url 'articles:search' %}" role='search'>
+            <input type="text" id="search-type" name='search'>
+            <a href="{% url 'articles:search' %}" role='search' onclick="#">
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
           </form>
