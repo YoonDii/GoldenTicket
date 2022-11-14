@@ -373,7 +373,7 @@
         <li>
           <div class="ttbox">
             <span class="tt1">작성자</span>
-            <span class="tt2"><a href="{% url 'accounts:profile' user.pk %}">{{review.user}}</a></span>
+            <span class="tt2"><a href="{% url 'accounts:profile' review.user.pk %}">{{review.user}}</a></span>
             <span class="tt3">{{review.created_at}}</span>
             <span class="tt4">
               {% if review.grade == "5" %}
