@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import PlayDetail, LocationDetail
 from django.http import JsonResponse
+from reviews.forms import ReviewForm, ReviewPhotoForm, CommentForm
+from reviews.models import ReviewPhoto, Review, Comment
+from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+
 
 
 def main(request):
@@ -51,9 +55,39 @@ def index(request):
 def detail(request, performance_pk):
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
+    reviews = Review.objects.order_by("-pk")
+    users = User.objects.all()
+    review_photo = ReviewPhoto.objects.all()
+    if request.method == "POST":
+        review_form = ReviewForm(request.POST)
+        reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
+
+        images = request.FILES.getlist("image")
+        if review_form.is_valid() and reviewPhoto_form.is_valid():
+            review = review_form.save(commit=False)
+            review.title = performance.playname
+            review.user = request.user
+            review.playId = performance
+            if len(images):
+                for image in images:
+                    image_instance = ReviewPhoto(review=review, image=image)
+                    review.save()
+                    image_instance.save()
+            else:
+                review.save()
+            # return redirect("articles:concert")
+            return redirect("articles:detail", performance_pk)
+    else:
+        review_form = ReviewForm()
+        reviewPhoto_form = ReviewPhotoForm()
     context = {
         "performance": performance,
         "location": location,
+        "review_form": review_form,
+        "reviewPhoto_form": reviewPhoto_form,
+        "reviews": reviews,
+        "users": users,
+        "review_photos": review_photo,
     }
     return render(request, "articles/detail.html", context)
 

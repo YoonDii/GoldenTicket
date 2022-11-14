@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
 {% block content %}
 {% include 'nav.html' %}
 <div style="height: 50px;"></div>
@@ -6,7 +8,7 @@
   <div class="perf-content"><!--제목-->
     <h1>{{performance.playname}}</h1>
     <div class="dateloc-data">
-      <p><span class="ps-date">{{performance.playstdate}} ~ {{performance.playenddate}}</span><a href="#" id="ps-location"> | <span class="ps-location">{{performance.locationname}}</span> <i class="bi bi-geo-alt-fill"></i></a></p>
+      <p><span class="ps-date">{{performance.playstdate}} ~ {{performance.playenddate}}</span><a href="#map" id="ps-location"> | <span class="ps-location">{{performance.locationname}}</span> <i class="bi bi-geo-alt-fill"></i></a></p>
       <!--배포후 공유링크 교체-->
       <div class="pf-social">
         <a href="http://www.facebook.com/sharer.php?u=http://ticket.yes24.com/Perf/41222" target="_blank" class="ps-social-btn1"><img src="http://tkfile.yes24.com/imgNew/common/rn-social-01.png" alt=""></a>
@@ -62,17 +64,17 @@
   </div>
   <div class="tabbox">
     <!--상세정보 *나중에 js적용-->
-    <a href="#">
+    <a href="#info">
       <span>상세정보</span>
     </a>
     <!--후기-->
-    <a href="#">
+    <a href="#reviews">
       <span>관람후기</span>
     </a>
   </div>
 </div>
 
-<div class="perf-content">
+<div class="perf-content" id="info">
   <div class="perf-detailinfo">
     <p class="detail-title">공연정보</p>
     <img src="{{performance.image1}}" alt="">
@@ -83,6 +85,15 @@
 </div>
 <!--지도-->
 <div class="perf-content-2">
+  <p class="tit-map">
+    <span>{{performance.locationname}}</span>
+  </p>
+  <p class="loc-map">
+    <span>{{location.address}}</span>
+  </p>
+</div>
+
+<div class="perf-content-2" id="map">
   <div id="map" style="width:1200px;height:700px;">
     <div class="map_wrap">
       <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -319,8 +330,95 @@
   </div>
 </div>
 <!--후기목록-->
-<div class="perf-content">
-
+<div class="perf-content" id="reviews">
+  <p class="tab-area-tit">
+    <span>관람후기</span>
+  </p>
+  <div class="review-area-create">
+    <div>
+      <p>매매, 욕설 등 예스24 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</p>
+      <p style="color: #666;">개인정보가 포함된 내용은 삼가 주시기 바라며, 게시물로 인해 발생하는 문제는 작성자 본인에게 책임이 있습니다.</p>
+      <!--리뷰 작성 버튼/모달-->
+      <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <img src="http://tkfile.yes24.com/imgNew/sub/rn-btn-review.png" alt="">
+      </a>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">{{ performance.playname }}</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Review-Form -->
+              <form id="review-create" action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% bootstrap_form review_form %}
+                {% bootstrap_form reviewPhoto_form %}
+              </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="submit" class="rc-btn" data-bs-dismiss="modal">취소</button>
+              <button type="submit" class="rc-btn" onclick="document.forms['review-create'].submit();">등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <ul class="review-list">
+      {% for review in reviews %}
+        {% if review.playId == performance %}
+        <li>
+          <div class="ttbox">
+            <span class="tt1">작성자</span>
+            <span class="tt2"><a href="{% url 'accounts:profile' user.pk %}">{{review.user}}</a></span>
+            <span class="tt3">{{review.created_at}}</span>
+            <span class="tt4">
+              {% if review.grade == "5" %}
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              {% endif %}
+              {% if review.grade == "4" %}
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              {% endif %}
+              {% if review.grade == "3" %}
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              {% endif %}
+              {% if review.grade == "2" %}
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              {% endif %}
+              {% if review.grade == "1" %}
+              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              {% endif %}
+            </span>
+          </div>
+          <div class="reviewbox">
+            {% for review_photo in review_photos %}
+              {% if review_photo.review_id == review.pk %}
+              <img src="{{review_photo.image.url}}" alt="">
+              {% endif %}
+            {% endfor %}
+            <img src="https://dummyimage.com/100x80/b5b5b5/ffffff&text=NO+IMG" alt="">
+            <div class="textbox">
+              <a href="{% url 'reviews:detail' review.pk %}">{{review.content}}</a>
+            </div>
+          </div>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock content %}
   
