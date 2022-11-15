@@ -70,7 +70,7 @@ function hasScrolled() {
                     return;
                 }
                 $("#pCurPage").val(curPage + 1);
-                jsf_genre_GetGenreList('15456', '1', $('.li-sec-tag').find('a[class*="on"]').attr('token') );
+                jsf_genre_GetGenreList('15456', '1', $('.li-sec-tag-01').find('a[class*="on"]').attr('href') );
                 asyncType = true;
             }
         }
@@ -79,4 +79,4 @@ function hasScrolled() {
     lastScrollTop = scrollT
 }
 
-    
+   

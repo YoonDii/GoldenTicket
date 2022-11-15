@@ -48,7 +48,8 @@
     {% endfor %}
   </div>
 </section>
-
+<input id="pCurPage" type="hidden" value="1" />
+<input id="pPageSize" type="hidden" value="20" />
 
 
 
@@ -57,7 +58,7 @@
 
 {% block js %}
   {% comment %} <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="{% static 'js/list.js' %}"></script> {% endcomment %}
+  <script src="{% static 'js/list.js' %}"></script>  {% endcomment %}
   <script>
     const tagList = document.querySelectorAll(".li-sec-tag-01");
     const playList = document.querySelectorAll(".ms-list-imgs");

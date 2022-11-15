@@ -9,6 +9,8 @@
   --dark-color: #3E3E3E;
   --purple-color: #8441ea;
   --green-color: #14caa6;
+  --pink-color: #d64275;
+  --blue-color: #306ba3;
   
   /* Font-size */
   --xlarge-font: 36px;
@@ -163,10 +165,12 @@
 }
 
 
-/* Concert & Musical * Classic */
+/* Concert & Musical * Classic * Dance * ktm */
 .concert,
 .musical,
-.classic {
+.classic,
+.dance,
+.ktm {
   margin: 30px;
 }
 
@@ -185,7 +189,9 @@
 .under-line-02, 
 .under-line-03,
 .under-line-04,
-.under-line-05 {
+
+.under-line-05{
+
   width: 100px;
   height: 40px;
   border-bottom: 5px solid var(--purple-color);
@@ -197,7 +203,12 @@
 .under-line-03 {
   border-bottom: 5px solid var(--green-color);
 }
-
+.under-line-04 {
+  border-bottom: 5px solid var(--pink-color);
+}
+.under-line-05 {
+  border-bottom: 5px solid var(--blue-color);
+}
 .concert__list {
   display: flex;
   justify-content: space-between;
@@ -224,3 +235,16 @@
 .concert__list__item p {
   padding: 10px 0;
 }
+
+/* slide banner */
+/* .bnr-slide {
+  position: absolute;
+  bottom: 0;
+  height: 400px;
+  text-align: center;
+  width: 100%;
+  min-width: 1920px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  overflow: hidden;
+} */
