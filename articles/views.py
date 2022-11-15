@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from datetime import datetime, timedelta
 from django.utils.dateformat import DateFormat
-from django.db.models import Avg
+from django.db.models import Avg, Count
 
 # from django.utils import timezone
 
@@ -19,12 +19,31 @@ import datetime
 
 def main(request):
 
-    play_list = PlayDetail.objects.filter(genrename="연극")
-    musical_list = PlayDetail.objects.filter(genrename="뮤지컬")
-    classic_list = PlayDetail.objects.filter(genrename="클래식")
-    dance_list = PlayDetail.objects.filter(genrename="무용")
-
-    ktm_list = PlayDetail.objects.filter(genrename="국악")
+    play_list = (
+        PlayDetail.objects.filter(genrename="연극")
+        .annotate(hot=Count("like_users"))
+        .order_by("-hot")
+    )
+    musical_list = (
+        PlayDetail.objects.filter(genrename="뮤지컬")
+        .annotate(hot=Count("like_users"))
+        .order_by("-hot")
+    )
+    classic_list = (
+        PlayDetail.objects.filter(genrename="클래식")
+        .annotate(hot=Count("like_users"))
+        .order_by("-hot")
+    )
+    dance_list = (
+        PlayDetail.objects.filter(genrename="무용")
+        .annotate(hot=Count("like_users"))
+        .order_by("-hot")
+    )
+    ktm_list = (
+        PlayDetail.objects.filter(genrename="국악")
+        .annotate(hot=Count("like_users"))
+        .order_by("-hot")
+    )
 
     return render(
         request,
