@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 import django
+from datetime import date
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
@@ -17,13 +18,13 @@ load_dotenv()
 API_SECRET_KEY = os.environ.get("API_SECRET_KEY")
 
 # 공연 시작일자
-stdate = "&stdate=" + "20221101"
+stdate = "&stdate=" + "20221115"
 # 공연 종료일자
 eddate = "&eddate=" + "20230630"
 # 현재페이지
-cpage = "&cpage=" + "5"
+cpage = "&cpage=" + "2"
 # 페이지당 목록 수
-rows = "&rows=" + "524"
+rows = "&rows=" + "1309"
 
 
 #################################################
@@ -91,7 +92,9 @@ def get_play_info():
         _runtime = soup.find("prfruntime").get_text()
         _age = soup.find("prfage").get_text()
         _locationid = soup.find("mt10id").get_text()
-
+        d1 = date(int(_playstdate[0:4]), int(_playstdate[5:7]), int(_playstdate[8:]))
+        d2 = date(int(_playenddate[0:4]), int(_playenddate[5:7]), int(_playenddate[8:]))
+        # print(d1, d2, type(d1), type(d2))
         _image = soup.find_all("styurl")
         _image1 = None
         _image2 = None
@@ -113,13 +116,17 @@ def get_play_info():
             _image4 = _image[3].get_text()
         # print(_image, len(_image))
 
+        _ticketprice = soup.find("pcseguidance").get_text()
+        _summary = soup.find("sty").get_text()
+        _guidance = soup.find("dtguidance").get_text()
+
         play = PlayDetail(
             playid=_playid,
             playname=_playname,
             genrename=_genrename,
             playstate=_playstate,
-            playstdate=_playstdate,
-            playenddate=_playenddate,
+            playstdate=d1,
+            playenddate=d2,
             poster=_poster,
             locationname=_locationname,
             playcast=_playcast,
@@ -130,6 +137,9 @@ def get_play_info():
             image2=_image2,
             image3=_image3,
             image4=_image4,
+            ticketprice=_ticketprice,
+            summary=_summary,
+            guidance=_guidance,
         )
         play.save()
 

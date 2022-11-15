@@ -60,15 +60,35 @@
       <div class="product-area1">
         <dl>
           <dt>장르</dt>
-          <dd>{{performance.genrename}}</dd>
+          <dd>{% if performance.genrename == " " %}
+            -
+            {% else %}
+            {{performance.genrename}}
+            {% endif %}</dd>
           <dt>등급</dt>
-          <dd>{{performance.age}}</dd>
+          <dd>{% if performance.age == " " %}
+            -
+            {% else %}
+            {{performance.age}}
+            {% endif %}</dd>
           <dt>관람시간</dt>
-          <dd>{{performance.runtime}}</dd>
+          <dd>{% if performance.runtime == " " %}
+            -
+            {% else %}
+            {{performance.runtime}}
+            {% endif %}</dd>
           <dt>출연</dt>
-          <dd>{{performance.playcast}}</dd>
+          <dd>{% if performance.playcast == " " %}
+            -
+            {% else %}
+            {{performance.playcast}}
+            {% endif %}</dd>
           <dt>공연상태</dt>
-          <dd>{{performance.playstate}}</dd>
+          <dd>{% if performance.playstate == " " %}
+            -
+            {% else %}
+            {{performance.playstate}}
+            {% endif %}</dd>
         </dl>
       </div>
     </div>
