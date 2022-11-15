@@ -73,8 +73,138 @@ a:hover {
   margin: 0 15px;
 }
 
+/* ham-nav*/
+input[id="menuicon"] {
+  display:none;
+}
 
-/* Main-Nav */
+input[id="menuicon"] + label {
+  display:block;
+  width: 45px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+input[id="menuicon"] + label span {
+  display:block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  border-radius: 30px;
+  background: rgb(252, 252, 252);
+  cursor: pointer;
+  transition: all .35s;
+}
+
+input[id="menuicon"] + label span:nth-child(1) {
+  top:0;
+}
+
+input[id="menuicon"] + label span:nth-child(2) {
+  top:50%;
+  transform: translateY(-50%);
+}
+
+input[id="menuicon"] + label span:nth-child(3) {
+  bottom:0;
+}
+
+input[id="menuicon"]:checked + label span:nth-child(1) {
+  top:50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+input[id="menuicon"]:checked + label span:nth-child(2) {
+  opacity:0;
+}
+
+input[id="menuicon"]:checked + label span:nth-child(3) {
+  bottom:50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+div[class=sidebar] {
+  width: 208px;
+  height: 100%;
+  position: fixed;
+  opacity: 0.7;
+  background: #222;
+  top: 0;
+  left: -300px;
+  z-index: 1;
+  transition: all .35s;
+}
+.sidebar-menu {
+  opacity: 0.7;
+  background: #222;
+}
+.ham_ {
+  background-color: #000;
+  opacity: 1 !important;
+  height: 100px;
+}
+.ham_input{
+  display: inline-block;
+  width: 22px;
+  height: 16px;
+  position: relative;
+  left: 23px;
+  top: 43px;
+}
+
+input[id="menuicon"]:checked + label + div {
+  left: 0;
+}
+
+.ham_in {
+  color: #fff;
+  font-size: 17px;
+}
+
+/* nav.html ham */
+
+/* 사이드 드롭다운 */
+.dropdown{
+  position : relative;
+  display : inline-block;
+}
+.dropdown-content{
+  display : none;
+  position : absolute;
+  z-index : 1; /*다른 요소들보다 앞에 배치*/
+}
+
+.dropdown-content a{
+  display : block;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+/* 임의의 영역 생성 */
+.scrollBar { 
+  width: 200px;
+  height: 200px;
+  overflow-y: scroll;
+}
+
+/* 아래의 모든 코드는 영역::코드로 사용 */
+
+.sidebar::-webkit-scrollbar {
+    width: 10px;  /* 스크롤바의 너비 */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #217af4; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+/* main-nav */
 .main-nav {
   width: 100%;
   position: absolute;
