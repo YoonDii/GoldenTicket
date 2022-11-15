@@ -6,6 +6,11 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from datetime import datetime,timedelta
+from django.utils.dateformat import DateFormat
+# from django.utils import timezone
+
+
 
 
 def main(request):
@@ -24,31 +29,38 @@ def main(request):
             "classic_list": classic_list[:6],
         },
     )
-
+# 날짜계산
+# startdate = DateFormat(datetime.today()).format('Y.m.d')
+# date = "playenddate" >= startdate
+# print(startdate,date) # 2022.11.15 True
 
 def index(request):
+    # while date == True:
+        if request.GET.get("genre"):
+            genre = request.GET.get("genre")
+            
+            playlist = PlayDetail.objects.filter(
+                genrename=genre,
+            ).order_by("-playstdate")
+            plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
 
-    if request.GET.get("genre"):
-        genre = request.GET.get("genre")
+            context = {
+                "genrename": genre,
+                "playlist": playlist,
+                "plist": plist,
+            }
+            
+        else:
+            playlist = PlayDetail.objects.order_by("-playstdate")
+            plist = PlayDetail.objects.order_by("playenddate")
 
-        playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
-        plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
-
-        context = {
-            "genrename": genre,
-            "playlist": playlist,
-            "plist": plist,
-        }
-    else:
-        playlist = PlayDetail.objects.order_by("-playstdate")
-        plist = PlayDetail.objects.order_by("playenddate")
-
-        context = {
-            "genrename": "모든 공연",
-            "playlist": playlist,
-            "plist": plist,
-        }
-    return render(request, "articles/index.html", context)
+            context = {
+                "genrename": "모든 공연",
+                "playlist": playlist,
+                "plist": plist,
+            }
+                
+        return render(request, "articles/index.html", context)
 
 
 def detail(request, performance_pk):
