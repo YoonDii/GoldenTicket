@@ -10,12 +10,13 @@ from django.contrib import messages
 import datetime
 
 
-
 def main(request):
 
     play_list = PlayDetail.objects.filter(genrename="연극")
     musical_list = PlayDetail.objects.filter(genrename="뮤지컬")
     classic_list = PlayDetail.objects.filter(genrename="클래식")
+    dance_list = PlayDetail.objects.filter(genrename="무용")
+    kmusic_list = PlayDetail.objects.filter(genrename="국악")
     return render(
         request,
         "articles/main.html",
@@ -26,6 +27,8 @@ def main(request):
             "playlist": play_list[:6],
             "musical_list": musical_list[:6],
             "classic_list": classic_list[:6],
+            "dance_list": dance_list[:6],
+            "kmusic_list": kmusic_list[:6],
         },
     )
 

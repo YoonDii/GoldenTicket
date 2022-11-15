@@ -118,7 +118,7 @@
     <div class="concert-wrap">
       <div class="concert__title">
         <div class="under-line-01"></div>
-        <a href="#">
+        <a href="{% url 'articles:index' %}?genre=연극">
           <h1>PLAY</h1>
         </a>
         <div class="under-line-01"></div>
@@ -146,7 +146,7 @@
     <div class="concert-wrap">
       <div class="concert__title">
         <div class="under-line-02"></div>
-        <a href="#">
+        <a href="{% url 'articles:index' %}?genre=뮤지컬">
           <h1>MUSICAL</h1>
         </a>
         <div class="under-line-02"></div>
@@ -174,7 +174,7 @@
     <div class="concert-wrap">
       <div class="concert__title">
         <div class="under-line-03"></div>
-        <a href="#">
+        <a href="{% url 'articles:index' %}?genre=클래식">
           <h1>CLASSIC</h1>
         </a>
         <div class="under-line-03"></div>
@@ -182,6 +182,62 @@
       <!-- Concert-List -->
       <div class="concert__list">
         {% for classic in classic_list %}
+        <a href="{% url 'articles:detail' classic.playid %}">
+          <div class="concert__list__item">
+            <img src="{{ classic.poster }}" alt="">
+            <p>{{ classic.playname }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+
+<!-- Dance -->
+<section class="Dance">
+  <div class="container">
+    <div class="concert-wrap">
+      <div class="concert__title">
+        <div class="under-line-04"></div>
+        <a href="{% url 'articles:index' %}?genre=무용">
+          <h1>Dance</h1>
+        </a>
+        <div class="under-line-04"></div>
+      </div>
+      <!-- Concert-List -->
+      <div class="concert__list">
+        {% for classic in dance_list %}
+        <a href="{% url 'articles:detail' classic.playid %}">
+          <div class="concert__list__item">
+            <img src="{{ classic.poster }}" alt="">
+            <p>{{ classic.playname }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+
+<!-- Korea Music -->
+<section class="K-Music">
+  <div class="container">
+    <div class="concert-wrap">
+      <div class="concert__title">
+        <div class="under-line-05"></div>
+        <a href="{% url 'articles:index' %}?genre=국악">
+          <h1>Korea Music</h1>
+        </a>
+        <div class="under-line-05"></div>
+      </div>
+      <!-- Concert-List -->
+      <div class="concert__list">
+        {% for classic in kmusic_list %}
         <a href="{% url 'articles:detail' classic.playid %}">
           <div class="concert__list__item">
             <img src="{{ classic.poster }}" alt="">
