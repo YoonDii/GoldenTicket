@@ -1,6 +1,6 @@
 from django import forms
 from .models import ReviewPhoto, Review, Comment
-from django.forms import ClearableFileInput, Textarea
+from django.forms import ClearableFileInput, Textarea, TextInput
 
 
 class ReviewForm(forms.ModelForm):
@@ -27,6 +27,16 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ["content"]
+        labels = {
+            "content": "",
+        }
+        widgets = {
+            "content": TextInput(
+                attrs={
+                    "placeholder": "댓글 달기",
+                }
+            )
+        }
 
 
 class ReviewPhotoForm(forms.ModelForm):
