@@ -26,6 +26,9 @@ def main(request):
             "playlist_rank": play_list[:3],
             "musical_rank": musical_list[:3],
             "classic_rank": classic_list[:3],
+            "dance_rank": dance_list[:3],
+            "ktm_rank": ktm_list[:3],
+
             "playlist": play_list[:6],
             "musical_list": musical_list[:6],
             "classic_list": classic_list[:6],

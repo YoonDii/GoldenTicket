@@ -23,6 +23,12 @@
           <h3 class="ranking__tag__name">
             <a href="#tab3" class="tag-btn"># 클래식</a>
           </h3>
+          <h3 class="ranking__tag__name">
+            <a href="#tab4" class="tag-btn"># 무용</a>
+          </h3>
+          <h3 class="ranking__tag__name">
+            <a href="#tab5" class="tag-btn"># 국악</a>
+          </h3>
         </div>
       </div>
       <!-- Ranking-List -->
@@ -70,6 +76,48 @@
       </div>
       <div class="ranking__list" id="tab3">
         {% for play in classic_rank %}
+        <!-- Ranking-Item -->
+        <div class="ranking__item">
+          <a href="{% url 'articles:detail' play.playid %}">
+            <div class="ranking__item__img">
+              <img src="{{ play.poster }}" alt="play_image">
+            </div>
+          </a>
+          <div class="ranking__item__desc">
+            <div class="rank-box">{{ forloop.counter }}위</div>
+            <h6 class="ranking__item__name">
+              {{ play.playname }}
+            </h6>
+            <p class="ranking__item__date">
+              {{ play.playstdate }} ~ {{ play.playenddate }}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="ranking__list" id="tab4">
+        {% for play in dance_rank %}
+        <!-- Ranking-Item -->
+        <div class="ranking__item">
+          <a href="{% url 'articles:detail' play.playid %}">
+            <div class="ranking__item__img">
+              <img src="{{ play.poster }}" alt="play_image">
+            </div>
+          </a>
+          <div class="ranking__item__desc">
+            <div class="rank-box">{{ forloop.counter }}위</div>
+            <h6 class="ranking__item__name">
+              {{ play.playname }}
+            </h6>
+            <p class="ranking__item__date">
+              {{ play.playstdate }} ~ {{ play.playenddate }}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="ranking__list" id="tab5">
+        {% for play in ktm_rank %}
         <!-- Ranking-Item -->
         <div class="ranking__item">
           <a href="{% url 'articles:detail' play.playid %}">
