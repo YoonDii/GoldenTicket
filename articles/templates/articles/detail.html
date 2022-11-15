@@ -4,6 +4,8 @@
 {% block content %}
 {% include 'nav.html' %}
 <div style="height: 50px;"></div>
+
+<!-- 제목 -->
 <div class="perf-title-wrap">
   <div class="perf-content"><!--제목-->
     <h1>{{performance.playname}}</h1>
@@ -25,8 +27,11 @@
   </div>
 </div>
 
+
+<!-- 상세정보 -->
 <div class="perf-content">
   <div class="perf-movieinfo">
+    <!-- Info left -->
     <div class="perf-movieinfo-left">
       <img src="{{performance.poster}}" alt="">
       <!--좋아요, 평균별점-->
@@ -55,14 +60,67 @@
           <a href="{% url 'accounts:login' %}" class="">로그인이 필요합니다.</a>
           {% endif %}
         </div>
+        <!-- Grade -->
         <div class="d-flex align-items-center">
-          {% if Avg_grade != 0 %}
-          <div class="">평균평점: {{Avg_grade}} </div>
+          {% if Avg_grade == 5 %}
+          <div class="d-flex align-items-center" style="color: var(--gray-color);">
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+          </div>
+          {% elif Avg_grade >= 4 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% elif Avg_grade >= 3 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% elif Avg_grade >= 2 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% elif Avg_grade >= 1 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% else %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
           {% endif %}
         </div>
       </div>
-      <!-- Likes-End -->
     </div>
+    <!-- Info right -->
     <div class="perf-movieinfo-right">
       <div class="product-area1">
         <dl>
@@ -113,6 +171,7 @@
 </div>
 
 
+<!-- 상세정보 이미지 -->
 {% if performance.image1 %}
 <div class="perf-content" id="info">
   <div class="perf-detailinfo">
@@ -125,6 +184,7 @@
 </div>
 {% endif %}
   
+
 <!--지도-->
 <div class="perf-content-2">
   <p class="tit-map" id="tit-map">
@@ -134,7 +194,6 @@
     <span>{{location.address}}</span>
   </p>
 </div>
-
 <div class="perf-content-2" id="map">
   <div id="map" style="width:1200px;height:700px;">
     <div class="map_wrap">
@@ -371,6 +430,8 @@
     </script>
   </div>
 </div>
+
+
 <!--후기목록-->
 <div class="perf-content" id="reviews">
   <p class="tab-area-tit">
@@ -503,7 +564,7 @@
                           <a href="{% url 'reviews:update' review.pk %}" class="me-1">
                             <i class="fa-solid fa-pen"></i>
                           </a>
-                          <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+                          <form action="{% url 'reviews:delete' performance.playid review.pk %}" method="POST">
                             {% csrf_token %}
                             <button type="submit" style="border: 0; background: none; padding-right: 0;">
                               <i class="fa-solid fa-trash-can"></i>
@@ -581,12 +642,12 @@
     </ul>
   </div>
 </div>
+
 {% endblock content %}
-  
 
 
+<!-- JS -->
 {% block js %}
-
 <!-- CDN axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -732,6 +793,5 @@
   }
 })}
 </script>
-
 {% endblock js %}
   
