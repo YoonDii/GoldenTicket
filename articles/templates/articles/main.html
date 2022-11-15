@@ -195,5 +195,60 @@
 </section>
 <hr>
 
+
+<!-- Dance -->
+<section class="dance">
+  <div class="container">
+    <div class="concert-wrap">
+      <div class="concert__title">
+        <div class="under-line-04"></div>
+        <a href="#">
+          <h1>Dance</h1>
+        </a>
+        <div class="under-line-04"></div>
+      </div>
+      <!-- Concert-List -->
+      <div class="concert__list">
+        {% for dance in dance_list %}
+        <a href="{% url 'articles:detail' dance.playid %}">
+          <div class="concert__list__item">
+            <img src="{{ dance.poster }}" alt="">
+            <p>{{ dance.playname }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
+
+
+<!-- Korean tranditional music-->
+<section class="ktm">
+  <div class="container">
+    <div class="concert-wrap">
+      <div class="concert__title">
+        <div class="under-line-05"></div>
+        <a href="#">
+          <h1>Korean traditional music</h1>
+        </a>
+        <div class="under-line-05"></div>
+      </div>
+      <!-- Concert-List -->
+      <div class="concert__list">
+        {% for ktm in ktm_list %}
+        <a href="{% url 'articles:detail' ktm.playid %}">
+          <div class="concert__list__item">
+            <img src="{{ ktm.poster }}" alt="">
+            <p>{{ ktm.playname }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<hr>
 {% include 'sub-footer.html' %}
 {% endblock content %}
