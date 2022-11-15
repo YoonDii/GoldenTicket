@@ -31,28 +31,35 @@
       <img src="{{performance.poster}}" alt="">
       <!--좋아요, 평균별점-->
       <!-- Likes -->
-      <div class="d-flex align-items-center" style="padding: 20px 0; border-bottom: 1px solid var(--gray-color);">
-        {% if request.user.is_authenticated %}
-        <!-- Like-Form -->
-        <form class="like-forms" data-performance-id="{{ performance.playid }}">
-        {% csrf_token %}
-          {% if user in performance.like_users.all %}
-            <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
-              <i id="star-{{ performance.playid }}" class="fa-solid fa-heart fa-2x"></i>
-            </button>
+      <div class="d-flex justify-content-evenly" style="padding: 20px 0; border-bottom: 1px solid var(--gray-color);">
+        <div class="d-flex">
+          {% if request.user.is_authenticated %}
+          <!-- Like-Form -->
+          <form class="like-forms" data-performance-id="{{ performance.playid }}">
+          {% csrf_token %}
+            {% if user in performance.like_users.all %}
+              <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+                <i id="star-{{ performance.playid }}" class="fa-solid fa-heart fa-2x"></i>
+              </button>
+            {% else %}
+              <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+                <i id="star-{{ performance.playid }}" class="fa-regular fa-heart fa-2x"></i>
+              </button>
+            {% endif %}
+          </form>
+          <div class="ms-3 d-flex align-items-center">
+              <span id="like-count" style="color: var(--main-color);">{{ performance.like_users.count }}</span>
+              <p class="ms-2">likes</p>
+          </div>
           {% else %}
-            <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
-              <i id="star-{{ performance.playid }}" class="fa-regular fa-heart fa-2x"></i>
-            </button>
+          <a href="{% url 'accounts:login' %}" class="">로그인이 필요합니다.</a>
           {% endif %}
-        </form>
-        <div class="ms-3 d-flex align-items-center">
-          <span id="like-count" style="color: var(--main-color);">{{ performance.like_users.count }}</span>
-          <p class="ms-2">likes</p>
         </div>
-        {% else %}
-        <a href="{% url 'accounts:login' %}" class="">로그인이 필요합니다.</a>
-        {% endif %}
+        <div class="d-flex align-items-center">
+          {% if Avg_grade != 0 %}
+          <div class="">평균평점: {{Avg_grade}} </div>
+          {% endif %}
+        </div>
       </div>
       <!-- Likes-End -->
     </div>
