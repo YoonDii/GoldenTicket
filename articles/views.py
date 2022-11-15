@@ -7,8 +7,9 @@ from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
-from datetime import datetime,timedelta
+from datetime import datetime, timedelta
 from django.utils.dateformat import DateFormat
+
 # from django.utils import timezone
 
 
@@ -34,59 +35,30 @@ def main(request):
             "classic_rank": classic_list[:3],
             "dance_rank": dance_list[:3],
             "ktm_rank": ktm_list[:3],
-
             "playlist": play_list[:6],
             "musical_list": musical_list[:6],
             "classic_list": classic_list[:6],
             "dance_list": dance_list[:6],
-
             "ktm_list": ktm_list[:6],
-
-
         },
     )
+
+
 # 날짜계산
 # startdate = DateFormat(datetime.today()).format('Y.m.d')
 # date = "playenddate" >= startdate
 # print(startdate,date) # 2022.11.15 True
 
+
 def index(request):
 
     # while date == True:
-        if request.GET.get("genre"):
-            genre = request.GET.get("genre")
-            
-            playlist = PlayDetail.objects.filter(
-                genrename=genre,
-            ).order_by("-playstdate")
-            plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
-
-            context = {
-                "genrename": genre,
-                "playlist": playlist,
-                "plist": plist,
-            }
-            
-        else:
-            playlist = PlayDetail.objects.order_by("-playstdate")
-            plist = PlayDetail.objects.order_by("playenddate")
-
-            context = {
-                "genrename": "모든 공연",
-                "playlist": playlist,
-                "plist": plist,
-            }
-                
-        return render(request, "articles/index.html", context)
-
-
-    today = datetime.date.today()
-    today = str(today.strftime("%Y.%m.%d"))
-
     if request.GET.get("genre"):
         genre = request.GET.get("genre")
 
-        playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
+        playlist = PlayDetail.objects.filter(
+            genrename=genre,
+        ).order_by("-playstdate")
         plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
 
         context = {
@@ -94,6 +66,7 @@ def index(request):
             "playlist": playlist,
             "plist": plist,
         }
+
     else:
         playlist = PlayDetail.objects.order_by("-playstdate")
         plist = PlayDetail.objects.order_by("playenddate")
@@ -103,8 +76,8 @@ def index(request):
             "playlist": playlist,
             "plist": plist,
         }
-    return render(request, "articles/index.html", context)
 
+    return render(request, "articles/index.html", context)
 
 
 #     review = Review.objects.get(pk=pk)
