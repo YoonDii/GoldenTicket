@@ -77,6 +77,10 @@
                     </a>
                     {% if request.user == user %}
                       <hr class="m-0">
+                      <a href="{% url 'accounts:logout' %}" style="color: var(--dark-color);">
+                        <p class="m-0" style="padding: 12px">로그아웃</p>
+                      </a>
+                      <hr class="m-0">
                       <a href="{% url 'accounts:update' %}" style="color: var(--dark-color);">
                         <p class="m-0" style="padding: 12px">정보수정</p>
                       </a>

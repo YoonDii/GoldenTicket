@@ -117,3 +117,12 @@
 .search-item__location {
   width: 350px;
 }
+
+/* Sub-Nav Search btn */
+#searchfunc1 button,
+#searchfunc2 button,
+#searchfunc3 button {
+  border: 0;
+  background: none;
+  padding: 0;
+}

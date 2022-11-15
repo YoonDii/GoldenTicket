@@ -12,8 +12,10 @@
     <h3 class="mb-3"><span>'{{search}}'</span> 에 대한 검색 결과입니다.</h3>
     <div class="nav__search">
       <form action="{% url 'articles:search' %}" role='search' id='searchfunc1'>
-        <input type="text" id="search-type-01" name='search'>
-        <button type="submit" onclick="">검색</button>
+        <input type="text" id="search-type-02" name='search'>
+        <button type="submit" onclick="">
+          <i class="fa-solid fa-magnifying-glass fa-lg m-0"></i>
+        </button>
       </form>
       <script>
         const btn1 = document.getElementById("searchfunc1")
@@ -69,7 +71,9 @@
       <div class="nav__search">
         <form action="{% url 'articles:search' %}" role='search' id='searchfunc2'>
           <input type="text" id="search-type-02" name='search'>
-          <button type="submit" onclick="">검색</button>
+          <button type="submit" onclick="">
+            <i class="fa-solid fa-magnifying-glass fa-lg m-0"></i>
+          </button>
         </form>
         <script>
           const btn2 = document.getElementById("searchfunc2")

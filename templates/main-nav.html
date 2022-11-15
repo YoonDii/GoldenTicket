@@ -36,15 +36,18 @@
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
           </form>
-          
-          {% if request.user.is_authenticated %}
-          <a href="{% url 'accounts:profile' request.user.pk %}">
-            <i class="fa-regular fa-user fa-xl"></i>
-          </a>
-          {% else %}
-            <i class="fa-regular fa-user fa-xl"></i>
-          {% endif %}
-            
+          <!-- User Profile -->
+          <div class="ms-3">
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'accounts:profile' request.user.pk %}">
+                <img src="{{ request.user.profile_image }}" alt="profile_image" width="45" height="45" style="border-radius: 50%;">
+              </a>
+              {% else %}
+              <a href="{% url 'accounts:login' %}">
+                <i class="fa-regular fa-user fa-xl"></i>
+              </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
