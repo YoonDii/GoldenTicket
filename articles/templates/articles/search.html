@@ -5,14 +5,15 @@
 {% block content %}
 {% include 'nav.html' %}
 
+{% if search_list %}
 <div class="container">
   <!-- Search-Top -->
   <div class="search-top">
-    <h3 class="mb-3"><span>'검색'</span> 에 대한 검색 결과입니다.</h3>
+    <h3 class="mb-3"><span>'{{search}}'</span> 에 대한 검색 결과입니다.</h3>
     <div class="nav__search">
-      <form action="#">
-        <input type="text" id="search-type-02">
-        <a href="#" onclick="#">
+      <form action="{% url 'articles:search' %}" role='search'>
+        <input type="text" id="search-type-02" name='search'>
+        <a href="{% url 'articles:search' %}" onclick="#">
           <i class="fa-solid fa-magnifying-glass fa-xl"></i>
         </a>
       </form>
@@ -38,7 +39,7 @@
 
   <!-- Search-List -->
   <div class="search-list">
-    {% for play in playlist %}
+    {% for play in search_list %}
     <!-- Search-Item -->
     <div class="search-item">
       <a href="{% url 'articles:detail' play.playid %}">
@@ -53,6 +54,19 @@
       </div>
     </div>
     {% endfor %}
+    {% else %}
+    <div class="search-top">
+      <h3 class="m-3 text-center"><span>'{{search}}'</span> 에 대한 검색 결과가 없습니다.</h3>
+      <div class="nav__search">
+        <form action="{% url 'articles:search' %}" role='search'>
+          <input type="text" id="search-type-02" name='search'>
+          <a href="{% url 'articles:search' %}" onclick="#">
+            <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+          </a>
+        </form>
+      </div>
+    </div>
+    {% endif %}
   </div>
 </div>
 

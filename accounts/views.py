@@ -75,7 +75,6 @@ def update(request):
     return render(request, "accounts/update.html", context)
 
 
-@login_required
 def profile(request, user_pk):
     user = get_user_model().objects.get(pk=user_pk)
     context = {

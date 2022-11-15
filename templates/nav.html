@@ -30,13 +30,11 @@
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악">국악</a></li>
           <li class="nav__nav__item hover-underline-animation"><a onclick="genre_select(this)" data-genre-value="play" data-test-value="연극">연극(test)</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'accounts:index' %}">accounts</a></li>
-          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}">articles</a></li>
-          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'reviews:index' %}">reviews</a></li>
         </ul>
         <div class="nav__search">
           <form  action="{% url 'articles:search' %}" role='search'>
             <input type="text" id="search_type_1" name='search'>
-            <a href="{% url 'articles:search' %}" role='search' onclick="#">
+            <a href="{% url 'articles:search' %}" onclick="#">
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
           </form>
