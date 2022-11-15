@@ -6,14 +6,11 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
 from datetime import datetime,timedelta
 from django.utils.dateformat import DateFormat
 # from django.utils import timezone
-
-
 from django.contrib import messages
-import datetime
+# import datetime
 
 
 def main(request):
@@ -22,7 +19,6 @@ def main(request):
     musical_list = PlayDetail.objects.filter(genrename="뮤지컬")
     classic_list = PlayDetail.objects.filter(genrename="클래식")
     dance_list = PlayDetail.objects.filter(genrename="무용")
-
     ktm_list = PlayDetail.objects.filter(genrename="국악")
 
     return render(
@@ -39,20 +35,16 @@ def main(request):
             "musical_list": musical_list[:6],
             "classic_list": classic_list[:6],
             "dance_list": dance_list[:6],
-
             "ktm_list": ktm_list[:6],
-
-
         },
     )
 # 날짜계산
-# startdate = DateFormat(datetime.today()).format('Y.m.d')
-# date = "playenddate" >= startdate
-# print(startdate,date) # 2022.11.15 True
+startdate = DateFormat(datetime.today()).format('Y-m-d')
+date = "playenddate" >= startdate
+print(startdate,date) # 2022.11.15 True
 
 def index(request):
-
-    # while date == True:
+    if date:
         if request.GET.get("genre"):
             genre = request.GET.get("genre")
             
@@ -79,31 +71,6 @@ def index(request):
                 
         return render(request, "articles/index.html", context)
 
-
-    today = datetime.date.today()
-    today = str(today.strftime("%Y.%m.%d"))
-
-    if request.GET.get("genre"):
-        genre = request.GET.get("genre")
-
-        playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
-        plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
-
-        context = {
-            "genrename": genre,
-            "playlist": playlist,
-            "plist": plist,
-        }
-    else:
-        playlist = PlayDetail.objects.order_by("-playstdate")
-        plist = PlayDetail.objects.order_by("playenddate")
-
-        context = {
-            "genrename": "모든 공연",
-            "playlist": playlist,
-            "plist": plist,
-        }
-    return render(request, "articles/index.html", context)
 
 
 
