@@ -83,7 +83,7 @@
 .ranking__item__img img {
   width: 100%;
   transition: transform .6s, filter 1s ease-in-out;
-  filter: blur(1.5px);
+  filter: blur(1px);
   transform: scale(1.2);
 }
 
@@ -189,12 +189,15 @@
 .under-line-02, 
 .under-line-03,
 .under-line-04,
+
 .under-line-05{
+
   width: 100px;
   height: 40px;
   border-bottom: 5px solid var(--purple-color);
 }
-.under-line-02 {
+.under-line-02,
+.under-line-04 {
   border-bottom: 5px solid var(--main-color);
 }
 .under-line-03 {
