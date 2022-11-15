@@ -6,7 +6,6 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
 from datetime import datetime, timedelta
 from django.utils.dateformat import DateFormat
 from django.db.models import Avg
