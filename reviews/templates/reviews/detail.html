@@ -103,10 +103,8 @@
       comments.textContent = ""
       const comment_data = response.data.comment_data
       const user = response.data.user
-      console.log('실행1')
       for (let i = 0; i < comment_data.length; i++){
         const review_pk = response.data.review_pk
-        console.log('실행2')
         if (user === comment_data[i].user_pk){
           comments.insertAdjacentHTML('beforeend',  `
           <p>${comment_data[i].commentPk} |: ${ comment_data[i].userName } : ${ comment_data[i].content } <span>
@@ -115,7 +113,6 @@
           <hr>
           `)
         } else {
-          console.log('실행3')
           comments.insertAdjacentHTML('beforeend',  `
           <p>${comment_data[i].commentPk} |: ${ comment_data[i].userName } : ${ comment_data[i].content } <span>
             <hr>
