@@ -7,9 +7,12 @@ from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
+import datetime
+
 
 
 def main(request):
+
     play_list = PlayDetail.objects.filter(genrename="연극")
     musical_list = PlayDetail.objects.filter(genrename="뮤지컬")
     classic_list = PlayDetail.objects.filter(genrename="클래식")
@@ -28,6 +31,9 @@ def main(request):
 
 
 def index(request):
+
+    today = datetime.date.today()
+    today = str(today.strftime("%Y.%m.%d"))
 
     if request.GET.get("genre"):
         genre = request.GET.get("genre")
@@ -112,41 +118,6 @@ def like(request, performance_pk):
     )
 
 
-# def play(request):
-#     playlist = PlayDetail.objects.filter(genrename="연극").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="연극").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/play.html", context)
-
-
-# def musical(request):
-#     playlist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/musical.html", context)
-
-
-# def classic(request):
-#     playlist = PlayDetail.objects.filter(genrename="클래식").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="클래식").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/classic.html", context)
-
-
-# def dance(request):
-#     playlist = PlayDetail.objects.filter(genrename="무용").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="무용").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/dance.html", context)
-
-
-# def ktm(request):
-#     playlist = PlayDetail.objects.filter(genrename="국악").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="국악").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/ktm.html", context)
-
-
 def search(request):
     all_data = PlayDetail.objects.order_by("-pk")
     search = request.GET.get("search")
@@ -176,3 +147,50 @@ def search(request):
         }
 
     return render(request, "articles/search.html", context)
+
+
+def index2(request, genre):
+
+    playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
+    plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
+
+    playlist_data = []
+
+    for play in playlist:
+        poster = str(play.poster)
+        playlist_data.append(
+            {
+                "playid": play.playid,
+                "playname": play.playname,
+                "playstdate": play.playstdate,
+                "playenddate": play.playenddate,
+                "locationname": play.locationname,
+                "poster": poster,
+            }
+        )
+
+    plist_data = []
+
+    for play in plist:
+        poster = str(play.poster)
+        plist_data.append(
+            {
+                "playid": play.playid,
+                "playname": play.playname,
+                "playstdate": play.playstdate,
+                "playenddate": play.playenddate,
+                "locationname": play.locationname,
+                "poster": poster,
+            }
+        )
+
+    playlistlenghth = playlist.count()
+
+    context = {
+        "genrename": genre,
+        "playlist_data": playlist_data,
+        "plist_data": plist_data,
+        "playlistlenghth": playlistlenghth,
+    }
+
+    return JsonResponse(context)

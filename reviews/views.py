@@ -57,7 +57,7 @@ def create(request):
 def detail(request, pk):
 
     review = Review.objects.get(pk=pk)
-    comments = Comment.objects.filter(review=review)
+    comments = Comment.objects.filter(review=review)[::-1]
     comment_form = CommentForm()
 
     context = {

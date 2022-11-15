@@ -28,6 +28,7 @@
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용">무용</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬">뮤지컬</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악">국악</a></li>
+          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'accounts:index' %}">accounts</a></li>
         </ul>
         <div class="nav__search">
           <form action="{% url 'articles:search' %}" role='search' id='searchfunc3'>
@@ -55,3 +56,7 @@
 
 </body>
 </html>
+
+{% block js %}
+
+{% endblock js %} 
