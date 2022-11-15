@@ -116,41 +116,6 @@ def like(request, performance_pk):
     )
 
 
-# def play(request):
-#     playlist = PlayDetail.objects.filter(genrename="연극").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="연극").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/play.html", context)
-
-
-# def musical(request):
-#     playlist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="뮤지컬").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/musical.html", context)
-
-
-# def classic(request):
-#     playlist = PlayDetail.objects.filter(genrename="클래식").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="클래식").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/classic.html", context)
-
-
-# def dance(request):
-#     playlist = PlayDetail.objects.filter(genrename="무용").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="무용").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/dance.html", context)
-
-
-# def ktm(request):
-#     playlist = PlayDetail.objects.filter(genrename="국악").order_by("-playstdate")
-#     plist = PlayDetail.objects.filter(genrename="국악").order_by("playenddate")
-#     context = {"playlist": playlist, "plist": plist}
-#     return render(request, "articles/ktm.html", context)
-
-
 def search(request):
     all_data = PlayDetail.objects.order_by("-pk")
     search = request.GET.get("search")
@@ -177,9 +142,6 @@ def search(request):
 
 def index2(request, genre):
 
-    print("index2 view 실행")
-    if genre == "play":
-        genre = "연극"
     playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
     plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
 
@@ -197,11 +159,28 @@ def index2(request, genre):
                 "poster": poster,
             }
         )
+
+    plist_data = []
+
+    for play in plist:
+        poster = str(play.poster)
+        plist_data.append(
+            {
+                "playid": play.playid,
+                "playname": play.playname,
+                "playstdate": play.playstdate,
+                "playenddate": play.playenddate,
+                "locationname": play.locationname,
+                "poster": poster,
+            }
+        )
+
     playlistlenghth = playlist.count()
 
     context = {
         "genrename": genre,
         "playlist_data": playlist_data,
+        "plist_data": plist_data,
         "playlistlenghth": playlistlenghth,
     }
 
