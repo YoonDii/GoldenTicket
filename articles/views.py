@@ -6,9 +6,9 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
 from datetime import datetime, timedelta
 from django.utils.dateformat import DateFormat
+from django.db.models import Avg
 
 # from django.utils import timezone
 
@@ -80,23 +80,19 @@ def index(request):
     return render(request, "articles/index.html", context)
 
 
-#     review = Review.objects.get(pk=pk)
-#     comments = Comment.objects.filter(review=review).order_by("-pk")
-#     comment_form = CommentForm()
-
-#     context = {
-#         "review": review,
-#         "comment_form": comment_form,
-#         "comments": comments,
-#     }
-
-
 def detail(request, performance_pk):
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
     reviews = Review.objects.order_by("-pk")
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
+
+    if performance.review_set.all():
+        tem = performance.review_set.aggregate(Avg("grade"))
+        Avg_grade = round(tem["grade__avg"], 1)
+    else:
+        Avg_grade = 0
+
     # Comment Detail
     comment_form = CommentForm()
     if request.method == "POST":
@@ -130,6 +126,7 @@ def detail(request, performance_pk):
         "users": users,
         "review_photos": review_photo,
         "comment_form": comment_form,
+        "Avg_grade": Avg_grade,
     }
     return render(request, "articles/detail.html", context)
 
@@ -185,48 +182,48 @@ def search(request):
     return render(request, "articles/search.html", context)
 
 
-def index2(request, genre):
+# def index2(request, genre):
 
-    playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
-    plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
+#     playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
+#     plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
 
-    playlist_data = []
+#     playlist_data = []
 
-    for play in playlist:
-        poster = str(play.poster)
-        playlist_data.append(
-            {
-                "playid": play.playid,
-                "playname": play.playname,
-                "playstdate": play.playstdate,
-                "playenddate": play.playenddate,
-                "locationname": play.locationname,
-                "poster": poster,
-            }
-        )
+#     for play in playlist:
+#         poster = str(play.poster)
+#         playlist_data.append(
+#             {
+#                 "playid": play.playid,
+#                 "playname": play.playname,
+#                 "playstdate": play.playstdate,
+#                 "playenddate": play.playenddate,
+#                 "locationname": play.locationname,
+#                 "poster": poster,
+#             }
+#         )
 
-    plist_data = []
+#     plist_data = []
 
-    for play in plist:
-        poster = str(play.poster)
-        plist_data.append(
-            {
-                "playid": play.playid,
-                "playname": play.playname,
-                "playstdate": play.playstdate,
-                "playenddate": play.playenddate,
-                "locationname": play.locationname,
-                "poster": poster,
-            }
-        )
+#     for play in plist:
+#         poster = str(play.poster)
+#         plist_data.append(
+#             {
+#                 "playid": play.playid,
+#                 "playname": play.playname,
+#                 "playstdate": play.playstdate,
+#                 "playenddate": play.playenddate,
+#                 "locationname": play.locationname,
+#                 "poster": poster,
+#             }
+#         )
 
-    playlistlenghth = playlist.count()
+#     playlistlenghth = playlist.count()
 
-    context = {
-        "genrename": genre,
-        "playlist_data": playlist_data,
-        "plist_data": plist_data,
-        "playlistlenghth": playlistlenghth,
-    }
+#     context = {
+#         "genrename": genre,
+#         "playlist_data": playlist_data,
+#         "plist_data": plist_data,
+#         "playlistlenghth": playlistlenghth,
+#     }
 
-    return JsonResponse(context)
+#     return JsonResponse(context)
