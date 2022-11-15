@@ -17,9 +17,9 @@ load_dotenv()
 API_SECRET_KEY = os.environ.get("API_SECRET_KEY")
 
 # 현재페이지
-cpage = "&cpage=" + "5"
+cpage = "&cpage=" + "2"
 # 페이지당 목록 수
-rows = "&rows=" + "500"
+rows = "&rows=" + "1776"
 
 
 #################################################
