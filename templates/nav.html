@@ -28,6 +28,8 @@
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용">무용</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬">뮤지컬</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악">국악</a></li>
+          <li class="nav__nav__item hover-underline-animation"><a onclick="genre_select(this)" data-genre-value="play" data-test-value="연극">연극(test)</a></li>
+          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'accounts:index' %}">accounts</a></li>
         </ul>
         <div class="nav__search">
           <form  action="{% url 'articles:search' %}" role='search'>
@@ -45,4 +47,47 @@
   </nav>
 
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  {% comment %} index 장르 전환 비동기 test 중 {% endcomment %}
+
+  const genre_select = (e) => {
+    console.log("js실행1")
+    console.log(event.target.dataset.genreValue)
+    const genre = event.target.dataset.genreValue
+    axios({
+      method: 'get',
+      url: `/articles/2/${event.target.dataset.genreValue}`,
+    })
+  .then(response => {  
+  console.log("js실행3")
+  // 내용 없애고
+  const playlist = document.querySelector('#new')
+  playlist.textContent = "";
+  // 데이터 받아서
+  const playlist_data = response.data.playlist_data
+  const genrename = response.data.genrename
+  const playlistlenghth = response.data.playlistlenghth
+  for (let i = 0; i < playlist_data.length; i++) {
+
+    playlist.insertAdjacentHTML('beforeend', `
+    <a style="cursor:pointer;" onclick="" title="${playlist_data[i].playname}">
+      <div class="list-bigger-wrap">
+        <div class="poster">
+          <img class="lazyload" alt="" src="${playlist_data[i].poster}" >
+        </div>
+        <div class="list-bigger-txt">
+          <p class="list-b-tit1 v2 v2">${playlist_data[i].playname}</p>
+          <p class="list-b-tit2 v2 v2">${playlist_data[i].playstdate} ~ ${playlist_data[i].playenddate}</p>
+          <p class="list-b-tit2 v2 v2">${playlist_data[i].locationname}</p>
+        </div>
+      </div>
+    </a>
+    `)
+  } }
+  )
+}
+
+</script>
 </html>

@@ -6,9 +6,11 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+import datetime
 
 
 def main(request):
+
     play_list = PlayDetail.objects.filter(genrename="연극")
     musical_list = PlayDetail.objects.filter(genrename="뮤지컬")
     classic_list = PlayDetail.objects.filter(genrename="클래식")
@@ -27,6 +29,9 @@ def main(request):
 
 
 def index(request):
+
+    today = datetime.date.today()
+    today = str(today.strftime("%Y.%m.%d"))
 
     if request.GET.get("genre"):
         genre = request.GET.get("genre")
@@ -168,3 +173,36 @@ def search(request):
         }
 
     return render(request, "articles/search.html", context)
+
+
+def index2(request, genre):
+
+    print("index2 view 실행")
+    if genre == "play":
+        genre = "연극"
+    playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
+    plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
+
+    playlist_data = []
+
+    for play in playlist:
+        poster = str(play.poster)
+        playlist_data.append(
+            {
+                "playid": play.playid,
+                "playname": play.playname,
+                "playstdate": play.playstdate,
+                "playenddate": play.playenddate,
+                "locationname": play.locationname,
+                "poster": poster,
+            }
+        )
+    playlistlenghth = playlist.count()
+
+    context = {
+        "genrename": genre,
+        "playlist_data": playlist_data,
+        "playlistlenghth": playlistlenghth,
+    }
+
+    return JsonResponse(context)
