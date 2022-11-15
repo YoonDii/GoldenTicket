@@ -6,6 +6,7 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib import messages
 
 
 def main(request):
@@ -151,20 +152,27 @@ def search(request):
     search = request.GET.get("search")
 
     if search:
-        search_list = all_data.filter(
-            Q(playname__icontains=search)
-            | Q(genrename__icontains=search)
-            | Q(locationname__icontains=search)
-            | Q(playcast__icontains=search)
-        )
-        context = {
-            "search": search,
-            "search_list": search_list,
-        }
+        if len(search) > 1:
+            search_list = all_data.filter(
+                Q(playname__icontains=search)
+                | Q(genrename__icontains=search)
+                | Q(locationname__icontains=search)
+                | Q(playcast__icontains=search)
+            )
+            context = {
+                "search": search,
+                "search_list": search_list,
+            }
+            return render(request, "articles/search.html", context)
+        else:
+            context = {
+                "search": search,
+                "search_list": "",
+            }
     else:
         context = {
-            "search": search,
-            "search_list": all_data,
+            "search": "",
+            "search_list": "",
         }
 
     return render(request, "articles/search.html", context)

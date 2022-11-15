@@ -30,12 +30,21 @@
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악">국악</a></li>
         </ul>
         <div class="nav__search">
-          <form  action="{% url 'articles:search' %}" role='search'>
-            <input type="text" id="search_type_1" name='search'>
-            <a href="{% url 'articles:search' %}" onclick="#">
-              <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-            </a>
+          <form action="{% url 'articles:search' %}" role='search' id='searchfunc3'>
+            <input type="text" id="search-type-03" name='search'>
+            <button type="submit" onclick="">검색</button>
           </form>
+          <script>
+            const btn3 = document.getElementById("searchfunc3")
+            btn3.addEventListener("submit", function(event) {
+              val = document.getElementById("search-type-03").value.length
+              console.log(val)
+              if(val <= 1) {
+                event.preventDefault()
+                alert("검색어는 2글자 이상 입력해주세요")
+              }
+            })
+          </script>
           <a href="{% url 'accounts:index' %}">
             <i class="fa-regular fa-user fa-xl"></i>
           </a>
