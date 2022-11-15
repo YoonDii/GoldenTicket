@@ -36,9 +36,15 @@
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
           </form>
+          
+          {% if request.user.is_authenticated %}
           <a href="{% url 'accounts:profile' request.user.pk %}">
             <i class="fa-regular fa-user fa-xl"></i>
           </a>
+          {% else %}
+            <i class="fa-regular fa-user fa-xl"></i>
+          {% endif %}
+            
         </div>
       </div>
     </div>
