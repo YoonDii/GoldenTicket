@@ -56,12 +56,25 @@ def index(request):
     return render(request, "articles/index.html", context)
 
 
+#     review = Review.objects.get(pk=pk)
+#     comments = Comment.objects.filter(review=review).order_by("-pk")
+#     comment_form = CommentForm()
+
+#     context = {
+#         "review": review,
+#         "comment_form": comment_form,
+#         "comments": comments,
+#     }
+
+
 def detail(request, performance_pk):
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
     reviews = Review.objects.order_by("-pk")
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
+    # Comment Detail
+    comment_form = CommentForm()
     if request.method == "POST":
         review_form = ReviewForm(request.POST)
         reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
@@ -92,6 +105,7 @@ def detail(request, performance_pk):
         "reviews": reviews,
         "users": users,
         "review_photos": review_photo,
+        "comment_form": comment_form,
     }
     return render(request, "articles/detail.html", context)
 

@@ -5,7 +5,6 @@
 {% block content %}
 {% include 'main-nav.html' %}
 
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   버튼
@@ -78,23 +77,28 @@
         </form>
         {% endif %}
 
+
         <!-- Comment List -->
         <div id="comments">
-          <p>댓글 목록</p>
+          <p class="fw-bold">댓글 목록</p>          
           <hr>
-          
           {% if review.comment_set.first %}
             {% for comment in comments %}
             <div class="d-flex justify-content-between mb-1">
-              <p>{{ comment.user }}: {{ comment.content }}</p>
+              <div class="">
+                <p class="mb-2" style="font-weight: 500;">{{ comment.user }}</p>
+                <p>{{ comment.content }}</p>
+              </div>
               <span>
                 {% if request.user == comment.user %}
+                  {{ comment.created_at|date:"Y-m-d" }}
                   <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-{{ comment.pk }}" data-commentdel-id="{{ comment.pk }}" style="border: 0; background: none;">
-                    <i class="fa-solid fa-trash-can"></i>
+                    삭제
                   </button>
                 {% endif %}
               </span>
             </div>
+            <hr>
             {% endfor %}
           {% else %}
           <div class="d-flex justify-content-center my-5" style="color: var(--gray-color);">
@@ -108,7 +112,7 @@
     <!-- Modal Content-End -->
   </div>
 </div>
-<!-- end -->
+
 {% include 'sub-footer.html' %}
 {% endblock content %}
 
@@ -116,7 +120,7 @@
 <!-- JS -->
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-{% comment %} 댓글 생성 {% endcomment %}
+<!-- Comment Create -->
 <script>
   const commentForm = document.querySelector('#comment-form')
   const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
@@ -143,13 +147,18 @@
           comments.insertAdjacentHTML('beforeend',  
           `
           <div class="d-flex justify-content-between mb-1">
-            <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
+            <div class="">
+              <p class="mb-2" style="font-weight: 500;">${ comment_data[i].userName }</p>
+              <p>${ comment_data[i].content }</p>
+            </div>
             <span>
+              ${ comment_data[i].commentDate }
               <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-${comment_data[i].commentPk}" data-commentdel-id="${comment_data[i].commentPk}" style="border: 0; background: none;">
-                <i class="fa-solid fa-trash-can"></i>
+                삭제
               </button>
             </span>
           </div>
+          <hr>
           `)
         } else {
           comments.insertAdjacentHTML('beforeend',  
@@ -162,7 +171,7 @@
   })
 </script>
 
-{% comment %} 댓글 삭제 {% endcomment %}
+<!-- Comment Delete -->
 <script>
   
   const comment_delete = (e) => {
@@ -183,16 +192,20 @@
           comments.insertAdjacentHTML('beforeend',  
           `
           <div class="d-flex justify-content-between mb-1">
-            <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
+            <div class="">
+              <p class="mb-2" style="font-weight: 500;">${ comment_data[i].userName }</p>
+              <p>${ comment_data[i].content }</p>
+            </div>
             <span>
+              ${ comment_data[i].commentDate }
               <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-${comment_data[i].commentPk}" data-commentdel-id="${comment_data[i].commentPk}" style="border: 0; background: none;">
-                <i class="fa-solid fa-trash-can"></i>
+                삭제
               </button>
             </span>
           </div>
+          <hr>
           `)
         } else {
-          console.log('실행3')
           comments.insertAdjacentHTML('beforeend',  
           `
           <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>

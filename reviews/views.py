@@ -57,7 +57,7 @@ def create(request):
 def detail(request, pk):
 
     review = Review.objects.get(pk=pk)
-    comments = Comment.objects.filter(review=review)[::-1]
+    comments = Comment.objects.filter(review=review).order_by("-pk")
     comment_form = CommentForm()
 
     context = {
@@ -126,6 +126,7 @@ def delete(request, pk):
 
 
 def comment_create(request, pk):
+    print(request.POST)
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm(request.POST)
 
@@ -146,6 +147,7 @@ def comment_create(request, pk):
                 "userName": tem.user.username,
                 "content": tem.content,
                 "commentPk": tem.pk,
+                "commentDate": tem.created_at.strftime("%y-%m-%d"),
             }
         )
     context = {
@@ -179,6 +181,7 @@ def comment_create(request, pk):
 
 
 def comment_delete(request, pk):
+    print(request.POST)
     comment = Comment.objects.get(pk=pk)
     review = comment.review
     comment.delete()
@@ -194,6 +197,7 @@ def comment_delete(request, pk):
                 "userName": tem.user.username,
                 "content": tem.content,
                 "commentPk": tem.pk,
+                "commentDate": tem.created_at.strftime("%y-%m-%d"),
             }
         )
     context = {
