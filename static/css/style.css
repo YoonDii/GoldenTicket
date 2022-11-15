@@ -162,7 +162,60 @@ input[id="menuicon"]:checked + label + div {
 }
 
 /* nav.html ham */
+/* ham-nav*/
+input[id="menuicon_nav"] {
+  display:none;
+}
 
+input[id="menuicon_nav"] + label {
+  display:block;
+  width: 45px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+input[id="menuicon_nav"] + label span {
+  display:block;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  border-radius: 30px;
+  background: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: all .35s;
+}
+
+input[id="menuicon_nav"] + label span:nth-child(1) {
+  top:0;
+}
+
+input[id="menuicon_nav"] + label span:nth-child(2) {
+  top:50%;
+  transform: translateY(-50%);
+}
+
+input[id="menuicon_nav"] + label span:nth-child(3) {
+  bottom:0;
+}
+
+input[id="menuicon_nav"]:checked + label span:nth-child(1) {
+  top:50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+input[id="menuicon_nav"]:checked + label span:nth-child(2) {
+  opacity:0;
+}
+
+input[id="menuicon_nav"]:checked + label span:nth-child(3) {
+  bottom:50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+
+input[id="menuicon_nav"]:checked + label + div {
+  left: 0;
+}
 /* 사이드 드롭다운 */
 .dropdown{
   position : relative;
@@ -401,6 +454,7 @@ input[id="menuicon"]:checked + label + div {
     display: flex;
     align-items: center;
   }
+
 /* Footer */
 .cont{
   width: 1200px;
