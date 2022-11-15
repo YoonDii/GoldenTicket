@@ -5,47 +5,115 @@
 {% block content %}
 {% include 'main-nav.html' %}
 
-<p>리뷰제목: {{ review.title }}</p>
-<hr>
-<p>리뷰내용: {{ review.content }}</p>
-<hr>
-{% for photo in review.reviewphoto_set.all %}
 
-<div style="width: 5rem; height: 5rem;">
-  <img src="{{ photo.image.url }}" alt="" style="height: 5rem; width:5rem;">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  버튼
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <!-- Modal Content -->
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 me-3">
+          관람 후기 
+          <span class="ms-2" style="color: var(--gray-dark-color); font-size: 16px;">
+            {{ review.playId.playname }}
+          </span>
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body" style="height: 700px; overflow-y: scroll">
+        <!-- User Info -->
+        <div class="fs-5 d-flex align-items-center justify-content-end" id="exampleModalLabel">
+          <!-- Btn: Update & Delete -->
+          {% if review.user == request.user %}
+          <div class="d-flex align-items-center me-2" style="font-size: 14px;">
+            <a href="{% url 'reviews:update' review.pk %}" class="me-1">
+              <i class="fa-solid fa-pen"></i>
+            </a>
+            <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" style="border: 0; background: none;">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </form>
+          </div>
+          {% endif %}
+          <div class="d-flex pe-3" style="color: var(--main-color); font-size: 14px;">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="px-3" style="border-left: 1px solid var(--gray-light-color); border-right: 1px solid var(--gray-light-color); font-size: 14px;">
+            {{ review.user.username }}
+          </div>
+          <div class="ps-3" style="font-size: 14px;">
+            {{ review.created_at|date:"Y-m-d" }}
+          </div>
+        </div>
+        <!-- Review-Photo -->
+        <div class="my-3 d-flex flex-column align-items-center">
+          {% for photo in review.reviewphoto_set.all %}
+          <div class="mb-2" style="width: 10rem; height: 10rem;">
+            <img src="{{ photo.image.url }}" alt="" style="height: 10rem; width:10rem;">
+          </div>
+          {% endfor %}
+        </div>
+        <p>{{ review.content }}</p>
+        <hr>
+
+        <!-- Comment Create Form -->
+        {% if request.user.is_authenticated %}
+        <form id="comment-form" data-review-id="{{ review.pk }}">
+          {% csrf_token %}
+          {% bootstrap_form comment_form %}
+          <input type="submit" value="댓글생성" style="display: none;">
+        </form>
+        {% endif %}
+
+        <!-- Comment List -->
+        <div id="comments">
+          <p>댓글 목록</p>
+          <hr>
+          
+          {% if review.comment_set.first %}
+            {% for comment in comments %}
+            <div class="d-flex justify-content-between mb-1">
+              <p>{{ comment.user }}: {{ comment.content }}</p>
+              <span>
+                {% if request.user == comment.user %}
+                  <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-{{ comment.pk }}" data-commentdel-id="{{ comment.pk }}" style="border: 0; background: none;">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                {% endif %}
+              </span>
+            </div>
+            {% endfor %}
+          {% else %}
+          <div class="d-flex justify-content-center my-5" style="color: var(--gray-color);">
+            댓글이 없어요...
+          </div>
+          {% endif %}
+            
+        </div>
+      </div>
+    </div>
+    <!-- Modal Content-End -->
+  </div>
 </div>
-{% endfor %}
-  <a href="{% url 'reviews:update' review.pk %}">수정하기</a>
-  <form action="{% url 'reviews:delete' review.pk %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="삭제하기">
-  </form>
-<hr>
-
-{% comment %} 댓글생성 {% endcomment %}
-{% if request.user.is_authenticated %}
-<form id="comment-form" data-review-id="{{ review.pk }}">
-  {% csrf_token %}
-  {% bootstrap_form comment_form %}
-  <input type="submit" value="댓글생성">
-</form>
-{% endif %}
-
-{% comment %} 댓글 출력 {% endcomment %}
-<div id="comments">
-  {% for comment in comments %}
-  <p>{{ comment.pk}} | {{ comment.user }}:{{ comment.content }} <span>
-    {% if request.user == comments.user %}
-      <button class="btn btn-danger float-end comment-del" onclick="comment_delete(this)" id="comment-delete-{{ comment.pk }}" data-commentdel-id="{{ comment.pk }}">댓글삭제</button>
-    {% endif %}
-  </span></p>
-  <hr>
-  {% endfor %}
-</div>
-
-{% endblock content %}
+<!-- end -->
 {% include 'sub-footer.html' %}
+{% endblock content %}
 
+
+<!-- JS -->
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% comment %} 댓글 생성 {% endcomment %}
@@ -72,22 +140,28 @@
       for (let i = 0; i < comment_data.length; i++){
         const review_pk = response.data.review_pk
         if (user === comment_data[i].user_pk){
-          comments.insertAdjacentHTML('beforeend',  `
-          <p>${comment_data[i].commentPk} |: ${ comment_data[i].userName } : ${ comment_data[i].content } <span>
-            <button class="btn btn-danger float-end comment-del" onclick="comment_delete(this)" id="comment-delete-${comment_data[i].commentPk}" data-commentdel-id="${comment_data[i].commentPk}">댓글삭제</button>
-          </span></p>
-          <hr>
+          comments.insertAdjacentHTML('beforeend',  
+          `
+          <div class="d-flex justify-content-between mb-1">
+            <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
+            <span>
+              <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-${comment_data[i].commentPk}" data-commentdel-id="${comment_data[i].commentPk}" style="border: 0; background: none;">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </span>
+          </div>
           `)
         } else {
-          comments.insertAdjacentHTML('beforeend',  `
-          <p>${comment_data[i].commentPk} |: ${ comment_data[i].userName } : ${ comment_data[i].content } <span>
-            <hr>
+          comments.insertAdjacentHTML('beforeend',  
+          `
+          <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
           `)
         }
       }
     })
   })
 </script>
+
 {% comment %} 댓글 삭제 {% endcomment %}
 <script>
   
@@ -106,16 +180,22 @@
       for (let i = 0; i < comment_data.length; i++){
         const review_pk = response.data.review_pk
         if (user === comment_data[i].user_pk){
-          comments.insertAdjacentHTML('beforeend',  `
-          <p>${comment_data[i].commentPk} |: ${ comment_data[i].userName } : ${ comment_data[i].content } <span>
-            <button class="btn btn-danger float-end comment-del" onclick="comment_delete(this)" id="comment-delete-${comment_data[i].commentPk}" data-commentdel-id="${comment_data[i].commentPk}">댓글삭제</button>
-          </span></p>
-          <hr>
+          comments.insertAdjacentHTML('beforeend',  
+          `
+          <div class="d-flex justify-content-between mb-1">
+            <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
+            <span>
+              <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-${comment_data[i].commentPk}" data-commentdel-id="${comment_data[i].commentPk}" style="border: 0; background: none;">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </span>
+          </div>
           `)
         } else {
-          comments.insertAdjacentHTML('beforeend',  `
-          <p>${comment_data[i].commentPk} |: ${ comment_data[i].userName } : ${ comment_data[i].content } <span>
-            <hr>
+          console.log('실행3')
+          comments.insertAdjacentHTML('beforeend',  
+          `
+          <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
           `)
     }
   }
