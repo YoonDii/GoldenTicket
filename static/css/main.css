@@ -232,3 +232,16 @@
 .concert__list__item p {
   padding: 10px 0;
 }
+
+/* slide banner */
+/* .bnr-slide {
+  position: absolute;
+  bottom: 0;
+  height: 400px;
+  text-align: center;
+  width: 100%;
+  min-width: 1920px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  overflow: hidden;
+} */
