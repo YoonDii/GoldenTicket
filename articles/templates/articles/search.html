@@ -11,12 +11,21 @@
   <div class="search-top">
     <h3 class="mb-3"><span>'{{search}}'</span> 에 대한 검색 결과입니다.</h3>
     <div class="nav__search">
-      <form action="{% url 'articles:search' %}" role='search'>
-        <input type="text" id="search-type-02" name='search'>
-        <a href="{% url 'articles:search' %}" onclick="#">
-          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-        </a>
+      <form action="{% url 'articles:search' %}" role='search' id='searchfunc1'>
+        <input type="text" id="search-type-01" name='search'>
+        <button type="submit" onclick="">검색</button>
       </form>
+      <script>
+        const btn1 = document.getElementById("searchfunc1")
+        btn1.addEventListener("submit", function(event) {
+          val = document.getElementById("search-type-01").value.length
+          console.log(val)
+          if(val <= 1) {
+            event.preventDefault()
+            alert("검색어는 2글자 이상 입력해주세요")
+          }
+        })
+      </script>
     </div>
   </div>
 
@@ -58,18 +67,26 @@
     <div class="search-top">
       <h3 class="m-3 text-center"><span>'{{search}}'</span> 에 대한 검색 결과가 없습니다.</h3>
       <div class="nav__search">
-        <form action="{% url 'articles:search' %}" role='search'>
+        <form action="{% url 'articles:search' %}" role='search' id='searchfunc2'>
           <input type="text" id="search-type-02" name='search'>
-          <a href="{% url 'articles:search' %}" onclick="#">
-            <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-          </a>
+          <button type="submit" onclick="">검색</button>
         </form>
+        <script>
+          const btn2 = document.getElementById("searchfunc2")
+          btn2.addEventListener("submit", function(event) {
+            val = document.getElementById("search-type-02").value.length
+            console.log(val)
+            if(val <= 1) {
+              event.preventDefault()
+              alert("검색어는 2글자 이상 입력해주세요")
+            }
+          })
+        </script>
       </div>
     </div>
     {% endif %}
   </div>
 </div>
-
 {% include 'sub-footer.html' %}
 {% endblock content %}
   
