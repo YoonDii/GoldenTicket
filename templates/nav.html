@@ -28,13 +28,15 @@
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용">무용</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬">뮤지컬</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악">국악</a></li>
-          <li class="nav__nav__item hover-underline-animation"><a href="{% url 'accounts:index' %}">accounts</a></li>
         </ul>
         <div class="nav__search">
           <form action="{% url 'articles:search' %}" role='search' id='searchfunc3'>
-            <input type="text" id="search-type-03" name='search'>
-            <button type="submit" onclick="">검색</button>
+            <input type="text" id="search-type-02" name='search'>
+            <button type="submit" onclick="">
+              <i class="fa-solid fa-magnifying-glass fa-lg m-0"></i>
+            </button>
           </form>
+          <!-- Search length -->
           <script>
             const btn3 = document.getElementById("searchfunc3")
             btn3.addEventListener("submit", function(event) {
@@ -46,9 +48,18 @@
               }
             })
           </script>
-          <a href="{% url 'accounts:index' %}">
-            <i class="fa-regular fa-user fa-xl"></i>
-          </a>
+          <!-- User Profile -->
+          <div class="ms-3">
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'accounts:profile' request.user.pk %}">
+                <img src="{{ request.user.profile_image }}" alt="profile_image" width="45" height="45" style="border-radius: 50%;">
+              </a>
+              {% else %}
+              <a href="{% url 'accounts:login' %}">
+                <i class="fa-regular fa-user fa-xl"></i>
+              </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
