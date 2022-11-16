@@ -1,0 +1,72 @@
+/* Footer */
+.cont{
+    width: 1200px;
+}
+ .footer-txt{
+    height:165px;
+}
+ .flogo{
+    width:250px;
+     height:250px;
+}
+ .footertxt{
+    top: 22px;
+     left: 221px;
+}
+ .github{
+    font-size: 13px;
+}
+/* Sub-Footer */
+ .sf-wrap {
+    display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin: 35px 0;
+}
+ .sf-number {
+    color: var(--main-color);
+     font-weight: 700;
+     margin-bottom: 14px;
+}
+ .sf-walking {
+    font-size: 14px;
+}
+ .sf-walking th {
+    color: var(--gray-color);
+     width: 50px;
+}
+ .sf-center {
+    display: flex;
+     padding-top: 15px;
+}
+ .sf-item {
+    display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin-right: 50px;
+}
+ .sf-item p {
+    font-weight: 500;
+     margin-top: 15px;
+}
+ .sf-right {
+    display: flex;
+     flex-direction: column;
+     justify-content: center;
+}
+ .sf-right i {
+    color: var(--gray-dark-color);
+     margin-right: 14px;
+}
+ .sf-social {
+    margin-top: var(--base-space);
+}
+ .sf-social span {
+    color: var(--gray-dark-color);
+     font-size: 8px;
+     margin-right: var(--base-space);
+}
+ .sf-social span i {
+    margin: 0;
+     margin-right: 5px;
+}
