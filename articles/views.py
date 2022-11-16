@@ -16,6 +16,8 @@ from django.db.models import Avg, Count
 from django.contrib import messages
 import datetime
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 def main(request):
 
@@ -79,21 +81,44 @@ def index(request):
             genrename=genre,
         ).order_by("-playstdate")
         plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
+        totalnum = len(playlist)
+        page1 = request.GET.get("page", 1)
+        playlistpage = Paginator(playlist, 40)
+        totalpagenum = playlistpage.num_pages
+
+        try:
+            news = playlistpage.page(page1)
+        except PageNotAnInteger:
+            news = playlistpage.page(1)
+        except EmptyPage:
+            news = playlistpage.page(playlistpage.num_pages)
 
         context = {
             "genrename": genre,
-            "playlist": playlist,
-            "plist": plist,
+            "news": news,
+            "totalnum": totalnum,
+            "totalpagenum": totalpagenum,
         }
 
     else:
         playlist = PlayDetail.objects.order_by("-playstdate")
         plist = PlayDetail.objects.order_by("playenddate")
 
+        totalnum = len(playlist)
+        page1 = request.GET.get("page", 1)
+        playlistpage = Paginator(playlist, 40)
+
+        try:
+            news = playlistpage.page(page1)
+        except PageNotAnInteger:
+            news = playlistpage.page(1)
+        except EmptyPage:
+            news = playlistpage.page(playlistpage.num_pages)
+
         context = {
             "genrename": "모든 공연",
-            "playlist": playlist,
-            "plist": plist,
+            "news": news,
+            "totalnum": totalnum,
         }
 
     return render(request, "articles/index.html", context)
