@@ -18,30 +18,36 @@ import datetime
 
 
 def main(request):
+    today = datetime.date.today()
 
     play_list = (
         PlayDetail.objects.filter(genrename="연극")
         .annotate(hot=Count("like_users"))
+        .exclude(playenddate__lte=today)
         .order_by("-hot")
     )
     musical_list = (
         PlayDetail.objects.filter(genrename="뮤지컬")
         .annotate(hot=Count("like_users"))
+        .exclude(playenddate__lte=today)
         .order_by("-hot")
     )
     classic_list = (
         PlayDetail.objects.filter(genrename="클래식")
         .annotate(hot=Count("like_users"))
+        .exclude(playenddate__lte=today)
         .order_by("-hot")
     )
     dance_list = (
         PlayDetail.objects.filter(genrename="무용")
         .annotate(hot=Count("like_users"))
+        .exclude(playenddate__lte=today)
         .order_by("-hot")
     )
     ktm_list = (
         PlayDetail.objects.filter(genrename="국악")
         .annotate(hot=Count("like_users"))
+        .exclude(playenddate__lte=today)
         .order_by("-hot")
     )
 
@@ -63,22 +69,22 @@ def main(request):
     )
 
 
-# 날짜계산
-# startdate = DateFormat(datetime.today()).format('Y.m.d')
-# date = "playenddate" >= startdate
-# print(startdate,date) # 2022.11.15 True
-
-
 def index(request):
+    today = datetime.date.today()
 
-    # while date == True:
     if request.GET.get("genre"):
         genre = request.GET.get("genre")
 
-        playlist = PlayDetail.objects.filter(
-            genrename=genre,
-        ).order_by("-playstdate")
-        plist = PlayDetail.objects.filter(genrename=genre).order_by("playenddate")
+        playlist = (
+            PlayDetail.objects.filter(genrename=genre)
+            .exclude(playenddate__lte=today)
+            .order_by("-playstdate")
+        )
+        plist = (
+            PlayDetail.objects.filter(genrename=genre)
+            .exclude(playenddate__lte=today)
+            .order_by("playenddate")
+        )
 
         context = {
             "genrename": genre,
@@ -131,7 +137,6 @@ def detail(request, performance_pk):
                     image_instance.save()
             else:
                 review.save()
-            # return redirect("articles:concert")
             return redirect("articles:detail", performance_pk)
     else:
         review_form = ReviewForm()
