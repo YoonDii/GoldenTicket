@@ -72,6 +72,7 @@ def detail(request, pk):
 @login_required
 def update(request, pk):
     # 작성자가 아닐 경우 로직 필요
+    play = PlayDetail.objects.get(pk=1)
     review = Review.objects.get(pk=pk)
     photos = ReviewPhoto.objects.filter(review=review)
 
@@ -111,6 +112,7 @@ def update(request, pk):
     context = {
         "review_form": review_form,
         "reviewPhoto_form": reviewPhoto_form,
+        "play": play,
     }
 
     return render(request, "reviews/create.html", context)

@@ -8,30 +8,20 @@
   <title>Document</title>
 </head>
 <body>
-  
-
   <!-- Nav -->
   <nav class="nav" style="color: #000; ">
     <div class="container">
       <div class="main-nav__wrap">
         <div class="m-nav__logo">
           <input type="checkbox" id="menuicon_nav">
-            <label for="menuicon">
+            <label for="menuicon_nav">
               <span></span>
               <span></span>
               <span></span>
-            </label>
+            </label> 
           <div class="sidebar">
-            <div class="ham_" style="color: #fff opacity:1">
-              <input class="ham_input" type="checkbox" id="menuicon_nav" class="my-3">
-              <label for="menuicon">
-                <span></span>
-                <span></span>
-                <span></span>
-              </label>
-            </div>
+            <div class="ham_" style="color: #fff opacity:1"></div>
             <div class="sidebar-menu">
-              <div>
               <ul class="pf-gnb-my-5 mx-4">
                 <li class="dropdown mb-3 ">
                   <a href="{% url 'articles:index' %}?genre=연극">
@@ -79,13 +69,12 @@
                   </ul>
                 </li>
               </ul>
-            </div>
           </div>
-        <h1>
-          <a href="{% url 'articles:main' %}">
-            <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
-          </a>
-        </h1>
+          <h1>
+            <a href="{% url 'articles:main' %}">
+              <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+            </a>
+          </h1>
         </div>
         <h1>
           <a href="{% url 'articles:main' %}">

@@ -11,6 +11,7 @@
   <div class="search-top">
     <h3 class="mb-3"><span>'{{search}}'</span> 에 대한 검색 결과입니다.</h3>
     <div class="nav__search">
+      <!-- Search Form -->
       <form action="{% url 'articles:search' %}" role='search' id='searchfunc1'>
         <input type="text" id="search-type-02" name='search'>
         <button type="submit" onclick="">
@@ -37,14 +38,78 @@
     <div class="sw-left">
       <h4>(<span class="shap">#</span>) 추천 검색어</h4>
     </div>
+    <!-- Search Tag -->
     <div class="sw-right">
-      <div class="sw-tag">
-        <p># 마룬파이브</p>
-      </div>
-      <div class="sw-tag">
-        <p># 서툰 사람들</p>
+      <div class="d-flex">
+        <a href="#" onclick="document.forms['search-01'].submit();">
+          <div class="sw-tag">
+            <p># 지브리</p>
+          </div>
+        </a>
+        <a href="#" onclick="document.forms['search-02'].submit();">
+          <div class="sw-tag">
+            <p># 서툰 사람들</p>
+          </div>
+        </a>
+        <a href="#" onclick="document.forms['search-03'].submit();">
+          <div class="sw-tag">
+            <p># 미수</p>
+          </div>
+        </a>
+        <a href="#" onclick="document.forms['search-04'].submit();">
+          <div class="sw-tag">
+            <p># 드라큘라</p>
+          </div>
+        </a>
+        <a href="#" onclick="document.forms['search-05'].submit();">
+          <div class="sw-tag">
+            <p># 택시</p>
+          </div>
+        </a>
+        <a href="#" onclick="document.forms['search-06'].submit();">
+          <div class="sw-tag">
+            <p># 옥탑방 고양이</p>
+          </div>
+        </a>
+        <a href="#" onclick="document.forms['search-07'].submit();">
+          <div class="sw-tag">
+            <p># 예술의전당</p>
+          </div>
+        </a>
       </div>
     </div>
+    <!-- Hidden Form -->
+    <div class="">
+      <form id="search-01" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="지브리">
+      </form>
+      <form id="search-02" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="서툰 사람들">
+      </form>
+      <form id="search-03" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="미수">
+      </form>
+      <form id="search-04" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="드라큘라">
+      </form>
+      <form id="search-05" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="택시">
+      </form>
+      <form id="search-06" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="옥탑방 고양이">
+      </form>
+      <form id="search-07" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="예술의전당">
+      </form>
+    </div>
+    <!-- Hidden Form-End -->
   </div>
 
 
@@ -59,7 +124,7 @@
       <div class="search-desc">
         <div class="search-item__title">{{ play.playname }}</div>
         <div class="search-desc-in">
-          <div class="search-item__date">{{ play.playstdate }}~{{ play.playenddate }}</div>
+          <div class="search-item__date">{{ play.playstdate|date:"Y.m.d" }} ~ {{ play.playenddate|date:"Y.m.d" }}</div>
           <div class="search-item__location">{{ play.locationname }}</div>
         </div>
       </div>
@@ -91,6 +156,8 @@
     {% endif %}
   </div>
 </div>
+
+
 {% include 'sub-footer.html' %}
 {% endblock content %}
   
