@@ -6,19 +6,20 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from datetime import datetime, timedelta
+
+from datetime import datetime,timedelta
+
 from django.utils.dateformat import DateFormat
 from django.db.models import Avg, Count
 
 # from django.utils import timezone
-
-
 from django.contrib import messages
-import datetime
+# import datetime
 
 
 def main(request):
     today = datetime.date.today()
+
 
     play_list = (
         PlayDetail.objects.filter(genrename="연극")
@@ -50,6 +51,7 @@ def main(request):
         .exclude(playenddate__lte=today)
         .order_by("-hot")
     )
+
 
     return render(
         request,
@@ -101,6 +103,7 @@ def index(request):
             "playlist": playlist,
             "plist": plist,
         }
+
 
     return render(request, "articles/index.html", context)
 
