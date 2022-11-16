@@ -21,11 +21,11 @@
       <div required class="email_form">
         <input type="text" name="email_id" placeholder="이메일 주소"/>
         <p>@</p>
-        <input class="text" name="email_address" id="domain-txt" type="text"/>
-        <select class="box" id="domain-list">
-          <option value="type">직접 입력</option>
+        <input class="text" name="email_address" id="domain-txt" type="text" value="">
+        <select class="box" id="domain-list" onchange="selectedControl()">
+          <option value="">직접 입력</option>
           <option value="naver.com">naver.com</option>
-          <option value="google.com">google.com</option>
+          <option value="gmail.com">gmail.com</option>
           <option value="kakao.com">kakao.com</option>
         </select>
       </div>
@@ -36,3 +36,15 @@
   </div>
 </section>
 {% endblock content %}
+
+{% block js %}
+{% comment %} 이메일 선택시 선택값 입력 {% endcomment %}
+<script>
+  function selectedControl(){
+    const emailSelect = document.getElementById('domain-list');
+    const domainTxt = document.getElementById('domain-txt');
+    const selectValue = emailSelect.options[emailSelect.selectedIndex].value;
+    domainTxt.value = selectValue
+  }
+</script>
+{% endblock js %}
