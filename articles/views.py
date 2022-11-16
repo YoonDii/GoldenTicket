@@ -44,7 +44,6 @@ date = "playenddate" >= startdate
 print(startdate,date) # 2022.11.15 True
 
 def index(request):
-    if date:
         if request.GET.get("genre"):
             genre = request.GET.get("genre")
             
