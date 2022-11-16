@@ -35,4 +35,47 @@ for (let i = 0; i < tagList.length; i++) {
     activeList = this.getAttribute('href');
     document.querySelector(activeList).style.display = 'flex';
   });
+
+// slide banner
+var index=0;
+var i = 0;
+var slider = document.getElementsByClassName("slider");
+var line = document.getElementsByClassName("line");
+
+auto();
+
+function show(n){
+  for(i=0;i<slider.length;i++){
+      slider[i].style.display="none";
+  }
+  for(i=0;i<line.length;i++){
+    line[i].className=line[i].className.replace("active");
+  }
+  slider[n-1].style.display=("block");
+  line[n-1].className += "active";
+}
+
+function auto(){
+  index++;
+  if(index>slider.length){
+      index=1;
+  }
+  show(index);
+  setTimeout(auto,3500); //3.5초마다 슬라이드바뀜
+}
+
+function plusSlide(n){
+  index+=n;
+  if(index>slider.length){
+    index=1;
+  }
+  if(index<1){
+    index = slider.length;
+  }
+  show(index);
+}
+
+function curentSlide(n){
+  index=n;
+  show(index);
 }
