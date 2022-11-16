@@ -15,7 +15,7 @@ from django.db.models import Avg, Count
 # from django.utils import timezone
 from django.contrib import messages
 
-# import datetime
+import datetime
 
 
 def main(request):
@@ -124,7 +124,6 @@ def detail(request, performance_pk):
     comment_form = CommentForm()
     if request.method == "POST":
         review_form = ReviewForm(request.POST)
-        update_form = ReviewForm(request.POST, instance=review)
         reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
         images = request.FILES.getlist("image")
 
