@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ReviewForm, ReviewPhotoForm, CommentForm
 from articles.models import PlayDetail
 from .models import ReviewPhoto, Review, Comment
@@ -117,12 +117,23 @@ def update(request, pk):
 
 
 @login_required
-def delete(request, pk):
-    # 작성자가 아닐 경우 로직 필요
-    if request.method == "POST":
-        review = Review.objects.get(pk=pk)
+def delete(request, performance_pk, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    performance = get_object_or_404(PlayDetail, playid=performance_pk)
+    if request.user == review.user:
+        review = Review.objects.get(pk=review_pk)
         review.delete()
-        return redirect("reviews:index")
+        return redirect("articles:detail", performance_pk)
+    else:
+        return render(
+            request,
+            "articles/detail.html",
+            {
+                "performance": performance,
+                "review": review,
+            },
+            performance_pk,
+        )
 
 
 def comment_create(request, pk):

@@ -8,20 +8,79 @@
   <title>Document</title>
 </head>
 <body>
-  
-
   <!-- Main-Nav -->
   <nav class="main-nav">
     <div class="container">
       <div class="main-nav__wrap">
         <div class="m-nav__logo">
-          <i class="fa-solid fa-bars-staggered fa-xl"></i>
+          <input type="checkbox" id="menuicon">
+            <label for="menuicon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+          <div class="sidebar">
+            <div class="ham_" style="color: #fff opacity:1"></div>
+            <div class="sidebar-menu">
+              <ul class="pf-gnb-my-5 mx-4">
+                <li class="dropdown mb-3 ">
+                  <a href="{% url 'articles:index' %}?genre=연극">
+                    <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">연극</span>
+                  </a>
+                  <ul class="dropdown-content">
+                    <li><a href="" style="color: #fff">신상품순</a></li>
+                    <li><a href="" style="color: #fff">종료임박순</a></li>
+                  </ul>
+                </li>
+                <li class="mb-3">
+                  <a href="{% url 'articles:index' %}?genre=클래식" id="hamm">
+                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">클래식</span>
+                  </a>
+                  <ul id="div1">
+                    <li><a href="" style="color: #fff">신상품순</a></li>
+                    <li><a href="" style="color: #fff">종료임박순</a></li>
+                  </ul>
+                </li>
+                <li class="mb-3">
+                  <a href="{% url 'articles:index' %}?genre=무용">
+                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">무용</span>
+                  </a>
+                  <ul>
+                    <li><a href="" style="color: #fff">신상품순</a></li>
+                    <li><a href="" style="color: #fff">종료임박순</a></li>
+                  </ul>
+                </li>
+                <li class="mb-3">
+                  <a href="{% url 'articles:index' %}?genre=뮤지컬">
+                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">뮤지컬</span>
+                  </a>
+                  <ul>
+                    <li><a href="" style="color: #fff">신상품순</a></li>
+                    <li><a href="" style="color: #fff">종료임박순</a></li>
+                  </ul>
+                </li>
+                <li class="mb-3">
+                  <a href="{% url 'articles:index' %}?genre=국악">
+                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">국악</span>
+                  </a>
+                  <ul>
+                    <li><a href="" style="color: #fff">신상품순</a></li>
+                    <li><a href="" style="color: #fff">종료임박순</a></li>
+                  </ul>
+                </li>
+              </ul>
+          </div>
           <h1>
             <a href="{% url 'articles:main' %}">
               <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
             </a>
           </h1>
         </div>
+        <h1>
+          <a href="{% url 'articles:main' %}">
+            <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+          </a>
+        </h1>
         <ul class="m-nav__nav">
           <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=연극">연극</a></li>
           <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=클래식">클래식</a></li>
@@ -36,15 +95,18 @@
               <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </a>
           </form>
-          
-          {% if request.user.is_authenticated %}
-          <a href="{% url 'accounts:profile' request.user.pk %}">
-            <i class="fa-regular fa-user fa-xl"></i>
-          </a>
-          {% else %}
-            <i class="fa-regular fa-user fa-xl"></i>
-          {% endif %}
-            
+          <!-- User Profile -->
+          <div class="ms-3">
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'accounts:profile' request.user.pk %}">
+                <img src="{{ request.user.profile_image }}" alt="profile_image" width="45" height="45" style="border-radius: 50%;">
+              </a>
+              {% else %}
+              <a href="{% url 'accounts:login' %}">
+                <i class="fa-regular fa-user fa-xl"></i>
+              </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
@@ -73,6 +135,17 @@
       </button>
     </div>
   </section>
-
+  <script>
+    function hamm() {
+      var x = document.getElementById("div1");
+  
+      if(x.style.display === "none") {
+        x.style.display = "block";
+      }
+      else {
+        x.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>

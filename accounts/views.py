@@ -22,7 +22,7 @@ def signup(request):
             if signup_form.is_valid():
                 user = signup_form.save()
                 auth_login(request, user)
-                return redirect("accounts:index")
+                return redirect("articles:main")
         else:
             signup_form = CustomUserCreationForm()
 
@@ -43,7 +43,7 @@ def login(request):
         if request.method == "POST":
             if login_form.is_valid():
                 auth_login(request, login_form.get_user())
-                return redirect(request.GET.get("next") or "accounts:index")
+                return redirect(request.GET.get("next") or "articles:main")
         else:
             login_form = AuthenticationForm()
         context = {
@@ -57,7 +57,7 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
-    return redirect("accounts:index")
+    return redirect("articles:main")
 
 
 @login_required
@@ -172,7 +172,7 @@ def kakao_callback(request):
         kakao_login_user.save()
         kakao_user = get_user_model().objects.get(kakao_id=kakao_id)
     auth_login(request, kakao_user, backend="django.contrib.auth.backends.ModelBackend")
-    return redirect(request.GET.get("next") or "accounts:index")
+    return redirect(request.GET.get("next") or "articles:main")
 
 
 def naver_request(request):
@@ -217,4 +217,4 @@ def naver_callback(request):
         naver_user = get_user_model().objects.get(naver_id=naver_id)
     auth_login(request, naver_user, backend="django.contrib.auth.backends.ModelBackend")
 
-    return redirect(request.GET.get("next") or "accounts:index")
+    return redirect(request.GET.get("next") or "articles:main")

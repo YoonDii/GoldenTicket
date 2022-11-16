@@ -34,7 +34,7 @@
       </div>
       <!-- Ranking-List -->
       <div class="ranking__list ranking__list-01" id="tab1">
-        {% for play in playlist_rank %}
+        {% for play in musical_rank %}
         <!-- Ranking-Item -->
         <div class="ranking__item">
           <a href="{% url 'articles:detail' play.playid %}">
@@ -55,7 +55,7 @@
         {% endfor %}
       </div>
       <div class="ranking__list" id="tab2">
-        {% for play in musical_rank %}
+        {% for play in playlist_rank %}
         <!-- Ranking-Item -->
         <div class="ranking__item">
           <a href="{% url 'articles:detail' play.playid %}">

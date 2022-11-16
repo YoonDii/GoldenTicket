@@ -4,6 +4,8 @@
 {% block content %}
 {% include 'nav.html' %}
 <div style="height: 50px;"></div>
+
+<!-- 제목 -->
 <div class="perf-title-wrap">
   <div class="perf-content"><!--제목-->
     <h1>{{performance.playname}}</h1>
@@ -25,37 +27,100 @@
   </div>
 </div>
 
+
+<!-- 상세정보 -->
 <div class="perf-content">
   <div class="perf-movieinfo">
+    <!-- Info left -->
     <div class="perf-movieinfo-left">
       <img src="{{performance.poster}}" alt="">
       <!--좋아요, 평균별점-->
       <!-- Likes -->
-      <div class="d-flex align-items-center" style="padding: 20px 0; border-bottom: 1px solid var(--gray-color);">
-        {% if request.user.is_authenticated %}
-        <!-- Like-Form -->
-        <form class="like-forms" data-performance-id="{{ performance.playid }}">
-        {% csrf_token %}
-          {% if user in performance.like_users.all %}
-            <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
-              <i id="star-{{ performance.playid }}" class="fa-solid fa-heart fa-2x"></i>
-            </button>
+      <div class="d-flex justify-content-evenly" style="padding: 20px 0; border-bottom: 1px solid var(--gray-color);">
+        <div class="d-flex">
+          {% if request.user.is_authenticated %}
+          <!-- Like-Form -->
+          <form class="like-forms" data-performance-id="{{ performance.playid }}">
+          {% csrf_token %}
+            {% if user in performance.like_users.all %}
+              <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+                <i id="star-{{ performance.playid }}" class="fa-solid fa-heart fa-2x"></i>
+              </button>
+            {% else %}
+              <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+                <i id="star-{{ performance.playid }}" class="fa-regular fa-heart fa-2x"></i>
+              </button>
+            {% endif %}
+          </form>
+          <div class="ms-3 d-flex align-items-center">
+              <span id="like-count" style="color: var(--main-color);">{{ performance.like_users.count }}</span>
+              <p class="ms-2">likes</p>
+          </div>
           {% else %}
-            <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
-              <i id="star-{{ performance.playid }}" class="fa-regular fa-heart fa-2x"></i>
-            </button>
+          <a href="{% url 'accounts:login' %}" class="">로그인이 필요합니다.</a>
           {% endif %}
-        </form>
-        <div class="ms-3 d-flex align-items-center">
-          <span id="like-count" style="color: var(--main-color);">{{ performance.like_users.count }}</span>
-          <p class="ms-2">likes</p>
         </div>
-        {% else %}
-        <a href="{% url 'accounts:login' %}" class="">로그인이 필요합니다.</a>
-        {% endif %}
+        <!-- Grade -->
+        <div class="d-flex align-items-center">
+          {% if Avg_grade == 5 %}
+          <div class="d-flex align-items-center" style="color: var(--gray-color);">
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+            <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+          </div>
+          {% elif Avg_grade >= 4 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% elif Avg_grade >= 3 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% elif Avg_grade >= 2 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% elif Avg_grade >= 1 %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% else %}
+            <div class="d-flex align-items-center" style="color: var(--gray-color);">
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
+            </div>
+          {% endif %}
+        </div>
       </div>
-      <!-- Likes-End -->
     </div>
+    <!-- Info right -->
     <div class="perf-movieinfo-right">
       <div class="product-area1">
         <dl>
@@ -106,6 +171,7 @@
 </div>
 
 
+<!-- 상세정보 이미지 -->
 {% if performance.image1 %}
 <div class="perf-content" id="info">
   <div class="perf-detailinfo">
@@ -118,6 +184,7 @@
 </div>
 {% endif %}
   
+
 <!--지도-->
 <div class="perf-content-2">
   <p class="tit-map" id="tit-map">
@@ -127,7 +194,6 @@
     <span>{{location.address}}</span>
   </p>
 </div>
-
 <div class="perf-content-2" id="map">
   <div id="map" style="width:1200px;height:700px;">
     <div class="map_wrap">
@@ -364,11 +430,14 @@
     </script>
   </div>
 </div>
+
+
 <!--후기목록-->
 <div class="perf-content" id="reviews">
   <p class="tab-area-tit">
     <span>관람후기</span>
   </p>
+  <!-- Review Create -->
   <div class="review-area-create">
     <div>
       <p>매매, 욕설 등 골든티켓 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</p>
@@ -401,6 +470,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Review List -->
   <div>
     <ul class="review-list">
       {% if performance.review_set.first %}
@@ -448,12 +519,12 @@
             <img src="https://dummyimage.com/100x80/b5b5b5/ffffff&text=NO+IMG" alt="">
             <div class="textbox">
               <!-- Review Detail -->
-              <!-- Button trigger modal -->
+              <!-- Detail modal Btn -->
               <button data-bs-toggle="modal" data-bs-target="#commentModal" style="border: 0; background: none;">
                 {{review.content}}
               </button>
 
-              <!-- Modal -->
+              <!-- Detail Modal -->
               <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <!-- Modal Content -->
@@ -471,34 +542,36 @@
                     <!-- Modal Body -->
                     <div class="modal-body" style="height: 700px; overflow-y: scroll">
                       <!-- User Info -->
-                      <div class="fs-5 d-flex align-items-center justify-content-end" id="exampleModalLabel">
+                      <div class="fs-5 d-flex flex-column align-items-end justify-content-end" id="exampleModalLabel">
+                        <div class="d-flex">
+                          <div class="pe-3" style="font-size: 14px;">
+                            {{ review.user.username }}
+                          </div>
+                          <div class="px-3" style="border-left: 1px solid var(--gray-light-color); border-right: 1px solid var(--gray-light-color); font-size: 14px;">
+                            {{ review.created_at|date:"Y-m-d" }}
+                          </div>
+                          <div class="d-flex ps-3" style="color: var(--main-color); font-size: 14px;">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                          </div>
+                        </div>
                         <!-- Btn: Update & Delete -->
                         {% if review.user == request.user %}
-                        <div class="d-flex align-items-center me-2" style="font-size: 14px;">
+                        <div class="d-flex align-items-center" style="font-size: 14px;">
                           <a href="{% url 'reviews:update' review.pk %}" class="me-1">
                             <i class="fa-solid fa-pen"></i>
                           </a>
-                          <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+                          <form action="{% url 'reviews:delete' performance.playid review.pk %}" method="POST">
                             {% csrf_token %}
-                            <button type="submit" style="border: 0; background: none;">
+                            <button type="submit" style="border: 0; background: none; padding-right: 0;">
                               <i class="fa-solid fa-trash-can"></i>
                             </button>
                           </form>
                         </div>
                         {% endif %}
-                        <div class="d-flex pe-3" style="color: var(--main-color); font-size: 14px;">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </div>
-                        <div class="px-3" style="border-left: 1px solid var(--gray-light-color); border-right: 1px solid var(--gray-light-color); font-size: 14px;">
-                          {{ review.user.username }}
-                        </div>
-                        <div class="ps-3" style="font-size: 14px;">
-                          {{ review.created_at|date:"Y-m-d" }}
-                        </div>
                       </div>
                       <!-- Review-Photo -->
                       <div class="my-3 d-flex flex-column align-items-center">
@@ -508,7 +581,7 @@
                         </div>
                         {% endfor %}
                       </div>
-                      <p>{{ review.content }}</p>
+                      <p style="color: var(--dark-color);">{{ review.content }}</p>
                       <hr>
 
                       <!-- Comment Create Form -->
@@ -569,12 +642,12 @@
     </ul>
   </div>
 </div>
+
 {% endblock content %}
-  
 
 
+<!-- JS -->
 {% block js %}
-
 <!-- CDN axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -720,6 +793,5 @@
   }
 })}
 </script>
-
 {% endblock js %}
   
