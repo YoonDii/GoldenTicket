@@ -109,6 +109,7 @@ def index(request):
 
 
 def detail(request, performance_pk):
+    print(request.POST)
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
     reviews = Review.objects.order_by("-pk")
@@ -125,9 +126,10 @@ def detail(request, performance_pk):
     comment_form = CommentForm()
     if request.method == "POST":
         review_form = ReviewForm(request.POST)
+        update_form = ReviewForm(request.POST, instance=review)
         reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
-
         images = request.FILES.getlist("image")
+
         if review_form.is_valid() and reviewPhoto_form.is_valid():
             review = review_form.save(commit=False)
             review.title = performance.playname
@@ -147,11 +149,12 @@ def detail(request, performance_pk):
     context = {
         "performance": performance,
         "location": location,
-        "review_form": review_form,
-        "reviewPhoto_form": reviewPhoto_form,
-        "reviews": reviews,
         "users": users,
+        "reviews": reviews,
         "review_photos": review_photo,
+        "review_form": review_form,
+        "update_form": update_form,
+        "reviewPhoto_form": reviewPhoto_form,
         "comment_form": comment_form,
         "Avg_grade": Avg_grade,
     }
@@ -179,6 +182,7 @@ def like(request, performance_pk):
 
 
 def search(request):
+    print(request.GET)
     all_data = PlayDetail.objects.order_by("-pk")
     search = request.GET.get("search")
 
