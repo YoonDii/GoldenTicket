@@ -67,7 +67,7 @@ div[class=sidebar] {
    background: #222;
    top: 0;
    left: -300px;
-   z-index: 1;
+   z-index: 999;
    transition: all .35s;
 }
 .sidebar-menu {
@@ -277,7 +277,7 @@ input[id="menuicon_nav"]:checked + label + div {
 
 /* Nav Drop-down */
 .pf-gnb-my-5 {
-   padding: 15px 15px 15px 0;
+   padding-top: 15px;
 }
 .dropdown {
    color: var(--white-color);
@@ -300,29 +300,4 @@ input[id="menuicon_nav"]:checked + label + div {
 .hide-box p:hover {
    opacity: 1;
    color: #fff;
-}
-
-.dropdown:hover > a {
-   display: inline-block;
-   position: relative;
-   color: var(--main-color);
-}
-.dropdown:hover > a:after {
-   content: '';
-   position: absolute;
-   width: 100%;
-   transform: scaleX(0);
-   height: 3px;
-   bottom: 0;
-   left: 0;
-   background-color: var(--main-color);
-   transform-origin: bottom right;
-   transition: transform 1s ease-out;
-}
-.dropdown:hover > a:hover:after {
-   transform: scaleX(1);
-   transform-origin: bottom left;
-}
-.dropdown:hover .hide-box {
-   display: block;
 }

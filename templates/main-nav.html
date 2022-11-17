@@ -27,48 +27,25 @@
                 <ul class="pf-gnb-my-5 mx-4" style="text-align: center;">
                   <li class="dropdown w-100">
                     <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                      <span class="dd-title" style="color: #fff;">연극</span>
+                      <span class="dd-title dd-title-01" style="color: #fff;">장르</span>
                     </a>
                     <ul class="hide-box">
-                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 연극</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 클래식</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 무용</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 뮤지컬</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 국악</p></a></li>
                     </ul>
                   </li>
                   <li class="dropdown w-100">
-                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                      <span class="dd-title" style="color: #fff;">클래식</span>
+                    <a href="{% url 'articles:ranking' %}" class="w-100">
+                    <span class="dd-title" style="color: #fff;">오늘의 랭킹</span>
                     </a>
-                    <ul class="hide-box">
-                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                    </ul>
                   </li>
                   <li class="dropdown w-100">
-                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                      <span class="dd-title" style="color: #fff;">무용</span>
+                    <a href="{% url 'accounts:profile' request.user.pk %}" class="w-100">
+                    <span class="dd-title" style="color: #fff;">마이프로필</span>
                     </a>
-                    <ul class="hide-box">
-                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown w-100">
-                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                      <span class="dd-title" style="color: #fff;">뮤지컬</span>
-                    </a>
-                    <ul class="hide-box">
-                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown w-100">
-                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                      <span class="dd-title" style="color: #fff;">국악</span>
-                    </a>
-                    <ul class="hide-box">
-                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                    </ul>
                   </li>
                 </ul>
               </div>
