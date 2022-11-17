@@ -480,8 +480,12 @@
         {% if review.playId == performance %}
         <li>
           <div class="ttbox">
-            <span class="tt1">작성자</span>
-            <span class="tt2"><a href="{% url 'accounts:profile' review.user.pk %}">{{review.user}}</a></span>
+            <a href="{% url 'accounts:profile' review.user.pk %}">
+              <span class="">
+                <img src="{{ review.user.profile_image }}" alt="user-profile-image" width="45" height="45" style="border-radius: 50%;">
+              </span>
+              <span class="tt2">{{review.user}}</span>
+            </a>
             <span class="tt3">{{review.created_at|date:'Y-m-d'}}</span>
             <span class="tt4" style="color: var(--main-color); font-size: 12px;">
               {% if review.grade == "5" %}
@@ -544,37 +548,45 @@
                       <!-- User Info -->
                       <div class="fs-5 d-flex flex-column align-items-end justify-content-end" id="exampleModalLabel">
                         <div class="d-flex">
-                          <div class="pe-3" style="font-size: 14px;">
-                            {{ review.user.username }}
-                          </div>
+                          <a href="{% url 'accounts:profile' review.user.pk %}">
+                            <div class="pe-3" style="font-size: 14px;">
+                              {{ review.user.username }}</a>
+                            </div>
+                          </a>
                           <div class="px-3" style="border-left: 1px solid var(--gray-light-color); border-right: 1px solid var(--gray-light-color); font-size: 14px;">
                             {{ review.created_at|date:"Y-m-d" }}
                           </div>
-                          <div class="d-flex ps-3 align-items-center" style="color: var(--main-color); font-size: 14px;">
+                          <div class="d-flex ps-3 align-items-center" style="color: var(--gray-color); font-size: 14px;">
                             {% if review.grade == "5" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% endif %}
-                            {% if review.grade == "4" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% endif %}
-                            {% if review.grade == "3" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% endif %}
-                            {% if review.grade == "2" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% endif %}
-                            {% if review.grade == "1" %}
-                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            {% elif review.grade == "4" %}
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            {% elif review.grade == "3" %}
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            {% elif review.grade == "2" %}
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            {% elif review.grade == "1" %}
+                            <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            {% else %}
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
                             {% endif %}
                           </div>
                         </div>
