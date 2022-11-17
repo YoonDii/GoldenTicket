@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load django_bootstrap5 %}
 {% block content %}
-<div class="container" style="width:50%">
+<section class="login_bg">
+  <div class="container d-flex justify-content-center">
+    <div class="box_bg boxbgwid p-5">
 
-  <h1>회원가입</h1>
-  
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <input class="btn btn-outline-primary" type="submit" value="Submit">
-  </form>
-</div>
+    <h1 class="text-center mb-5">회원 정보 수정</h1>
+    
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input class="btn account_btn mt-5" type="submit" value="Submit">
+    </form>
+    </div>
+  </div>
+</section>
   {% endblock content %}
