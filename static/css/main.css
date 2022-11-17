@@ -264,7 +264,7 @@
   }
 }
 
-img{
+.slider a img{
   width: 100%;
   vertical-align: middle;
 }
@@ -273,7 +273,7 @@ img{
   width: 30px;
   height: 30px;
   font-size: 20px;
-  color: #e6e5e5;
+  color: white;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -289,21 +289,21 @@ img{
 }
 .prevbnt:hover,
 .nextbnt:hover{
-  color: #adb5bd;
+  color: white;
 }
 .lines{
   position: absolute;
   display: flex;
   bottom: 5px;
 }
-.line{
+.bnrline{
   padding: 1.5px 5px;
   margin: 0 3px;
-  background-color: #6c757d;
+  background-color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.line:hover,
+.bnrline:hover,
 .active{
   background-color: white;
 }

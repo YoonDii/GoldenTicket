@@ -282,21 +282,28 @@ input[id="menuicon_nav"]:checked + label span:nth-child(3) {
 /* Visual */
 .visual {
   width: 100%;
+  min-width: 1300px;
   height: 700px;
+  position: relative;
   overflow: hidden;
 }
 
 /* Carousel */
 .carousel {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
+  position: absolute;
+  width: 1920px;
+  top: 0;
+  left: 50%; 
+  transform: translate(-50%,0); 
 }
 
 .carousel ul {
   margin: 0;
   padding: 0;
   list-style: none;
+  width: 1920px;
+  height: 700px;
+  /* position: absolute; */
 }
 
 .slide {
@@ -345,11 +352,11 @@ input[id="menuicon_nav"]:checked + label span:nth-child(3) {
 }
 
 .carousel-button.prev {
-  left: 3rem;
+  left: 2rem;
 }
 
 .carousel-button.next {
-  right: 3rem;
+  right: 2rem;
 }
 
 
