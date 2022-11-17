@@ -91,6 +91,11 @@ form input::file-selector-button {
   max-height: 280px;
   overflow: hidden;
   position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--gray-light-color);
+}
+.review-list li:last-child {
+  border-bottom: none;
 }
 .review-list li .ttbox {
   width: 100%;
