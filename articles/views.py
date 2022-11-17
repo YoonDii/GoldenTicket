@@ -15,6 +15,7 @@ import datetime
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 def main(request):
     today = datetime.date.today()
 
@@ -145,7 +146,10 @@ def detail(request, performance_pk):
 
     if performance.review_set.all():
         tem = performance.review_set.aggregate(Avg("grade"))
-        Avg_grade = round(tem["grade__avg"], 1)
+        if tem["grade__avg"] == None:
+            Avg_grade = 0
+        else:
+            Avg_grade = round(tem["grade__avg"], 1)
     else:
         Avg_grade = 0
 
