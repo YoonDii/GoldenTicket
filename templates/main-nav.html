@@ -14,101 +14,68 @@
       <div class="main-nav__wrap">
         <div class="m-nav__logo">
           <input type="checkbox" id="menuicon">
-            <label for="menuicon">
-              <span></span>
-              <span></span>
-              <span></span>
-            </label>
+          <label for="menuicon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+          <!-- Side Bar -->
           <div class="sidebar">
-            <div class="ham_" style="color: #fff opacity:1"></div>
+            <div class="ham_" style="color: #fff"></div>
             <div class="sidebar-menu">
               <ul class="pf-gnb-my-5 mx-4">
-                <li class="dropdown mb-3 ">
-                  <a href="{% url 'articles:index' %}?genre=연극">
-                    <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">연극</span>
+                <li class="dropdown w-100">
+                  <a href="{% url 'articles:index' %}?genre=연극" class="hover-underline-animation w-100">
+                    <span class="m-nav__nav__item" style="color: #fff;">연극</span>
                   </a>
-                  <ul>
-                    <li><a href="" style="color: #fff">신상품순</a></li>
-                    <li><a href="" style="color: #fff">종료임박순</a></li>
-                  </ul>
-                </li>
-                <li class="mb-3">
-                  <a href="{% url 'articles:index' %}?genre=클래식" id="hamm">
-                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">클래식</span>
-                  </a>
-                  <ul id="div1">
-                    <li><a href="" style="color: #fff">신상품순</a></li>
-                    <li><a href="" style="color: #fff">종료임박순</a></li>
-                  </ul>
-                </li>
-                <li class="mb-3">
-                  <a href="{% url 'articles:index' %}?genre=무용">
-                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">무용</span>
-                  </a>
-                  <ul>
-                    <li><a href="" style="color: #fff">신상품순</a></li>
-                    <li><a href="" style="color: #fff">종료임박순</a></li>
-                  </ul>
-                </li>
-                <li class="mb-3">
-                  <a href="{% url 'articles:index' %}?genre=뮤지컬">
-                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">뮤지컬</span>
-                  </a>
-                  <ul>
-                    <li><a href="" style="color: #fff">신상품순</a></li>
-                    <li><a href="" style="color: #fff">종료임박순</a></li>
-                  </ul>
-                </li>
-                <li class="mb-3">
-                  <a href="{% url 'articles:index' %}?genre=국악">
-                      <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">국악</span>
-                  </a>
-                  <ul>
-                    <li><a href="" style="color: #fff">신상품순</a></li>
-                    <li><a href="" style="color: #fff">종료임박순</a></li>
+                  <ul class="hide-box">
+                    <li><a href="#" style="color: #fff">신상품순</a></li>
+                    <li><a href="#" style="color: #fff">종료임박순</a></li>
                   </ul>
                 </li>
               </ul>
+            </div>
+            <h1>
+              <a href="{% url 'articles:main' %}">
+                <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
+              </a>
+            </h1>
           </div>
           <h1>
             <a href="{% url 'articles:main' %}">
               <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
             </a>
           </h1>
-        </div>
-        <h1>
-          <a href="{% url 'articles:main' %}">
-            <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
-          </a>
-        </h1>
-        <ul class="m-nav__nav">
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=연극"><p style="color:#fff">연극</p></a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=클래식"><p style="color:#fff">클래식</p></a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용"><p style="color:#fff">무용</p></a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬"><p style="color:#fff">뮤지컬</p></a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악"><p style="color:#fff">국악</p></a></li>
-        </ul>
-        <div class="m-nav__search">
-          <form id="search-form" action="{% url 'articles:search' %}" role='search'>
-            <input type="text" id="search-type" name='search' style="color: var(--white-color);">
-            <a href="{% url 'articles:search' %}" role='search' onclick="#">
-              <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-            </a>
-          </form>
-          <!-- User Profile -->
-          <div class="ms-3">
-            {% if request.user.is_authenticated %}
-              <a href="{% url 'accounts:profile' request.user.pk %}">
-                <img src="{{ request.user.profile_image }}" alt="profile_image" width="45" height="45" style="border-radius: 50%;">
+          <ul class="m-nav__nav">
+            <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=연극"><p style="color:#fff">연극</p></a></li>
+            <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=클래식"><p style="color:#fff">클래식</p></a></li>
+            <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용"><p style="color:#fff">무용</p></a></li>
+            <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬"><p style="color:#fff">뮤지컬</p></a></li>
+            <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악"><p style="color:#fff">국악</p></a></li>
+          </ul>
+          <div class="m-nav__search">
+            <form id="search-form" action="{% url 'articles:search' %}" role='search'>
+              <input type="text" id="search-type" name='search' style="color: var(--white-color);">
+              <a href="{% url 'articles:search' %}" role='search' onclick="#">
+                <i class="fa-solid fa-magnifying-glass fa-xl"></i>
               </a>
-              {% else %}
-              <a href="{% url 'accounts:login' %}">
-                <i class="fa-regular fa-user fa-xl"></i>
-              </a>
-            {% endif %}
+            </form>
+            <!-- User Profile -->
+            <div class="ms-3">
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'accounts:profile' request.user.pk %}">
+                  <img src="{{ request.user.profile_image }}" alt="profile_image" width="45" height="45" style="border-radius: 50%;">
+                </a>
+                {% else %}
+                <a href="{% url 'accounts:login' %}">
+                  <i class="fa-regular fa-user fa-xl"></i>
+                </a>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
+      <!-- Main-Nav__Wrap-End -->
     </div>
   </nav>
 

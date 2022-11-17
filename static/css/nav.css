@@ -60,7 +60,7 @@ input[id="menuicon"]:checked + label span:nth-child(3) {
    transform: translateY(50%) rotate(-45deg);
 }
 div[class=sidebar] {
-   width: 180px;
+   width: 260px;
    height: 100%;
    position: fixed;
    opacity: 0.9;
@@ -102,8 +102,8 @@ input[id="menuicon_nav"] {
 }
 input[id="menuicon_nav"] + label {
    display:block;
-   width: 45px;
-   height: 30px;
+   width: 25px;
+   height: 25px;
    position: relative;
    cursor: pointer;
 }
@@ -272,4 +272,58 @@ input[id="menuicon_nav"]:checked + label + div {
    border-left-width:0;
    border-right-width:0;
    border-top-width:0;
- }
+}
+
+
+/* Nav Drop-down */
+.pf-gnb-my-5 {
+   padding: 0 15px;
+}
+.dropdown {
+   color: var(--white-color);
+   margin-bottom: 25px;
+}
+.dd-title {
+   font-size: 24px;
+}
+.hide-box {
+   display: block;
+}
+
+.hide-box p {
+   color: var(--gray-color);
+   opacity: .5;
+   font-size: 16px;
+   margin: 5px 0;
+}
+
+.hide-box p:hover {
+   opacity: 1;
+   color: #fff;
+}
+
+.dropdown:hover > a {
+   display: inline-block;
+   position: relative;
+   color: var(--main-color);
+}
+.dropdown:hover > a:after {
+   content: '';
+   position: absolute;
+   width: 100%;
+   transform: scaleX(0);
+   height: 3px;
+   bottom: 0;
+   left: 0;
+   background-color: var(--main-color);
+   transform-origin: bottom right;
+   transition: transform 1s ease-out;
+}
+.dropdown:hover > a:hover:after {
+   transform: scaleX(1);
+   transform-origin: bottom left;
+}
+
+.dropdown:hover .hide-box {
+   display: block;
+}
