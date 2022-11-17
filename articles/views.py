@@ -6,13 +6,9 @@ from reviews.models import ReviewPhoto, Review, Comment
 from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
 from django.db.models import Avg, Count
-
 from django.contrib import messages
-
 import datetime
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -141,6 +137,9 @@ def detail(request, performance_pk):
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
     reviews = Review.objects.order_by("-pk")
+    # -pk 순으로 출력하기 위해 따로 comments 만들어서 넘겨줌
+    comments = Comment.objects.filter(review__playId=performance).order_by("-pk")
+    print(comments)
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
 
@@ -186,6 +185,7 @@ def detail(request, performance_pk):
         "reviewPhoto_form": reviewPhoto_form,
         "comment_form": comment_form,
         "Avg_grade": Avg_grade,
+        "comments": comments,
     }
     return render(request, "articles/detail.html", context)
 
