@@ -75,6 +75,9 @@ def update(request, performance_pk, review_pk):
     review = Review.objects.get(pk=review_pk)
     photos = ReviewPhoto.objects.filter(review=review)
 
+    print(request.POST.get("grade"))
+    print(review)
+
     if request.method == "POST":
         review_form = ReviewForm(request.POST, instance=review)
         reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
