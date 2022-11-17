@@ -42,9 +42,10 @@
     <hr class="gray">
     <div class="container p-3" >
 
-      <div class="footer-txt d-flex">
+      <div class="footer-txt d-flex justify-content-around">
         <a href='{% url 'articles:main' %}' class="d-flex align-items-center" >
-          <img src="{% static 'img/golden_ticket.png' %}" alt='logo' class="flogo" ></a>
+          <img src="{% static 'img/golden_ticket.png' %}" alt='logo' class="flogo" >
+        </a>
           <div class="footxt d-flex flex-column justify-content-center">
             <p>GoldenTicket</p>
               <p class="github">
@@ -55,8 +56,24 @@
                 <a href="https://github.com/Bonbon315">&nbsp조본희 |</a> 
                 <a href="https://github.com/YoonDii">&nbsp김윤지 |</a>  
                 <a href="https://github.com/rhoeunbin">&nbsp노은빈</a>
-                </div></p>
+                </div>
+              </p>
             <p style="font-size: 14px;">Copyright © GoldenTicket Corp. All Rights Reserved.</p>
+          </div>
+          <div class=" d-flex flex-column justify-content-center">
+            <h1 class="sf-number">2022-1122</h1>
+            <table class="sf-walking"> 
+              <tr>
+                <th>기 간</th>
+                <td>11:09 ~ 11:21</td>
+                <td class="gray">(공휴일 휴무)</td> 
+              </tr>
+              <tr>
+                <th>발 표</th>
+                <td>11:22 ~ 11:00</td>
+              </tr>
+            </table>
+          </div>
       </div>
     </div>
   </footer>
