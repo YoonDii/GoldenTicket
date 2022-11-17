@@ -13,75 +13,78 @@
     <div class="container">
       <div class="main-nav__wrap">
         <div class="m-nav__logo">
-          <input type="checkbox" id="menuicon_nav">
-            <label for="menuicon_nav">
-              <span></span>
-              <span></span>
-              <span></span>
-            </label> 
-          <!-- Side Bar -->
-          <div class="sidebar">
-            <div class="ham_" style="color: #fff"></div>
-            <div class="sidebar-menu">
-              <ul class="pf-gnb-my-5 mx-4">
-                <li class="dropdown w-100">
-                  <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                    <span class="dd-title" style="color: #fff;">연극</span>
-                  </a>
-                  <ul class="hide-box">
-                    <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                    <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                  </ul>
-                </li>
-                <li class="dropdown w-100">
-                  <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                    <span class="dd-title" style="color: #fff;">클래식</span>
-                  </a>
-                  <ul class="hide-box">
-                    <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                    <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                  </ul>
-                </li>
-                <li class="dropdown w-100">
-                  <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                    <span class="dd-title" style="color: #fff;">무용</span>
-                  </a>
-                  <ul class="hide-box">
-                    <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                    <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                  </ul>
-                </li>
-                <li class="dropdown w-100">
-                  <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                    <span class="dd-title" style="color: #fff;">뮤지컬</span>
-                  </a>
-                  <ul class="hide-box">
-                    <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                    <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                  </ul>
-                </li>
-                <li class="dropdown w-100">
-                  <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
-                    <span class="dd-title" style="color: #fff;">국악</span>
-                  </a>
-                  <ul class="hide-box">
-                    <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
-                    <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
-                  </ul>
-                </li>
-              </ul>
+          <div class="logo-wrap d-flex align-items-center">
+            <input type="checkbox" id="menuicon_nav">
+              <label for="menuicon_nav">
+                <span></span>
+                <span></span>
+                <span></span>
+              </label> 
+            <!-- Side Bar -->
+            <div class="sidebar">
+              <div class="ham_" style="color: #000"></div>
+              <div class="sidebar-menu">
+                <ul class="pf-gnb-my-5 mx-4" style="text-align: center;">
+                  <li class="dropdown w-100">
+                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
+                      <span class="dd-title" style="color: #fff;">연극</span>
+                    </a>
+                    <ul class="hide-box">
+                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown w-100">
+                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
+                      <span class="dd-title" style="color: #fff;">클래식</span>
+                    </a>
+                    <ul class="hide-box">
+                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown w-100">
+                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
+                      <span class="dd-title" style="color: #fff;">무용</span>
+                    </a>
+                    <ul class="hide-box">
+                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown w-100">
+                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
+                      <span class="dd-title" style="color: #fff;">뮤지컬</span>
+                    </a>
+                    <ul class="hide-box">
+                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
+                    </ul>
+                  </li>
+                  <li class="dropdown w-100">
+                    <a href="{% url 'articles:index' %}?genre=연극" class="w-100">
+                      <span class="dd-title" style="color: #fff;">국악</span>
+                    </a>
+                    <ul class="hide-box">
+                      <li><a href="#" style="color: #fff"><p>- 신상품순</p></a></li>
+                      <li><a href="#" style="color: #fff"><p>- 종료임박순</p></a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <h1 style="text-align: center; background-color: #000; height: 100%;">
+                <a href="{% url 'articles:main' %}">
+                  <img src="{% static 'img/logogray.png' %}" alt="logo" width="160" height="90">
+                </a>
+              </h1>
             </div>
-            <h1>
-              <a href="{% url 'articles:main' %}">
-                <img src="{% static 'img/golden_ticket.png' %}" alt="logo" width="120" height="80">
-              </a>
-            </h1>
+            <!-- Side Bar-End -->
+          <h1>
+            <a href="{% url 'articles:main' %}">
+              <img src="{% static 'img/logoblack.png' %}" alt="logo" width="160" height="90">
+            </a>
+          </h1>
           </div>
-        <h1>
-          <a href="{% url 'articles:main' %}">
-            <img src="{% static 'img/logoblack.png' %}" alt="logo" width="160" height="90">
-          </a>
-        </h1>
         <ul class="m-nav__nav">
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=연극">연극</a></li>
           <li class="nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=클래식">클래식</a></li>
