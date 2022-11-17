@@ -77,7 +77,7 @@ function plusSlide(n){
   show(index);
 }
 
-function curentSlide(n){
+function currentSlide(n){
   index=n;
   show(index);
 }
