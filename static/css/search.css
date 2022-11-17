@@ -33,6 +33,16 @@
   color: var(--main-color);
 }
 
+#search-type-01 {
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--dark-color);
+  width: 240px;
+  border-left-width:0;
+  border-right-width:0;
+  border-top-width:0;
+}
+
 #search-type-02 {
   border: none;
   background-color: transparent;
