@@ -7,6 +7,7 @@
 @import './nav.css';
 @import './review.css';
 @import './search.css';
+@import './ranking.css';
 
 /* Root */
 :root {

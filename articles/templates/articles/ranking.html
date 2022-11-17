@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'nav.html' %}
+
+<div class="container">
+  <h1 class="my-5 text-center fw-bold">랭킹</h1>
+  <!-- Top Rank -->
+  <div class="top-rank">
+    <div class="top-today">
+      <i class="fa-regular fa-calendar-check fa-lg"></i>
+      {{ today|date:'Y.m.d' }}
+    </div>
+    <div class="top__list">
+      {% for best_item in play_list_best %}
+      <div class="top__item">
+        <div class="top-number">
+          {{ forloop.counter }}
+        </div>
+        <div class="top__item__image">
+          <img src="{{ best_item.poster }}" alt="">
+        </div>
+        <div class="top__item__title">
+          {{ best_item.playname }}
+        </div>
+        <div class="top__item__info">
+          <div class="top__item__location">
+            <p>{{ best_item.playstdate|date:'Y.m.d' }}~{{ best_item.playenddate|date:'Y.m.d' }}</p>
+            <p>{{ best_item.locationname }}</p>
+          </div>
+          <div class="top__item__like-count">
+            <i class="fa-solid fa-heart me-1"></i>{{ best_item.like_users.count }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Top Rank List -->
+  <div class="tr__list">
+    
+    {% for play in play_list %}
+    <!-- Top Rank Item -->
+    <div class="tr__item">
+      <!-- Item Left -->
+      <div class="tr__item__left">
+        <div class="tr__item__img-wrap">
+          <div class="tr__item__num">
+            <p>{{ forloop.counter|add:'3' }}위</p>
+          </div>
+          <div class="tr__item__image">
+            <img src="{{ play.poster }}" alt="">
+          </div>
+        </div>
+        <div class="tr__item__title">
+          <p>{{ play.playname }}</p>
+          <p>
+            {% if play.like_users.first %}
+            <i class="fa-solid fa-heart"></i>
+            {{ play.like_users.count }}
+            {% endif %}
+          </p>
+        </div>
+      </div>
+      <!-- Item Right -->
+      <div class="tr__item__right">
+        <p>{{ play.playstdate|date:'Y.m.d' }}~{{ play.playenddate|date:'Y.m.d' }}</p>
+        <p>{{ play.locationname }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
+  
