@@ -8,14 +8,14 @@
   <div><p class="li-sec-tit">
 		<span class="li-sec-tit1">{{ genrename }}</span>
   <div class="li-sec-tag">
-    <span class="li-sec-tag-01"><a style="cursor:pointer;" href="#new" class="tag-btn on">신상품순</a></span>
-    <span class="li-sec-tag-01"><a style="cursor:pointer;" href="#end" class="tag-btn">종료임박순</a></span>
+    <span class="li-sec-tag-01 on" id="tag-new"><a style="cursor:pointer;" href="#new" class="tag-btn">신상품순</a></span>
+    <span class="li-sec-tag-01" id="tag-old"><a style="cursor:pointer;" href="#end" class="tag-btn">종료임박순</a></span>
   </div>
   <p class="li-sec-result">
     현재 예매 가능한 공연은 총 <span>{{ totalnum }}개</span> 입니다.
   </p>
-  <div class="infinite" id="infinite">
-    <div class="ms-list-imgs ms-list-imgs-01 inflist" id="new">
+  <div class="infinite" id="new">
+    <div class="ms-list-imgs ms-list-imgs-01 inflist">
       {% for play in news %}
       <a style="cursor:pointer;" href="{% url 'articles:detail' play.playid %}" onclick="" title="{{play.playname}}">
         <div class="list-bigger-wrap">
@@ -58,25 +58,25 @@
   </div>
   
   {% comment %} 종료임박순 {% endcomment %}
-  {% comment %} <div class="ms-list-imgs" id="end">
-    {% for play in plist %}
-    <a style="cursor:pointer;" onclick="" href="{% url 'articles:detail' play.playid %}" title="{{play.playname}}">
-      <div class="list-bigger-wrap">
-        <div class="poster">
-          <img class="lazyload" alt="" src="{{play.poster}}" >
+  <div class="infinite infinite-old" id="end">
+    <div class="ms-list-imgs inflist-old">
+      {% for play in olds %}
+      <a style="cursor:pointer;" onclick="" href="{% url 'articles:detail' play.playid %}" title="{{play.playname}}">
+        <div class="list-bigger-wrap">
+          <div class="poster">
+            <img class="lazyload" alt="" src="{{play.poster}}" >
+          </div>
+          <div class="list-bigger-txt">
+            <p class="list-b-tit1 v2 v2">{{play.playname}}</p>
+            <p class="list-b-tit2 v2 v2">{{play.playstdate|date:"Y.m.d"}} ~ {{play.playenddate|date:"Y.m.d"}}</p>
+            <p class="list-b-tit2 v2 v2">{{play.locationname}}</p>
+          </div>
         </div>
-        <div class="list-bigger-txt">
-          <p class="list-b-tit1 v2 v2">{{play.playname}}</p>
-          <p class="list-b-tit2 v2 v2">{{play.playstdate|date:"Y.m.d"}} ~ {{play.playenddate|date:"Y.m.d"}}</p>
-          <p class="list-b-tit2 v2 v2">{{play.locationname}}</p>
-        </div>
-      </div>
-    </a>
-    {% endfor %}
+      </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
-<input id="pCurPage" type="hidden" value="1" />
-<input id="pPageSize" type="hidden" value="20" /> {% endcomment %}
 
 
 
@@ -84,11 +84,10 @@
 
 
 {% block js %}
-  {% comment %} <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="{% static 'js/list.js' %}"></script>  {% endcomment %}
-  {% comment %} <script>
+  {% comment %} <script src="{% static 'js/list.js' %}"></script> {% endcomment %}
+  <script>
     const tagList = document.querySelectorAll(".li-sec-tag-01");
-    const playList = document.querySelectorAll(".ms-list-imgs");
+    const playList = document.querySelectorAll(".infinite");
     let activeList = ''; // 활성화된 리스트를 담을 변수
   
     for (let i = 0; i < tagList.length; i++) {
@@ -103,7 +102,7 @@
         document.querySelector(activeList).style.display = 'block';
       });
     }
-  </script> {% endcomment %}
+  </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="{% static 'js/infinite.js' %}"></script>
 {% endblock js %}  

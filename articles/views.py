@@ -100,9 +100,18 @@ def index(request):
         except EmptyPage:
             news = playlistpage.page(playlistpage.num_pages)
 
+        plistpage = Paginator(plist, 40)
+        try:
+            olds = plistpage.page(page1)
+        except PageNotAnInteger:
+            olds = plistpage.page(1)
+        except EmptyPage:
+            olds = plistpage.page(plistpage.num_pages)
+
         context = {
             "genrename": genre,
             "news": news,
+            "olds": olds,
             "totalnum": totalnum,
             "totalpagenum": totalpagenum,
         }
