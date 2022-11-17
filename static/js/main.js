@@ -35,7 +35,7 @@ for (let i = 0; i < tagList.length; i++) {
     activeList = this.getAttribute('href');
     document.querySelector(activeList).style.display = 'flex';
   });
-
+}
 // slide banner
 var index=0;
 var i = 0;

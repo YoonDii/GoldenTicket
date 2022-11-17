@@ -42,6 +42,31 @@
   display: none;
 }
 
+/* Update Form */
+#review-update {
+  display: flex;
+  flex-direction: column;
+}
+
+#review-update label {
+  margin: 10px 0;
+}
+
+#review-update label:first-child {
+  margin-top: 0;
+}
+
+#images {
+  height: 100px;
+  width: 100px;
+  border: 1px dashed #adb5bd;
+  color: #adb5bd;
+}
+
+form input::file-selector-button {
+  display: none;
+}
+
 /* review-list */
 .review-area-create {
   padding: 14px 0 14px 48px;

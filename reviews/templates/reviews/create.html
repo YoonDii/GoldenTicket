@@ -34,6 +34,75 @@
       </div>
     </div>
   </div>
+
+  <!-- Review update -->
+  <!-- Button trigger modal -->
+  <a data-bs-toggle="modal" href="#update-form" style="border: 0; background: none;">
+    리뷰수정
+  </a>
+
+  <!-- Review update Modal -->
+  <div class="modal fade" id="update-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            관람 후기 수정
+            <span class="ms-2" style="color: var(--gray-dark-color); font-size: 16px;">
+              {{ performance.playname }}
+            </span>
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Review update Form -->
+          <form id="review-update" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form review_form %}
+          {% bootstrap_form reviewPhoto_form %}
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="submit" class="rc-btn" data-bs-dismiss="modal">취소</button>
+          <button type="submit" class="rc-btn" onclick="document.forms['review-update'].submit();">수정</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <!-- 폼 비교중 -->
+  <hr>
+  <!-- Review update Form -->
+  <form id="review-update" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form review_form %}
+    {% bootstrap_form reviewPhoto_form %}
+  </form>
+  <hr>
+
+  <!-- Form Custom -->
+  <form action="" id="update-custom">
+    <!-- textarea -->
+    <label for="textarea">관람후기</label>
+    <textarea name="" id="textarea" class="form-control" cols="30" rows="10" placeholder="후기를 작성해주세요."></textarea>
+    <!-- select -->
+    <label for="select">별점</label>
+    <select name="order" form="update-custom" id="select" class="form-select">
+      <option value="">---------</option>
+      <option value="">⭐️</option>
+      <option value="">⭐️⭐️</option>
+      <option value="">⭐️⭐️⭐️</option>
+      <option value="">⭐️⭐️⭐️⭐️</option>
+      <option value="">⭐️⭐️⭐️⭐️⭐️</option>
+    </select>
+    <!-- image file -->
+    <label for="images">다중 클릭하여 사진을 여러장 올릴 수 있어요!</label>
+    <input class="form-control" type="file" src="#" alt="제출버튼" multiple id="images">
+  </form>
+
+
 </div>
 
 {% include 'sub-footer.html' %}
