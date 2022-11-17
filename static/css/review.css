@@ -41,3 +41,92 @@
 #image_field::file-selector-button {
   display: none;
 }
+
+/* review-list */
+.review-area-create {
+  padding: 14px 0 14px 48px;
+   background: url(http://tkfile.yes24.com/imgNew/common/rn-ico-dot.png)no-repeat left 14px;
+   position: relative;
+}
+.review-area-create p {
+  font-size: 14px;
+  line-height: 20px;
+  color: #ed4037;
+}
+.review-area-create a {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 17px;
+}
+.review-list {
+  margin: auto;
+}
+.review-list li {
+  max-height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+.review-list li .ttbox {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  margin-bottom: 21px;
+  margin-top: 5px;
+}
+.review-list li .ttbox .tt1 {
+  top: 20px;
+  width: 43px;
+  height: 17px;
+  line-height: 19px;
+  padding: 2px;
+  border: 1px solid #ec7d2c;
+  border-radius: 30px;
+  color: #ec7d2c;
+  font-size: 12px;
+  text-align: center;
+  margin-right: 10px;
+}
+.review-list li .ttbox .tt2 {
+  top: 19px;
+  height: 20px;
+  line-height: 20px;
+  color: #333;
+  font-size: 15px;
+}
+.review-list li .ttbox .tt3 {
+  top: 19px;
+  height: 20px;
+  line-height: 20px;
+  color: #333;
+  font-size: 13px;
+  padding-left: 18px;
+  margin-right: 17px;
+  letter-spacing: 0.05em;
+}
+.review-list li .ttbox .tt4 {
+  top: 20px;
+  margin-right: 15px;
+}
+.review-list li .ttbox .tt4 img{
+  display: inline-block;
+  margin: 0px;
+}
+.review-list li .reviewbox {
+  display: flex;
+}
+.review-list li .reviewbox .textbox {
+  position: absolute;
+  height:80px;
+  width: 1086px;
+  font-size: 15px;
+  line-height: 22px;
+  margin-left:110px;
+  color: #666;
+  background-color: #ffffff;
+}
+.review-list li .reviewbox img{
+  width: 100px;
+  height: 80px;
+  margin-right:20px;
+}
