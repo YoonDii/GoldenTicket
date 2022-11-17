@@ -483,31 +483,31 @@
             <span class="tt1">작성자</span>
             <span class="tt2"><a href="{% url 'accounts:profile' review.user.pk %}">{{review.user}}</a></span>
             <span class="tt3">{{review.created_at|date:'Y-m-d'}}</span>
-            <span class="tt4">
+            <span class="tt4" style="color: var(--main-color); font-size: 12px;">
               {% if review.grade == "5" %}
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
               {% endif %}
               {% if review.grade == "4" %}
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
               {% endif %}
               {% if review.grade == "3" %}
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
               {% endif %}
               {% if review.grade == "2" %}
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
               {% endif %}
               {% if review.grade == "1" %}
-              <img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+              <i class="fa-solid fa-star"></i>
               {% endif %}
             </span>
           </div>
@@ -583,10 +583,9 @@
                         <div class="d-flex align-items-center" style="font-size: 14px;">
                           <!-- Review update -->
                           <!-- Button trigger modal -->
-                          <a data-bs-toggle="modal" href="#review_updateModal" style="border: 0; background: none;">
+                          <a data-bs-toggle="modal" href="#update-{{ review.pk }}" style="border: 0; background: none;">
                             <i class="fa-solid fa-pen"></i>
                           </a>
-
                           <!-- Review delete -->
                           <form action="{% url 'reviews:delete' performance.playid review.pk %}" method="POST">
                             {% csrf_token %}
@@ -653,38 +652,55 @@
                   <!-- Modal Content-End -->
                 </div>
               </div>
+              <!-- Review update Modal -->
+              <div class="modal fade" id="update-{{ review.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        관람 후기 수정
+                        <span class="ms-2" style="color: var(--gray-dark-color); font-size: 16px;">
+                          {{ performance.playname }}
+                        </span>
+                      </h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- Review update Form -->
+                      <!-- Form Custom -->
+                      <form id="review-update" action="{% url 'reviews:update' performance.playid review.pk %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- textarea -->
+                        <label for="id_textarea">관람후기</label>
+                        <textarea name="content" id="id_textarea" class="form-control" cols="30" rows="10">{{ review.content }}</textarea>
+                        <!-- select -->
+                        <label for="id_grade">별점</label>
+                        <select name="grade" form="review-update" id="id_grade" class="form-select">
+                          <option value="" disabled selected>
+                            별점을 선택해주세요
+                          </option>
+                          <option value="1">⭐️</option>
+                          <option value="2">⭐️⭐️</option>
+                          <option value="3">⭐️⭐️⭐️</option>
+                          <option value="4">⭐️⭐️⭐️⭐️</option>
+                          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+                        </select>
+                        <!-- image file -->
+                        <label for="images">다중 클릭하여 사진을 여러장 올릴 수 있어요!</label>
+                        <input type="file" name="image" id="images" class="form-control" accept="image/*" multiple>
+                      </form>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                      <button type="submit" class="rc-btn" data-bs-dismiss="modal">취소</button>
+                      <button type="submit" class="rc-btn" onclick="document.forms['review-update'].submit();">수정</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </li>
-        
-        <!-- Review update Modal -->
-        <div class="modal fade" id="review_updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                  관람 후기 수정
-                  <span class="ms-2" style="color: var(--gray-dark-color); font-size: 16px;">
-                    {{ performance.playname }}
-                  </span>
-                </h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <!-- Review-Form -->
-                <form id="review-update" action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% bootstrap_form review_form %}
-                {% bootstrap_form reviewPhoto_form %}
-                </form>
-              </div>
-              <div class="modal-footer justify-content-center">
-                <button type="submit" class="rc-btn" data-bs-dismiss="modal">취소</button>
-                <button type="submit" class="rc-btn" onclick="document.forms['review-update'].submit();">수정</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <hr>
         {% endif %}
       {% endfor %}
       {% else %}
