@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from articles.models import PlayDetail
 
-# Create your models here.
+
 class Review(models.Model):
     title = models.CharField(max_length=20)
     content = models.TextField()
@@ -13,7 +13,7 @@ class Review(models.Model):
         ("4", "⭐⭐⭐⭐"),
         ("5", "⭐⭐⭐⭐⭐"),
     ]
-    grade = models.CharField(max_length=20, choices=grades)
+    grade = models.CharField(max_length=20, choices=grades, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
