@@ -7,12 +7,8 @@ from accounts.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
-from datetime import datetime, timedelta
-
-from django.utils.dateformat import DateFormat
 from django.db.models import Avg, Count
 
-# from django.utils import timezone
 from django.contrib import messages
 
 import datetime
