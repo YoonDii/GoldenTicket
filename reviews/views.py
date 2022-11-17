@@ -142,7 +142,7 @@ def comment_create(request, pk):
         comment.review = review
         comment.user = request.user
         comment.save()
-
+    print("실행되나?")
     user = request.user.pk
     temp = Comment.objects.filter(review_id=pk).order_by("-pk")
     comment_data = []
@@ -162,6 +162,7 @@ def comment_create(request, pk):
         "review_pk": review.pk,
         "user": user,
     }
+    print(context)
     return JsonResponse(context)
 
 
