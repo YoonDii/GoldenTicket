@@ -148,12 +148,24 @@
             {% else %}
             {{performance.playcast}}
             {% endif %}</dd>
+          <dt>티켓 가격</dt>
+          <dd>{% if performance.ticketprice == " " %}
+            -
+            {% else %}
+            {{performance.ticketprice}}
+            {% endif %}</dd>
           <dt>공연상태</dt>
           <dd>{% if performance.playstate == " " %}
             -
             {% else %}
             {{performance.playstate}}
             {% endif %}</dd>
+          <dt>공연시간</dt>
+            <dd>{% if performance.guidance == " " %}
+              -
+              {% else %}
+              {{performance.guidance}}
+              {% endif %}</dd>
         </dl>
       </div>
     </div>
@@ -172,17 +184,20 @@
 
 
 <!-- 상세정보 이미지 -->
-{% if performance.image1 %}
 <div class="perf-content" id="info">
+  
   <div class="perf-detailinfo">
     <p class="detail-title">공연정보</p>
+    <p class="detail-info-text">{{performance.summary|linebreaksbr}}</p>
+    {% if performance.image1 %}
     <img src="{{performance.image1}}" alt="">
     <img src="{{performance.image2}}" alt="">
     <img src="{{performance.image3}}" alt="">
     <img src="{{performance.image4}}" alt="">
+    {% endif %}
   </div>
 </div>
-{% endif %}
+
   
 
 <!--지도-->

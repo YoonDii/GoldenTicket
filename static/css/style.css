@@ -242,6 +242,8 @@ option {font-size: 16px;}
 
 .perf-detailinfo img{text-align: center; margin-bottom: 5px;}
 
+.perf-detailinfo .detail-info-text{font-size: 13px; color: #333; padding-bottom: 51px; font-weight:400; letter-spacing: -0.07em;}
+
 .perf-content-2 {width: 1200px; margin: 0 auto; position: relative; overflow: hidden;}
 .perf-content-2 .kakaomap{width: 1200px; height: 700px; overflow: hidden; margin: 0 auto; background: #f6f6f6; position: relative;}
 
