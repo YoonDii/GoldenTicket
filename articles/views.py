@@ -242,6 +242,25 @@ def search(request):
     return render(request, "articles/search.html", context)
 
 
+def ranking(request):
+    today = datetime.date.today()
+    play_list = (
+        PlayDetail.objects.all()
+        .annotate(hot=Count("like_users"))
+        .exclude(playenddate__lte=today)
+        .order_by("-hot")
+    )
+    return render(
+        request,
+        "articles/ranking.html",
+        {
+            "play_list_best": play_list[:3],
+            "play_list": play_list[3:50],
+            "today": today,
+        },
+    )
+
+
 # def index2(request, genre):
 
 #     playlist = PlayDetail.objects.filter(genrename=genre).order_by("-playstdate")
