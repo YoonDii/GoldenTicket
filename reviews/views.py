@@ -70,28 +70,20 @@ def detail(request, pk):
 
 
 @login_required
-def update(request, pk):
-    # 작성자가 아닐 경우 로직 필요
-    play = PlayDetail.objects.get(pk=1)
-    review = Review.objects.get(pk=pk)
+def update(request, performance_pk, review_pk):
+    play = PlayDetail.objects.get(playid=performance_pk)
+    review = Review.objects.get(pk=review_pk)
     photos = ReviewPhoto.objects.filter(review=review)
-
-    print(review)
-    print(photos)
 
     if request.method == "POST":
         review_form = ReviewForm(request.POST, instance=review)
         reviewPhoto_form = ReviewPhotoForm(request.POST, request.FILES)
-        # 추후 pk 부분 수정해야 함
-        # playId = PlayDetail.objects.get(pk=1)
         images = request.FILES.getlist("image")
         for photo in photos:
             if photo.image:
                 photo.delete()
         if review_form.is_valid():
             review = review_form.save(commit=False)
-            # review.user = request.user
-            # review.playId = playId
             if len(images):
                 for image in images:
                     image_instance = ReviewPhoto(review=review, image=image)
@@ -99,9 +91,8 @@ def update(request, pk):
                     image_instance.save()
             else:
                 review.save()
-            # return redirect("articles:concert")
             review.save()
-            return redirect("reviews:detail", pk)
+            return redirect("articles:detail", performance_pk)
     else:
         review_form = ReviewForm(instance=review)
     if photos:

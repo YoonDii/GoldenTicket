@@ -583,7 +583,7 @@
                         <div class="d-flex align-items-center" style="font-size: 14px;">
                           <!-- Review update -->
                           <!-- Button trigger modal -->
-                          <a data-bs-toggle="modal" href="#update-form" style="border: 0; background: none;">
+                          <a data-bs-toggle="modal" href="#update-{{ review.pk }}" style="border: 0; background: none;">
                             <i class="fa-solid fa-pen"></i>
                           </a>
                           <!-- Review delete -->
@@ -653,7 +653,7 @@
                 </div>
               </div>
               <!-- Review update Modal -->
-              <div class="modal fade" id="update-form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="update-{{ review.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -667,10 +667,27 @@
                     </div>
                     <div class="modal-body">
                       <!-- Review update Form -->
-                      <form id="review-update" action="" method="POST" enctype="multipart/form-data">
-                      {% csrf_token %}
-                      {% bootstrap_form review_form %}
-                      {% bootstrap_form reviewPhoto_form %}
+                      <!-- Form Custom -->
+                      <form id="review-update" action="{% url 'reviews:update' performance.playid review.pk %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- textarea -->
+                        <label for="id_textarea">관람후기</label>
+                        <textarea name="content" id="id_textarea" class="form-control" cols="30" rows="10">{{ review.content }}</textarea>
+                        <!-- select -->
+                        <label for="id_grade">별점</label>
+                        <select name="grade" form="review-update" id="id_grade" class="form-select">
+                          <option value="" disabled selected>
+                            별점을 선택해주세요
+                          </option>
+                          <option value="1">⭐️</option>
+                          <option value="2">⭐️⭐️</option>
+                          <option value="3">⭐️⭐️⭐️</option>
+                          <option value="4">⭐️⭐️⭐️⭐️</option>
+                          <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+                        </select>
+                        <!-- image file -->
+                        <label for="images">다중 클릭하여 사진을 여러장 올릴 수 있어요!</label>
+                        <input type="file" name="image" id="images" class="form-control" accept="image/*" multiple>
                       </form>
                     </div>
                     <div class="modal-footer justify-content-center">

@@ -19,6 +19,7 @@ buttons.forEach(button => {
 })
 
 
+
 // Ranking tag
 const tagList = document.querySelectorAll(".ranking__tag__name");
 const rankList = document.querySelectorAll(".ranking__list");
@@ -35,6 +36,7 @@ for (let i = 0; i < tagList.length; i++) {
     activeList = this.getAttribute('href');
     document.querySelector(activeList).style.display = 'flex';
   });
+}
 
 // slide banner
 var index=0;

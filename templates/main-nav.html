@@ -27,7 +27,7 @@
                   <a href="{% url 'articles:index' %}?genre=연극">
                     <span class="m-nav__nav__item hover-underline-animation" style="color: #fff">연극</span>
                   </a>
-                  <ul class="dropdown-content">
+                  <ul>
                     <li><a href="" style="color: #fff">신상품순</a></li>
                     <li><a href="" style="color: #fff">종료임박순</a></li>
                   </ul>
@@ -82,11 +82,11 @@
           </a>
         </h1>
         <ul class="m-nav__nav">
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=연극">연극</a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=클래식">클래식</a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용">무용</a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬">뮤지컬</a></li>
-          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악">국악</a></li>
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=연극"><p style="color:#fff">연극</p></a></li>
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=클래식"><p style="color:#fff">클래식</p></a></li>
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=무용"><p style="color:#fff">무용</p></a></li>
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=뮤지컬"><p style="color:#fff">뮤지컬</p></a></li>
+          <li class="m-nav__nav__item hover-underline-animation"><a href="{% url 'articles:index' %}?genre=국악"><p style="color:#fff">국악</p></a></li>
         </ul>
         <div class="m-nav__search">
           <form id="search-form" action="{% url 'articles:search' %}" role='search'>
@@ -121,18 +121,43 @@
           <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202211/20221107/wel_mv_43842_2.jpg/dims/quality/70/" alt="Nature Image #1">
         </li>
         <li class="slide carousel_item">
-          <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202210/20221028/wel_mv_43889_1.jpg/dims/quality/70/" alt="Nature Image #2">
+          <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202211/20221114/wel_mv_44090.jpg/dims/quality/70//" alt="Nature Image #2">
         </li>
         <li class="slide carousel_item">
           <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202211/20221110/wel_mv_44048.jpg/dims/quality/70/" alt="Nature Image #3">
         </li>
+        <li class="slide carousel_item">
+          <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202210/20221027/wel_mv_43907.jpg/dims/quality/70/" alt="Nature Image #4">
+        </li>
+        <li class="slide carousel_item">
+          <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202211/20221103/wel_mv_43937_1.jpg/dims/quality/70/" alt="Nature Image #5">
+        </li>
+        <li class="slide carousel_item">
+          <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202211/20221116/wel_mv_btv.jpg/dims/quality/70/" alt="Nature Image #6">
+        </li>
+        <li class="slide carousel_item">
+          <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202207/20220720/wel_mv_.png/dims/quality/70/" alt="Nature Image #7">
+        </li>
+        <li class="slide carousel_item">
+          <img class="slide__image carousel_img" src="http://tkfile.yes24.com/Upload2/Display/202210/20221017/wel_mv_2022.jpg/dims/quality/70/" alt="Nature Image #8">
+        </li>
       </ul>
-      <button class="carousel-button prev" data-carousel-button="prev">
+      <button class="carousel-button prev" data-carousel-button="prev" onclick="mplusSlide(-1)">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-      <button class="carousel-button next" data-carousel-button="next">
+      <button class="carousel-button next" data-carousel-button="next" onclick="mplusSlide(1)">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
+      <div class="mlines">
+        <div class="mbnrline" onclick="mcurrentSlide(1)"></div>
+        <div class="mbnrline" onclick="mcurrentSlide(2)"></div>
+        <div class="mbnrline" onclick="mcurrentSlide(3)"></div>
+        <div class="mbnrline" onclick="mcurrentSlide(4)"></div>
+        <div class="mbnrline" onclick="mcurrentSlide(5)"></div>
+        <div class="mbnrline" onclick="mcurrentSlide(6)"></div>
+        <div class="mbnrline" onclick="mcurrentSlide(7)"></div>
+        <div class="mbnrline" onclick="mcurrentSlide(8)"></div>
+      </div> 
     </div>
   </section>
   <script>

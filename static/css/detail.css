@@ -1,0 +1,216 @@
+/* Root */
+:root {
+    /* Color */
+    --white-color: #f7f7f7;
+    --main-color: #ec7d2c;
+    --gray-color: #adb5bd;
+    --gray-light-color:#e6e5e5;
+    --gray-dark-color:#6c757d;
+    --dark-color: #3E3E3E;
+    
+    /* Font-size */
+    --xlarge-font: 36px;
+    --large-font: 24px;
+    --middle-font: 18px;
+    --small-font: 14px;
+  
+    /* Space */
+    --base-space: 8px;
+  }
+  
+  
+  /* Global */
+  *:focus { outline: 0;}
+  ul {
+    list-style: none;
+     padding-left: 0;
+     margin: 0;
+  }
+  h1, h2, h3, h4, h5, h6, p {
+     margin: 0;
+  }
+  a:link {
+     color: black;
+     text-decoration: none;
+  }
+  a:visited {
+     color: black;
+     text-decoration: none;
+  }
+  a:hover {
+     color: black;
+     text-decoration: none;
+  }
+  .main-color {
+    color: var(--main-color);
+  }
+  .gray {
+    color: var(--gray-color);
+  }
+  .emp {
+    width: 50px;
+     height: 50px;
+  }
+  .line {
+    width: 2px;
+     height: 100px;
+     background-color: var(--gray-light-color);
+     margin: 0 15px;
+  }
+
+/* 상세페이지 */
+.perf-title-wrap {
+    width: 1300px;
+     margin: 0 auto;
+     padding-top: 55px;
+     position: relative;
+  }
+  .perf-content {
+    width: 1200px;
+     margin: 0 auto;
+     position: relative;
+     overflow: hidden;
+     border-bottom: 2px solid #333;
+  }
+  .perf-content h1{
+    word-break: break-all;
+     font-size: 35px;
+     color: #333;
+     line-height: 40px;
+     font-weight: bold;
+     letter-spacing: -0.003em;
+  }
+  .perf-content .dateloc-data {
+    margin: 23px 0 21px 0;
+  }
+  .perf-content .pf-social {
+    display: block;
+     position: absolute;
+     right: 2px;
+     bottom: 8px;
+     width: 220px;
+     height: 51px;
+     font-size: 0;
+  }
+  .perf-movieinfo {
+    margin-top: 40px;
+     overflow: hidden;
+     padding-bottom: 50px;
+     position: relative;
+  }
+  .perf-movieinfo-left {
+    float: left;
+     width: 430px;
+  }
+  .perf-movieinfo-left img{
+    width: 430px;
+     height: 600px;
+     position: relative;
+  }
+  .perf-movieinfo-right {
+    float: right;
+     width: 701px;
+  }
+  .perf-movieinfo-right product-area1{
+    border-bottom: 1px solid #000;
+     position: relative;
+  }
+  .perf-movieinfo-right dl{
+    overflow: hidden;
+  }
+  .perf-movieinfo-right dt{
+    font-size: 15px;
+     color: #333;
+     font-weight: bold;
+     float: left;
+     line-height: 35px;
+  }
+  .perf-movieinfo-right dd{
+    font-size: 15px;
+     color: #333;
+     clear: right;
+     margin: 0 0 3px 86px;
+     line-height: 35px;
+     position: relative;
+  }
+  .tabbox {
+    /* border-bottom: 2px solid #333;
+     */
+    font-size: 0;
+  }
+  .tabbox a{
+    display: inline-block;
+     height: 55px;
+     line-height: 55px;
+     width: 180px;
+     border-top: 3px solid #fff;
+     text-align: center;
+  }
+  .tabbox a > span {
+    font-size: 18px;
+     color: #333;
+     letter-spacing: -0.09em;
+  }
+  .perf-detailinfo {
+    position: relative;
+     text-align: center;
+     padding: 30px;
+  }
+  .perf-detailinfo .detail-title{
+    font-size: 30px;
+     color: #333;
+     padding-bottom: 51px;
+     font-weight: bold;
+     letter-spacing: -0.07em;
+  }
+  .perf-detailinfo img{
+    text-align: center;
+     margin-bottom: 5px;
+  }
+  .perf-content-2 {
+    width: 1200px;
+     margin: 0 auto;
+     position: relative;
+     overflow: hidden;
+  }
+  .perf-content-2 .kakaomap{
+    width: 1200px;
+     height: 700px;
+     overflow: hidden;
+     margin: 0 auto;
+     background: #f6f6f6;
+     position: relative;
+  }
+  .tit-map {
+    text-align: center;
+     font-size: 30px;
+     color: #333;
+     font-weight: bold;
+     padding: 85px 0 42px 0;
+  }
+  .tit-map span {
+    background: url(http://tkfile.yes24.com/imgNew/sub/rn-1101-tit.png)no-repeat left 10px;
+     padding-left: 32px;
+     letter-spacing: -0.06em;
+  }
+  .loc-map {
+    text-align: center;
+     line-height: 20px;
+     margin: 0 auto 44px auto;
+  }
+  .loc-map span {
+    padding: 0 7px;
+     font-size: 16px;
+     color: #666;
+     letter-spacing: -0.01em;
+  }
+  .tab-area-tit {
+    margin: 60px 0;
+     height: 50px;
+     text-align: left;
+  }
+  .tab-area-tit span {
+    border-bottom: 4px solid #333;
+     font-size: 30px;
+  }
+  
