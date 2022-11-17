@@ -612,33 +612,35 @@
 
                       <!-- Comment Create Form -->
                       {% if request.user.is_authenticated %}
-                      <form id="comment-form" data-review-id="{{ review.pk }}">
+                      <form id="comment-form-{{ review.pk }}" class="comment-form" data-review-id="{{ review.pk }}">
                         {% csrf_token %}
                         {% bootstrap_form comment_form %}
                         <input type="submit" value="댓글생성" style="display: none;">
                       </form>
                       {% endif %}
                       <!-- Comment List -->
-                      <div id="comments">
+                      <div id="comments-{{review.pk}}" class="comments">
                         <p class="fw-bold">댓글 목록</p>          
                         <hr>
                         {% if review.comment_set.first %}
                           {% for comment in comments %}
-                          <div class="d-flex justify-content-between mb-1">
-                            <div class="">
-                              <p class="mb-2" style="font-weight: 500;">{{ comment.user }}</p>
-                              <p>{{ comment.content }}</p>
+                            {% if comment.review == review %}
+                            <div class="d-flex justify-content-between mb-1">
+                              <div class="">
+                                <p class="mb-2" style="font-weight: 500;">{{ comment.user }}</p>
+                                <p>{{ comment.content }}</p>
+                              </div>
+                              <span>
+                                {% if request.user == comment.user %}
+                                  {{ comment.created_at|date:"Y-m-d" }}
+                                  <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-{{ comment.pk }}" data-commentdel-id="{{ comment.pk }}" style="border: 0; background: none;">
+                                    삭제
+                                  </button>
+                                {% endif %}
+                              </span>
                             </div>
-                            <span>
-                              {% if request.user == comment.user %}
-                                {{ comment.created_at|date:"Y-m-d" }}
-                                <button class="float-end comment-del" onclick="comment_delete(this)" id="comment-delete-{{ comment.pk }}" data-commentdel-id="{{ comment.pk }}" style="border: 0; background: none;">
-                                  삭제
-                                </button>
-                              {% endif %}
-                            </span>
-                          </div>
-                          <hr>
+                            <hr>
+                            {% endif %}
                           {% endfor %}
                         {% else %}
                         <div class="d-flex justify-content-center my-5" style="color: var(--gray-color);">
@@ -668,16 +670,16 @@
                     <div class="modal-body">
                       <!-- Review update Form -->
                       <!-- Form Custom -->
-                      <form id="review-update" action="{% url 'reviews:update' performance.playid review.pk %}" method="POST" enctype="multipart/form-data">
+                      <form id="review-update-{{ review.pk }}" action="{% url 'reviews:update' performance.playid review.pk %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <!-- textarea -->
                         <label for="id_textarea">관람후기</label>
                         <textarea name="content" id="id_textarea" class="form-control" cols="30" rows="10">{{ review.content }}</textarea>
                         <!-- select -->
                         <label for="id_grade">별점</label>
-                        <select name="grade" form="review-update" id="id_grade" class="form-select">
-                          <option value="" disabled selected>
-                            별점을 선택해주세요
+                        <select name="grade" form="review-update-{{ review.pk }}" id="id_grade" class="form-select">
+                          <option value="{{ review.grade }}" selected>
+                            별점을 선택해주세요                        
                           </option>
                           <option value="1">⭐️</option>
                           <option value="2">⭐️⭐️</option>
@@ -692,7 +694,7 @@
                     </div>
                     <div class="modal-footer justify-content-center">
                       <button type="submit" class="rc-btn" data-bs-dismiss="modal">취소</button>
-                      <button type="submit" class="rc-btn" onclick="document.forms['review-update'].submit();">수정</button>
+                      <button type="submit" class="rc-btn" onclick="document.forms['review-update-{{review.pk}}'].submit();">수정</button>
                     </div>
                   </div>
                 </div>
@@ -770,8 +772,8 @@
 
 <!-- Comment Create -->
 <script>
-  const commentForm = document.querySelector('#comment-form')
-  
+  const commentForms = document.querySelectorAll('.comment-form')
+  commentForms.forEach(commentForm => {
   commentForm.addEventListener('submit', function(event){
     event.preventDefault()
     axios({
@@ -783,7 +785,7 @@
     .then(response => {
       console.log(response.data)
       commentForm.reset()
-      const comments = document.querySelector('#comments')
+      const comments = document.querySelector(`#comments-${event.target.dataset.reviewId}`)
       comments.textContent = ""
       const comment_data = response.data.comment_data
       const user = response.data.user
@@ -810,12 +812,22 @@
         } else {
           comments.insertAdjacentHTML('beforeend',  
           `
-          <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
+          <div class="d-flex justify-content-between mb-1">
+            <div class="">
+              <p class="mb-2" style="font-weight: 500;">${ comment_data[i].userName }</p>
+              <p>${ comment_data[i].content }</p>
+            </div>
+            <span>
+              ${ comment_data[i].commentDate }
+            </span>
+          </div>
+          <hr>
           `)
         }
       }
     })
   })
+})
 </script>
 
 <!-- Comment Delete -->
@@ -829,12 +841,12 @@
     })
     .then(response => {
       console.log(response.data)
-      const comments = document.querySelector('#comments')
+      const review_pk = response.data.review_pk
+      const comments = document.querySelector(`#comments-${review_pk}`)
       comments.textContent = ""
       const comment_data = response.data.comment_data
       const user = response.data.user
       for (let i = 0; i < comment_data.length; i++){
-        const review_pk = response.data.review_pk
         if (user === comment_data[i].user_pk){
           comments.insertAdjacentHTML('beforeend',  
           `
@@ -855,7 +867,16 @@
         } else {
           comments.insertAdjacentHTML('beforeend',  
           `
-          <p>${ comment_data[i].userName }: ${ comment_data[i].content }</p>
+          <div class="d-flex justify-content-between mb-1">
+            <div class="">
+              <p class="mb-2" style="font-weight: 500;">${ comment_data[i].userName }</p>
+              <p>${ comment_data[i].content }</p>
+            </div>
+            <span>
+              ${ comment_data[i].commentDate }
+            </span>
+          </div>
+          <hr>
           `)
     }
   }
