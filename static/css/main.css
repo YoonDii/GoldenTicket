@@ -239,7 +239,8 @@
 /* slide banner */
 .con{
   width: 100%;
-  height: auto;
+  height: 300px;
+
 }
 .slider-container{
   max-width: 1920px;
