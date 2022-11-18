@@ -557,6 +557,25 @@ option {
    line-height: 35px;
    position: relative;
 }
+.perf-movieinfo-ticket{
+    margin: 50px 0;
+    text-align: center;
+    font-size: 0;
+}
+.perf-movieinfo-ticket a{
+  display: inline-block;
+  width: 236px;
+  height: 46px;
+  line-height: 46px;
+  margin: 0 5px;
+  vertical-align: top;
+}
+.perf-movieinfo-ticket a.movieticket{
+  font-size: 20px;
+  color: #fff;
+  background: #f43142;
+  border: 2px solid #f43142;
+}
 .tabbox {
   /* border-bottom: 2px solid #333;
    */
