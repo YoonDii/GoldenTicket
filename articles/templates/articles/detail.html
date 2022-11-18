@@ -492,7 +492,7 @@
 
   <!-- Review List -->
   <div>
-    <ul class="review-list">
+    {% comment %} <ul class="review-list">
       {% if performance.review_set.first %}
       {% for review in reviews %}
         {% if review.playId == performance %}
@@ -739,7 +739,7 @@
         <p class="py-5">등록된 관람후기가 없습니다.</p>
       </div>
       {% endif %}
-    </ul>
+    </ul> {% endcomment %}
   </div>
 </div>
 
