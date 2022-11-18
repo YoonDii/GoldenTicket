@@ -43,8 +43,11 @@
                     </a>
                   </li>
                   <li class="dropdown w-100">
+                    {% if request.user.pk %}
                     <a href="{% url 'accounts:profile' request.user.pk %}" class="w-100">
                     <span class="dd-title" style="color: #fff;">마이프로필</span>
+                    {% endif %}
+                    
                     </a>
                   </li>
                 </ul>
