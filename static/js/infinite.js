@@ -1,6 +1,6 @@
 function YesScroll() {
   const pagination = document.querySelector('.pagination'); // 페이지네이션 정보획득
-  const fullContent = document.querySelector('.infinite'); // 전체를 둘러싼 컨텐츠 정보획득
+  const fullContent = document.querySelector('.infinite-new'); // 전체를 둘러싼 컨텐츠 정보획득
   const fullContentOld = document.querySelector('.infinite-old');
   const nextLink = pagination.querySelector('.nextPage');
   const nextURL = nextLink.getAttribute('href');
@@ -58,7 +58,7 @@ function YesScroll() {
         const totalPageNum = totalPage.textContent
         fullContentOld.appendChild(infInputOld);
         console.log(URLOld);
-        console.log(totalPageNum)
+        console.log(totalPageNum);
         if (pagenum >= totalPageNum) {
           document.removeEventListener('scroll', OnScroll, { passive: true });
         }
@@ -69,5 +69,21 @@ function YesScroll() {
         console.log(error)
       })
   }
+}
+const tagList = document.querySelectorAll(".li-sec-tag-01");
+const playList = document.querySelectorAll(".infinite");
+let activeList = ''; // 활성화된 리스트를 담을 변수
+for (let i = 0; i < tagList.length; i++) {
+  tagList[i].querySelector('.tag-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    for (let j = 0; j < tagList.length; j++) {
+      tagList[j].classList.remove('on');
+      playList[j].style.display = 'none';
+    }
+    this.parentNode.classList.add('on');
+    activeList = this.getAttribute('href');
+    document.querySelector(activeList).style.display = 'block';
+    document.addEventListener('scroll', YesScroll(), { passive: true });
+  });
 }
 YesScroll()
