@@ -73,6 +73,7 @@
   height: 280px;
   overflow: hidden;
   background-color: #f7f7f7;
+  margin: 0 auto;
   margin-bottom: 20px;
 }
 .top__item__image img {
@@ -82,21 +83,24 @@
 .top__item__info {
   text-align: center;
   width: 200px;
-  height: 210px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  margin: 0 auto;
 }
 
 .top__item__title {
   color: var(--dark-color);
   font-weight: 700;
+  height: 50px;
+  text-align: center;
 }
 
 .top__item__location {
   display: flex;
   flex-direction: column;
-  padding: 30px 0;
+  padding-top: 20px;
   color: var(--dark-color);
 }
 
@@ -143,6 +147,7 @@
 /* Ranking List */
 .tr__list {
   width: 100%;
+  border-bottom: 2px solid var(--dark-color);
 }
 
 .tr__item {
@@ -152,10 +157,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.tr__item:last-child {
-  border-bottom: 2px solid var(--dark-color);
 }
 
 .tr__item__left {
