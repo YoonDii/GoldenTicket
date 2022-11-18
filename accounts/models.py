@@ -17,7 +17,7 @@ class User(AbstractUser):
     followings = models.ManyToManyField(
         "self", symmetrical=False, related_name="followers"
     )
-
+    blockings = models.ManyToManyField('self', symmetrical=False, related_name='blockers')
     def profile_image(self):
         if self.image and hasattr(self.image, "url"):
             return self.image.url

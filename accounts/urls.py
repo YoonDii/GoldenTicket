@@ -17,4 +17,7 @@ urlpatterns = [
     path("login/kakao/callback/", views.kakao_callback),
     path("login/naver/", views.naver_request, name="naver"),
     path("login/naver/callback/", views.naver_callback),
+    path('blockuser/', views.blockuser, name='blockuser'),
+    path('<int:user_pk>/block/', views.block, name='block'),
+    path('<int:pk>/block_user_block', views.block_user_block, name='block_user_block'),
 ]

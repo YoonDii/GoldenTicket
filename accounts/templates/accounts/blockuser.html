@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% load django_bootstrap5 %} 
+{% block content %}
+
+<div class="container">
+
+    {% for blockuser in block_users %}
+    <div class="card m-4 p-2">
+        <div class="d-flex justify-content-center">
+            {% if blockuser.profile.image %}
+            <img src="{{blockuser.profile.image.url}}" class="" alt="" style="height: 100px; width:100px;"> {% else %}
+            <img src="/static/img/bros_blank.png" class="" alt="" style="height: 100px; width:100px;"> {% endif %}
+
+            <p class="align-self-center pt-3 ms-4"><a class="navbar-brand ms-4" href="{% url 'accounts:profile' blockuser.username %} ">{{ blockuser.username }}</a></p>
+            <a class="ms-5 align-self-center text-decoration-none text-black fw-bold" href="{% url 'accounts:block_user_block' blockuser.pk %}">차단 취소</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
