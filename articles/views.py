@@ -138,21 +138,21 @@ from urllib import parse
 def detail(request, performance_pk):
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
-    # reviews = Review.objects.order_by("-id")
+    reviews = Review.objects.order_by("-id")
     # -pk 순으로 출력하기 위해 따로 comments 만들어서 넘겨줌
     ticketurl = parse.quote(performance.playname)
     comments = Comment.objects.filter(review__playId=performance).order_by("-id")
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
 
-    if performance.review_set.all():
-        tem = performance.review_set.aggregate(Avg("grade"))
-        if tem["grade__avg"] == None:
-            Avg_grade = 0
-        else:
-            Avg_grade = round(tem["grade__avg"], 1)
-    else:
-        Avg_grade = 0
+    # if performance.review_set.all():
+    #     tem = performance.review_set.aggregate(Avg("grade"))
+    #     if tem["grade__avg"] == None:
+    #         Avg_grade = 0
+    #     else:
+    #         Avg_grade = round(tem["grade__avg"], 1)
+    # else:
+    #     Avg_grade = 0
 
     # Comment Detail
     comment_form = CommentForm()
@@ -181,12 +181,12 @@ def detail(request, performance_pk):
         "performance": performance,
         "location": location,
         "users": users,
-        # "reviews": reviews,
-        # "review_photos": review_photo,
+        "reviews": reviews,
+        "review_photos": review_photo,
         "review_form": review_form,
         "reviewPhoto_form": reviewPhoto_form,
         "comment_form": comment_form,
-        "Avg_grade": Avg_grade,
+        # "Avg_grade": Avg_grade,
         "comments": comments,
         "ticketurl": ticketurl,
     }
