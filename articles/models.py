@@ -22,7 +22,7 @@ class PlayDetail(models.Model):
     image3 = models.CharField(max_length=80, null=True)
     image4 = models.CharField(max_length=80, null=True)
     ticketprice = models.CharField(max_length=80, null=True)
-    summary = models.CharField(max_length=200, null=True)
+    summary = models.TextField(null=True)
     guidance = models.CharField(max_length=50, null=True)
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="performance"
