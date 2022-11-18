@@ -61,7 +61,7 @@
           {% endif %}
         </div>
         <!-- Grade -->
-        <div class="d-flex align-items-center">
+        {% comment %} <div class="d-flex align-items-center">
           {% if Avg_grade == 5 %}
           <div class="d-flex align-items-center" style="color: var(--gray-color);">
             <i class="fa-solid fa-star" style="color: var(--main-color);"></i>
@@ -117,7 +117,7 @@
               <div class="ms-2" style="color: var(--main-color);">{{Avg_grade}} <span class="ms-1" style="color: var(--dark-color);">Reviews</span></div>
             </div>
           {% endif %}
-        </div>
+        </div> {% endcomment %}
       </div>
     </div>
     <!-- Info right -->
