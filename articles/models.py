@@ -30,10 +30,10 @@ class PlayDetail(models.Model):
 
 
 class LocationDetail(models.Model):
-    locationid = models.CharField(max_length=20)
-    locationname = models.CharField(max_length=30)
-    address = models.CharField(max_length=50)
-    phone = models.CharField(max_length=20)
-    relateurl = models.CharField(max_length=50)
-    lat = models.CharField(max_length=20)
-    lgt = models.CharField(max_length=10)
+    locationid = models.CharField(max_length=200)
+    locationname = models.CharField(max_length=300)
+    address = models.CharField(max_length=500)
+    phone = models.CharField(max_length=200)
+    relateurl = models.CharField(max_length=500)
+    lat = models.CharField(max_length=200)
+    lgt = models.CharField(max_length=200)
