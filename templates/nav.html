@@ -30,11 +30,11 @@
                       <span class="dd-title dd-title-01" style="color: #fff;">장르</span>
                     </a>
                     <ul class="hide-box">
-                      <li><a href="#" style="color: #fff"><p>- 연극</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 클래식</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 무용</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 뮤지컬</p></a></li>
-                      <li><a href="#" style="color: #fff"><p>- 국악</p></a></li>
+                      <li><a href="{% url 'articles:index' %}?genre=연극" style="color: #fff"><p>- 연극</p></a></li>
+                      <li><a href="{% url 'articles:index' %}?genre=클래식" style="color: #fff"><p>- 클래식</p></a></li>
+                      <li><a href="{% url 'articles:index' %}?genre=무용" style="color: #fff"><p>- 무용</p></a></li>
+                      <li><a href="{% url 'articles:index' %}?genre=뮤지컬" style="color: #fff"><p>- 뮤지컬</p></a></li>
+                      <li><a href="{% url 'articles:index' %}?genre=국악" style="color: #fff"><p>- 국악</p></a></li>
                     </ul>
                   </li>
                   <li class="dropdown w-100">
