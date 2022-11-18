@@ -108,7 +108,7 @@ def delete(request):
     request.user.delete()
     auth_logout(request)
 
-    return redirect("accounts:index")
+    return redirect("articles:main")
 
 
 # Follow
@@ -219,6 +219,7 @@ def naver_callback(request):
 
     return redirect(request.GET.get("next") or "articles:main")
 
+
 # 회원차단
 @login_required
 def block(request, user_pk):
@@ -230,12 +231,14 @@ def block(request, user_pk):
         else:
             user.blockers.add(request.user)
             user.save()
-    return redirect('accounts:profile', user_pk)
+    return redirect("accounts:profile", user_pk)
+
 
 @login_required
 def blockuser(request):
     block_users = request.user.blockings.all()
-    return render(request, 'accounts/blockuser.html', {'block_users': block_users})
+    return render(request, "accounts/blockuser.html", {"block_users": block_users})
+
 
 @login_required
 def block_user_block(request, pk):
@@ -247,4 +250,4 @@ def block_user_block(request, pk):
         else:
             user.blockers.add(request.user)
             user.save()
-    return redirect('accounts:blockuser')
+    return redirect("accounts:blockuser")

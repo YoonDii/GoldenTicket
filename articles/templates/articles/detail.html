@@ -57,7 +57,21 @@
               <p class="ms-2">likes</p>
           </div>
           {% else %}
-          <a href="{% url 'accounts:login' %}" class="">로그인이 필요합니다.</a>
+            <a href="{% url 'accounts:login' %}" style="display: flex;">
+              {% if user in performance.like_users.all %}
+                <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+                  <i id="star-{{ performance.playid }}" class="fa-solid fa-heart fa-2x"></i>
+                </button>
+              {% else %}
+                <button id="like-{{ performance.playid }}" type="submit" style="background: none; border: 0; color: var(--main-color);">
+                  <i id="star-{{ performance.playid }}" class="fa-regular fa-heart fa-2x"></i>
+                </button>
+              {% endif %}
+              <div class="ms-3 d-flex align-items-center">
+                <span id="like-count" style="color: var(--main-color);">{{ performance.like_users.count }}</span>
+                <p class="ms-2">likes</p>
+              </div>
+            </a>
           {% endif %}
         </div>
         <!-- Grade -->
