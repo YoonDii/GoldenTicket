@@ -724,10 +724,10 @@
                       <form id="review-update-{{ review.pk }}" action="{% url 'reviews:update' performance.playid review.pk %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <!-- textarea -->
-                        <label for="id_textarea">관람후기</label>
+                        <label for="id_textarea" style="margin-bottom: 10px;">관람후기</label>
                         <textarea name="content" id="id_textarea" class="form-control" cols="30" rows="10">{{ review.content }}</textarea>
                         <!-- select -->
-                        <label for="id_grade">별점</label>
+                        <label for="id_grade" style="margin: 10px 0;">별점</label>
                         <select name="grade" form="review-update-{{ review.pk }}" id="id_grade" class="form-select">
                           <option value="{{ review.grade }}" selected>
                             별점을 선택해주세요                        
@@ -739,7 +739,7 @@
                           <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
                         </select>
                         <!-- image file -->
-                        <label for="images">다중 클릭하여 사진을 여러장 올릴 수 있어요!</label>
+                        <label for="images" style="margin: 10px 0;">다중 클릭하여 사진을 여러장 올릴 수 있어요!</label>
                         <input type="file" name="image" id="images" class="form-control" accept="image/*" multiple>
                       </form>
                     </div>

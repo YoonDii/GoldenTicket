@@ -145,12 +145,12 @@ def detail(request, performance_pk):
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
 
-    # starlists = Review.objects.filter(playId=performance.id)
-    # Avg_grade = 0
-    # if starlists:
-    #     for starlist in starlists:
-    #         Avg_grade += int(starlist.grade)
-    #     Avg_grade = round(Avg_grade / len(starlists), 1)
+    starlists = Review.objects.filter(playId=performance.id)
+    Avg_grade = 0
+    if starlists:
+        for starlist in starlists:
+            Avg_grade += int(starlist.grade)
+        Avg_grade = round(Avg_grade / len(starlists), 1)
 
     # Comment Detail
     comment_form = CommentForm()
@@ -184,7 +184,7 @@ def detail(request, performance_pk):
         "review_form": review_form,
         "reviewPhoto_form": reviewPhoto_form,
         "comment_form": comment_form,
-        # "Avg_grade": Avg_grade,
+        "Avg_grade": Avg_grade,
         "comments": comments,
         "ticketurl": ticketurl,
     }
