@@ -6,14 +6,14 @@ from django.conf import settings
 
 class PlayDetail(models.Model):
     playid = models.CharField(max_length=20)
-    playname = models.CharField(max_length=50)
+    playname = models.CharField(max_length=100)
     genrename = models.CharField(max_length=20)
     playstate = models.CharField(max_length=20)
     playstdate = models.DateField()
     playenddate = models.DateField()
     poster = models.CharField(max_length=80)
-    locationname = models.CharField(max_length=30)
-    playcast = models.CharField(max_length=50, null=True)
+    locationname = models.CharField(max_length=100)
+    playcast = models.CharField(max_length=100, null=True)
     runtime = models.CharField(max_length=10, null=True)
     age = models.CharField(max_length=10, null=True)
     locationid = models.CharField(max_length=20)
@@ -21,9 +21,9 @@ class PlayDetail(models.Model):
     image2 = models.CharField(max_length=80, null=True)
     image3 = models.CharField(max_length=80, null=True)
     image4 = models.CharField(max_length=80, null=True)
-    ticketprice = models.CharField(max_length=80, null=True)
+    ticketprice = models.CharField(max_length=100, null=True)
     summary = models.TextField(null=True)
-    guidance = models.CharField(max_length=50, null=True)
+    guidance = models.CharField(max_length=100, null=True)
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="performance"
     )
