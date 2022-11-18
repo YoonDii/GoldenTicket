@@ -65,15 +65,15 @@
                   <!-- Modal-Body -->
                   <div class="modal-body p-0 accounts-modal">
                     <a href="#" class="fw-bold text-danger">
-                      <p class="m-0 text-danger" style="padding: 12px">차단</p>
-                    </a>
-                    <hr class="m-0">
-                    <a href="#" class="fw-bold text-danger">
-                      <p class="m-0 text-danger" style="padding: 12px">제한</p>
-                    </a>
-                    <hr class="m-0">
-                    <a href="#" class="fw-bold text-danger">
-                      <p class="m-0 text-danger" style="padding: 12px">신고</p>
+                      {% if request.user == user %} {% else %}
+                      <a href="{% url 'accounts:block' user.pk %}" class="text-decoration-none">
+                        {% if request.user in user.blockers.all %}
+                        <p class="m-0 text-danger" style="padding: 12px">차단 취소</p>
+                        {% else %}
+                        <p class="m-0 text-danger" style="padding: 12px">차단</p>
+                      </a> {% endif %}
+                      {% endif %}
+                      </p>
                     </a>
                     {% if request.user == user %}
                       <hr class="m-0">

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -218,3 +218,33 @@ def naver_callback(request):
     auth_login(request, naver_user, backend="django.contrib.auth.backends.ModelBackend")
 
     return redirect(request.GET.get("next") or "articles:main")
+
+# 회원차단
+@login_required
+def block(request, user_pk):
+    user = get_object_or_404(get_user_model(), pk=user_pk)
+    if user != request.user:
+        if user.blockers.filter(pk=request.user.pk).exists():
+            user.blockers.remove(request.user)
+            user.save()
+        else:
+            user.blockers.add(request.user)
+            user.save()
+    return redirect('accounts:profile', user_pk)
+
+@login_required
+def blockuser(request):
+    block_users = request.user.blockings.all()
+    return render(request, 'accounts/blockuser.html', {'block_users': block_users})
+
+@login_required
+def block_user_block(request, pk):
+    user = get_object_or_404(get_user_model(), pk=pk)
+    if user != request.user:
+        if user.blockers.filter(pk=request.user.pk).exists():
+            user.blockers.remove(request.user)
+            user.save()
+        else:
+            user.blockers.add(request.user)
+            user.save()
+    return redirect('accounts:blockuser')
