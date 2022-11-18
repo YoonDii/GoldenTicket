@@ -138,10 +138,10 @@ from urllib import parse
 def detail(request, performance_pk):
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
-    reviews = Review.objects.order_by("-pk")
+    reviews = Review.objects.order_by("-id")
     # -pk 순으로 출력하기 위해 따로 comments 만들어서 넘겨줌
     ticketurl = parse.quote(performance.playname)
-    comments = Comment.objects.filter(review__playId=performance).order_by("-pk")
+    comments = Comment.objects.filter(review__playId=performance).order_by("-id")
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
 
@@ -197,7 +197,7 @@ def detail(request, performance_pk):
 def like(request, performance_pk):
     if request.user.is_authenticated:
         performance = PlayDetail.objects.get(playid=performance_pk)
-        if performance.like_users.filter(pk=request.user.pk).exists():
+        if performance.like_users.filter(pk=request.user.id).exists():
             performance.like_users.remove(request.user)
             is_liked = False
         else:
@@ -215,7 +215,7 @@ def like(request, performance_pk):
 
 def search(request):
     print(request.GET)
-    all_data = PlayDetail.objects.order_by("-pk")
+    all_data = PlayDetail.objects.order_by("-id")
     search = request.GET.get("search")
 
     if search:
