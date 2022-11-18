@@ -136,14 +136,12 @@ from urllib import parse
 
 
 def detail(request, performance_pk):
-    print(request.POST)
     performance = PlayDetail.objects.get(playid=performance_pk)
     location = LocationDetail.objects.get(locationid=performance.locationid)
     reviews = Review.objects.order_by("-pk")
     # -pk 순으로 출력하기 위해 따로 comments 만들어서 넘겨줌
     ticketurl = parse.quote(performance.playname)
     comments = Comment.objects.filter(review__playId=performance).order_by("-pk")
-    print(comments)
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
 
