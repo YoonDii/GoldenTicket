@@ -4,18 +4,18 @@
 {% block content %}
 {% include 'nav.html' %}
 
-<section class="list-sec ">
+<section class="list-sec">
   <div><p class="li-sec-tit">
 		<span class="li-sec-tit1">{{ genrename }}</span>
-  <div class="li-sec-tag">
+  <div class="li-sec-tag" id="newoldtag">
     <span class="li-sec-tag-01 on" id="tag-new"><a style="cursor:pointer;" href="#new" class="tag-btn">신상품순</a></span>
     <span class="li-sec-tag-01" id="tag-old"><a style="cursor:pointer;" href="#end" class="tag-btn">종료임박순</a></span>
   </div>
   <p class="li-sec-result">
     현재 예매 가능한 공연은 총 <span>{{ totalnum }}개</span> 입니다.
   </p>
-  <div class="infinite" id="new">
-    <div class="ms-list-imgs ms-list-imgs-01 inflist">
+  <div class="infinite infinite-new" id="new">
+    <div class="ms-list-imgs ms-list-imgs-01 inflist" id="inflistrownew">
       {% for play in news %}
       <a style="cursor:pointer;" href="{% url 'articles:detail' play.playid %}" onclick="" title="{{play.playname}}">
         <div class="list-bigger-wrap">
@@ -58,8 +58,8 @@
   </div>
   
   {% comment %} 종료임박순 {% endcomment %}
-  <div class="infinite infinite-old" id="end">
-    <div class="ms-list-imgs inflist-old">
+  <div class="infinite infinite-old" id="end" style="display: none;">
+    <div class="ms-list-imgs inflist-old" id="inflistrowold">
       {% for play in olds %}
       <a style="cursor:pointer;" onclick="" href="{% url 'articles:detail' play.playid %}" title="{{play.playname}}">
         <div class="list-bigger-wrap">
@@ -85,24 +85,6 @@
 
 {% block js %}
   {% comment %} <script src="{% static 'js/list.js' %}"></script> {% endcomment %}
-  <script>
-    const tagList = document.querySelectorAll(".li-sec-tag-01");
-    const playList = document.querySelectorAll(".infinite");
-    let activeList = ''; // 활성화된 리스트를 담을 변수
-  
-    for (let i = 0; i < tagList.length; i++) {
-      tagList[i].querySelector('.tag-btn').addEventListener('click', function(event) {
-        event.preventDefault();
-        for (let j = 0; j < tagList.length; j++) {
-          tagList[j].classList.remove('on');
-          playList[j].style.display = 'none';
-        }
-        this.parentNode.classList.add('on');
-        activeList = this.getAttribute('href');
-        document.querySelector(activeList).style.display = 'block';
-      });
-    }
-  </script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="{% static 'js/infinite.js' %}"></script>
 {% endblock js %}  
