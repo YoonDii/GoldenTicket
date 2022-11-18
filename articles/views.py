@@ -145,14 +145,12 @@ def detail(request, performance_pk):
     users = User.objects.all()
     review_photo = ReviewPhoto.objects.all()
 
-    if performance.review_set.all():
-        tem = performance.review_set.aggregate(Avg("grade"))
-        if tem["grade__avg"] == None:
-            Avg_grade = 0
-        else:
-            Avg_grade = round(tem["grade__avg"], 1)
-    else:
-        Avg_grade = 0
+    starlists = Review.objects.filter(playId=performance.id)
+    Avg_grade = 0
+    if starlists:
+        for starlist in starlists:
+            Avg_grade += int(starlist.grade)
+        Avg_grade = round(Avg_grade / len(starlists), 1)
 
     # Comment Detail
     comment_form = CommentForm()
