@@ -56,6 +56,16 @@
             <p># 미수</p>
           </div>
         </a>
+        <a href="#" onclick="document.forms['search-06'].submit();">
+          <div class="sw-tag">
+            <p># 옥탑방 고양이</p>
+          </div>
+        </a>
+        <a href="#" onclick="document.forms['search-08'].submit();">
+          <div class="sw-tag">
+            <p># 크리스마스</p>
+          </div>
+        </a>
         <a href="#" onclick="document.forms['search-04'].submit();">
           <div class="sw-tag">
             <p># 드라큘라</p>
@@ -66,16 +76,12 @@
             <p># 택시</p>
           </div>
         </a>
-        <a href="#" onclick="document.forms['search-06'].submit();">
-          <div class="sw-tag">
-            <p># 옥탑방 고양이</p>
-          </div>
-        </a>
         <a href="#" onclick="document.forms['search-07'].submit();">
           <div class="sw-tag">
             <p># 예술의전당</p>
           </div>
         </a>
+        
       </div>
     </div>
     <!-- Hidden Form -->
@@ -107,6 +113,10 @@
       <form id="search-07" method="get" action="{% url 'articles:search' %}">
         {% csrf_token %}
         <input type="hidden" id="search" name="search" value="예술의전당">
+      </form>
+      <form id="search-08" method="get" action="{% url 'articles:search' %}">
+        {% csrf_token %}
+        <input type="hidden" id="search" name="search" value="크리스마스">
       </form>
     </div>
     <!-- Hidden Form-End -->

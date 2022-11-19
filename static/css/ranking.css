@@ -173,7 +173,8 @@
 }
 
 .tr__item__num {
-  padding: 0 30px;
+  width: 90px;
+  text-align: center;
 }
 
 .tr__item__num p {

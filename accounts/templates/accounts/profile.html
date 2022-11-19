@@ -104,20 +104,19 @@
       <!-- Info-Bottom -->
       <div class="pd__info-bottom my-3">
         <span class="me-2">찜</span>
-        <span class="me-3 fw-bold">{{ request.user.performance.count }}</span>
+        <span class="me-3 fw-bold">{{ user.performance.count }}</span>
         <span class="me-2">팔로우</span>
         <span id="followings-count" class="me-3 fw-bold">{{ user.followers.count }}</span>
         <span class="me-2">팔로워</span>
         <span id="followers-count" class="me-3 fw-bold">{{ user.followings.count }}</span>
       </div>
-      <div class="pd__email">{{ request.user.email }}</div>
     </div>
   </div>
 
 
   <!-- Profile-Likes -->
   <div class="profile-likes">
-    <h3 class="my-3">🎬 찜한 연극 </h3>
+    <h3 class="my-3">🎬 찜한 공연 </h3>
     <!-- Grid -->
     {% if user.performance.all %}
       <div class="like-outbox">
