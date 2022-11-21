@@ -30,6 +30,7 @@ DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = [
     "Kdtgoldenticketbean-env.eba-nsybrye9.ap-northeast-2.elasticbeanstalk.com",
+    "goldenticket.shop",
     "127.0.0.1",
     "localhost",
 ]
