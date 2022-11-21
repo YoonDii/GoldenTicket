@@ -51,11 +51,6 @@
             <p># 서툰 사람들</p>
           </div>
         </a>
-        <a href="#" onclick="document.forms['search-03'].submit();">
-          <div class="sw-tag">
-            <p># 미수</p>
-          </div>
-        </a>
         <a href="#" onclick="document.forms['search-06'].submit();">
           <div class="sw-tag">
             <p># 옥탑방 고양이</p>
@@ -93,10 +88,6 @@
       <form id="search-02" method="get" action="{% url 'articles:search' %}">
         {% csrf_token %}
         <input type="hidden" id="search" name="search" value="서툰 사람들">
-      </form>
-      <form id="search-03" method="get" action="{% url 'articles:search' %}">
-        {% csrf_token %}
-        <input type="hidden" id="search" name="search" value="미수">
       </form>
       <form id="search-04" method="get" action="{% url 'articles:search' %}">
         {% csrf_token %}
