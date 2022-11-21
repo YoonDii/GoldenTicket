@@ -80,6 +80,7 @@ def profile(request, user_pk):
     context = {
         "user": user,
         "my": request.user,
+        "performance": user.performance.all().order_by("-pk"),
     }
     return render(request, "accounts/profile.html", context)
 
