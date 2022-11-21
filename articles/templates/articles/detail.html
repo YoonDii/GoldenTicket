@@ -21,7 +21,7 @@
       <div class="pf-social" style="text-align: end;">
         <a href="http://www.facebook.com/sharer.php?u=http://goldentiket.shop/articles/d/{{performance.playid}}" target="_blank" class="ps-social-btn1"><img src="http://tkfile.yes24.com/imgNew/common/rn-social-01.png" alt=""></a>
         <a href='https://twitter.com/share?ref_src=http://goldentiket.shop/articles/d/{{performance.playid}}'  class='ps-social-btn2' target='_blank' ><img src='http://tkfile.yes24.com/imgNew/common/rn-social-02.png' alt='트위터' /></a>
-        <a href="javascript: copy();" class="ps-social-btn3"><img src="http://tkfile.yes24.com/imgNew/common/rn-social-03.png" alt=""></a>
+        <a href="" class="ps-social-btn3 copy"><img src="http://tkfile.yes24.com/imgNew/common/rn-social-03.png" alt=""></a>
       </div>				
     </div>			
   </div>
@@ -934,9 +934,15 @@
 })}
 </script>
 <script>
-  function copy() {
-    navigator.clipboard.writeText(document.URL);
-  }
+  document.querySelector(".copy").addEventListener("click", function(){
+    var tempElem = document.createElement('textarea');
+    tempElem.value = document.URL;  
+    document.body.appendChild(tempElem);
+  
+    tempElem.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempElem);
+  });
 </script>
 {% endblock js %}
   
