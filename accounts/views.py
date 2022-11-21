@@ -139,7 +139,7 @@ state_token = secrets.token_urlsafe(16)
 
 def kakao_request(request):
     kakao_api = "https://kauth.kakao.com/oauth/authorize?response_type=code"
-    redirect_uri = "http://localhost:8000/accounts/login/kakao/callback"
+    redirect_uri = "http://goldentiket.shop/accounts/login/kakao/callback"
     client_id = "72b73a1d5e11f6c8e5ebb51f86c0dfab"  # 배포시 보안적용 해야함
     return redirect(f"{kakao_api}&client_id={client_id}&redirect_uri={redirect_uri}")
 
@@ -148,7 +148,7 @@ def kakao_callback(request):
     data = {
         "grant_type": "authorization_code",
         "client_id": "72b73a1d5e11f6c8e5ebb51f86c0dfab",  # 배포시 보안적용 해야함
-        "redirect_uri": "http://localhost:8000/accounts/login/kakao/callback",
+        "redirect_uri": "http://goldentiket.shop/accounts/login/kakao/callback",
         "code": request.GET.get("code"),
     }
     kakao_token_api = "https://kauth.kakao.com/oauth/token"
@@ -178,7 +178,7 @@ def kakao_callback(request):
 def naver_request(request):
     naver_api = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
     client_id = "mwAzJRdaHS860HumilZ7"  # 배포시 보안적용 해야함
-    redirect_uri = "http://localhost:8000/accounts/login/naver/callback"
+    redirect_uri = "http://goldentiket.shop/accounts/login/naver/callback"
     state_token = secrets.token_urlsafe(16)
     return redirect(
         f"{naver_api}&client_id={client_id}&redirect_uri={redirect_uri}&state={state_token}"
@@ -192,7 +192,7 @@ def naver_callback(request):
         "client_secret": "Aa7AEd9pZ6",
         "code": request.GET.get("code"),
         "state": request.GET.get("state"),
-        "redirect_uri": "http://localhost:8000/accounts/login/naver/callback",
+        "redirect_uri": "http://goldentiket.shop/accounts/login/naver/callback",
     }
     naver_token_request_url = "https://nid.naver.com/oauth2.0/token"
     access_token = requests.post(naver_token_request_url, data=data).json()[
