@@ -118,9 +118,9 @@
   <div class="profile-likes">
     <h3 class="my-3">🎬 찜한 공연 </h3>
     <!-- Grid -->
-    {% if user.performance.all %}
+    {% if performance %}
       <div class="like-outbox">
-        {% for play in user.performance.all %}
+        {% for play in performance %}
           <a href="{% url 'articles:detail' play.playid %}">
             <div class="like-box sa sa-up">
               <div class="like-box__item">
