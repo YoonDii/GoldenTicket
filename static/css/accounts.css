@@ -247,3 +247,13 @@ select.box {
 option {
   font-size: 16px;
 }
+
+
+/* Profile Followings button */
+.followings,
+#followings-btn {
+  display: none;
+}
+#followings-btn:checked ~ .followings {
+  display: block;
+}

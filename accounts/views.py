@@ -81,6 +81,8 @@ def profile(request, user_pk):
         "user": user,
         "my": request.user,
         "performance": user.performance.all().order_by("-pk"),
+        "followings": user.followings.all(),
+        "followers": user.followers.all(),
     }
     return render(request, "accounts/profile.html", context)
 

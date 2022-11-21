@@ -105,10 +105,63 @@
       <div class="pd__info-bottom my-3">
         <span class="me-2">찜</span>
         <span class="me-3 fw-bold">{{ user.performance.count }}</span>
-        <span class="me-2">팔로우</span>
-        <span id="followings-count" class="me-3 fw-bold">{{ user.followers.count }}</span>
-        <span class="me-2">팔로워</span>
-        <span id="followers-count" class="me-3 fw-bold">{{ user.followings.count }}</span>
+        <!-- Button trigger modal -->
+        <a data-bs-toggle="modal" href="#follow-user">
+          <span class="me-1">팔로우</span>
+          <span id="followings-count" class="me-3 fw-bold">{{ user.followers.count }}</span>
+        </a>
+        <a data-bs-toggle="modal" href="#followings-user">
+          <span class="me-1">팔로워</span>
+          <span id="followers-count" class="me-3 fw-bold">{{ user.followings.count }}</span>
+        </a>
+      </div>
+      <!-- Followers Modal -->
+      <div class="modal fade" id="follow-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">팔로우한 유저</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+              {% if followers %}
+                {% for followUser in followers %}
+                <a href="{% url 'accounts:profile' followUser.pk %}">
+                  <img src="{{ followUser.profile_image }}" alt="" width="45" height="45" style="border-radius: 50%;">  
+                </a>
+                {% endfor %}
+              {% else %}
+                <p style="font-size: 14px; color: var(--gray-color);">팔로우한 유저가 없습니다...</p>
+              {% endif %}
+                
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Followings Modal -->
+      <div class="modal fade" id="followings-user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">팔로잉한 유저</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              
+              {% if followings %}
+                {% for followingUser in followings %}
+                <a href="{% url 'accounts:profile' followingUser.pk %}">
+                  <img src="{{ followingUser.profile_image }}" alt="" width="45" height="45" style="border-radius: 50%;">  
+                </a>
+                {% endfor %}
+              {% else %}
+              <p style="font-size: 14px; color: var(--gray-color);">팔로잉한 유저가 없습니다...</p>
+              {% endif %}
+                
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
