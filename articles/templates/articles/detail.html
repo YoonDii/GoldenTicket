@@ -730,7 +730,19 @@
                         <label for="id_grade" style="margin: 10px 0;">별점</label>
                         <select name="grade" form="review-update-{{ review.pk }}" id="id_grade" class="form-select">
                           <option value="{{ review.grade }}" selected>
-                            별점을 선택해주세요                        
+                            {% if review.grade == "5" %}
+                            ⭐️⭐️⭐️⭐️⭐️
+                            {% elif review.grade == "4" %}
+                            ⭐️⭐️⭐️⭐️
+                            {% elif review.grade == "3" %}
+                            ⭐️⭐️⭐️
+                            {% elif review.grade == "2" %}
+                            ⭐️⭐️
+                            {% elif review.grade == "1" %}
+                            ⭐️
+                            {% else %}
+                            <p style="color: var(--gray-color); font-size: 14px;">별점을 선택해주세요</p>
+                            {% endif %}
                           </option>
                           <option value="1">⭐️</option>
                           <option value="2">⭐️⭐️</option>
