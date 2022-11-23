@@ -184,8 +184,7 @@
 - 검색은 `상품 / 장르 / 장소 / 배우 이름으로 검색이 가능`합니다.
 - `추천 검색어 클릭`으로 추천 검색이 가능합니다.
 
-![](./static/img/service_photo/search-01.png)
-![](./static/img/service_photo/search-02.png)
+<img width="100%" src="https://user-images.githubusercontent.com/108647861/203456228-f9d0ccf5-b656-4728-9d3c-0724e905dd96.gif"/>
 
 ---
 
