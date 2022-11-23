@@ -142,34 +142,8 @@
 - `장르별 TOP 랭킹 / 장르별 목록을 나열`하고, `해당 공연 상세 페이지로 이동`이 가능합니다.
 
 <br/>
+<img width="100%" src="https://user-images.githubusercontent.com/108647861/203454134-5af780f5-a02f-4d51-a1cb-7cc92811c61f.gif"/>
 
-#### 1-1. 메인 배너
-
-![](./static/img/service_photo/main-visual.png)
-
-<br />
-
-#### 1-2. 장르별 TOP 랭킹
-
-![](./static/img/service_photo/main-ranking.png)
-
-<br />
-
-#### 1-3. 메인 영상
-
-![](./static/img/service_photo/main-video.png)
-
-<br />
-
-#### 1-4. 장르별 목록
-
-![](./static/img/service_photo/main-playlist.png)
-
-<br />
-
-#### 1-5. 푸터
-
-![](./static/img/service_photo/main-footer.png)
 
 ---
 
@@ -188,9 +162,8 @@
 
 - 스크롤을 내리면 `40개씩 공연이 노출`됩니다.
 
-![](./static/img/service_photo/infinite-scroll-01.png)
-![](./static/img/service_photo/infinite-scroll-02.png)
-![](./static/img/service_photo/infinite-scroll-03.png)
+<img width="100%" src="https://user-images.githubusercontent.com/108647861/203453865-ba11e13f-cf8b-4619-8efc-7b451fd8e478.gif"/>
+
 
 ---
 
@@ -199,9 +172,8 @@
 ### **3. 랭킹 페이지**
 
 - `좋아요 순으로 50위까지 랭킹을 선별` 하였습니다.
+<img width="100%" src="https://user-images.githubusercontent.com/108647861/203454127-9fd29f7f-2c36-4eff-9801-76205e814e68.gif"/>
 
-![](./static/img/service_photo/ranking-01.png)
-![](./static/img/service_photo/ranking-02.png)
 
 ---
 
