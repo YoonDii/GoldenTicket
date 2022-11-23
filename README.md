@@ -12,7 +12,8 @@
 
 - **2022.11.09 ~ 2022.11.21**
 - 사이트 주소 : http://goldentiket.shop/
-http://kdtgoldenticketbean-env.eba-nsybrye9.ap-northeast-2.elasticbeanstalk.com/
+- http://kdtgoldenticketbean-env.eba-nsybrye9.ap-northeast-2.elasticbeanstalk.com/
+
 
 <br />
 
