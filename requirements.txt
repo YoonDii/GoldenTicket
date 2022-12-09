@@ -13,6 +13,7 @@ django-bootstrap5==22.1
 django-extensions==3.2.1
 django-imagekit==4.1.0
 django-infinite-scroll==0.1.7
+django-sslserver==0.22
 django-storages==1.13.1
 django-widget-tweaks==1.4.12
 idna==3.4
